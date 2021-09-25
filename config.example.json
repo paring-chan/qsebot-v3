@@ -2,5 +2,19 @@
   "token": "TOKEN_HERE",
   "slash": {
     "guild": ""
-  }
+  },
+  "db": "mongodb://localhost:27017/qse",
+  "web": {
+    "port": 3000,
+    "key": {},
+    "oauth2": {
+      "clientID": "",
+      "clientSecret": "",
+      "redirectURI": ""
+    },
+    "redis": {
+      "db": 0
+    }
+  },
+  "dev": false
 }

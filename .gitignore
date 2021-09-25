@@ -118,3 +118,5 @@ dist
 
 /config.json
 /.idea
+/data
+/static/dist
