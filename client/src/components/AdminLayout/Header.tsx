@@ -19,7 +19,7 @@ const AdminHeader: React.FC<DevelopersDrawerProps> = ({ openDrawer }) => {
                         <Menu />
                     </IconButton>
                 )}
-                <Link color="inherit" underline="none" component={RouterLink} to="/" variant="h6" fontWeight={700}>
+                <Link color="inherit" underline="none" component={RouterLink} to="/admin" variant="h6" fontWeight={700}>
                     큐새
                 </Link>
             </Toolbar>
