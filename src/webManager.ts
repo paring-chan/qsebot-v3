@@ -56,7 +56,7 @@ export function start() {
 
 export function stop() {
     Object.keys(require.cache)
-        .filter((x) => x.startsWith(path.join(__dirname, 'api')))
+        .filter((x) => x.startsWith(path.join(__dirname, 'web')))
         .forEach((x) => delete require.cache[x])
     return new Promise<void>((resolve) => {
         console.log('Stopping server...')

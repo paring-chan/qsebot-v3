@@ -1,12 +1,41 @@
 import React from 'react'
 import { CssBaseline } from '@mui/material'
+import { RecoilRoot } from 'recoil'
+import WaitReady from './components/WaitReady'
+import LoadingScreen from './components/LoadingScreen'
+import { SnackbarProvider } from 'notistack'
+import AuthRequired from './components/AuthRequired'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import Main from './Pages/Main'
+import AdminRequired from './components/AdminRequired'
 
 const Entry: React.FC = () => {
     return (
-        <div>
-            <CssBaseline />
-            Entry
-        </div>
+        <BrowserRouter>
+            <RecoilRoot>
+                <SnackbarProvider>
+                    <CssBaseline />
+                    <React.Suspense fallback={<LoadingScreen />}>
+                        <WaitReady>
+                            <Switch>
+                                <Route exact path="/" component={Main} />
+                                <Route path="/admin">
+                                    <AuthRequired>
+                                        <AdminRequired>
+                                            <Switch>
+                                                <Route exact path="/admin">
+                                                    <Redirect to="/admin/admins" />
+                                                </Route>
+                                            </Switch>
+                                        </AdminRequired>
+                                    </AuthRequired>
+                                </Route>
+                            </Switch>
+                        </WaitReady>
+                    </React.Suspense>
+                </SnackbarProvider>
+            </RecoilRoot>
+        </BrowserRouter>
     )
 }
 

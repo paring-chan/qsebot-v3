@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import koaPassport from 'koa-passport'
+import { Middleware } from 'koa'
 
 const router = new Router({ prefix: '/auth' })
 
@@ -10,5 +11,14 @@ router.get(
         failureRedirect: '/',
     })
 )
+
+router.get('/logout', ((ctx) => {
+    ctx.logout()
+    ctx.redirect('/')
+}) as Middleware)
+
+router.get('/current', (ctx) => {
+    ctx.body = ctx.state.user || null
+})
 
 export default router

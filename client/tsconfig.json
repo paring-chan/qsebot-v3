@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
-    "jsx": "react"
+    "jsx": "react",
+    "module": "CommonJS",
+    "target": "ES5"
   },
   "extends": "../tsconfig.json",
   "include": ["src/**/*"]

@@ -30,6 +30,8 @@
     "@emotion/styled": "^11.3.0",
     "@mui/material": "^5.0.0-rc.1",
     "@pikokr/command.ts": "^3.0.6",
+    "axios": "^0.21.4",
+    "axios-hooks": "^2.7.0",
     "chokidar": "^3.5.2",
     "discord-api-types": "^0.23.1",
     "discord.js": "^13.1.0",
@@ -41,10 +43,12 @@
     "koa-session": "^6.2.0",
     "koa-static": "^5.0.0",
     "mongoose": "^6.0.7",
+    "notistack": "^1.0.6-next.3",
     "passport-discord": "^0.1.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.3.0"
+    "react-router-dom": "^5.3.0",
+    "recoil": "^0.4.1"
   },
   "scripts": {
     "dev": "ts-node src",
