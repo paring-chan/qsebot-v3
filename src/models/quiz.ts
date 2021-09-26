@@ -21,6 +21,7 @@ const schema = new mongoose.Schema<IQuiz>({
     question: {
         type: String,
         required: true,
+        index: 'text',
     },
     ready: {
         type: Boolean,

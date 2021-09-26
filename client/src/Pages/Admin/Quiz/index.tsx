@@ -1,15 +1,13 @@
 import React from 'react'
-import { axios, useRequest } from '../../../utils/request'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, ListItem, ListItemText, Pagination, TextField, Typography } from '@mui/material'
+import { axios } from '../../../utils/request'
+import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { useSnackbar } from 'notistack'
-import { Link, useHistory } from 'react-router-dom'
-import { getAnswerCount } from '../../../utils/getAnswerCount'
+import { useHistory } from 'react-router-dom'
+import QuizList from '../../../components/QuizList'
 
-const QuizList: React.FC = () => {
-    const [page, setPage] = React.useState(1)
-
-    const { data: quizList, pages } = useRequest(`/admin/quiz?page=${page}`).data!
+const QuizListPage: React.FC = () => {
+    const [search, setSearch] = React.useState('')
 
     const [addDialog, setAddDialog] = React.useState(false)
 
@@ -72,19 +70,12 @@ const QuizList: React.FC = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
-            <Box sx={{ mt: 2 }}>
-                {(quizList as any[]).map((x, i) => (
-                    <ListItem key={i} button component={Link} to={`/admin/quiz/${x._id}`}>
-                        <ListItemText primary={x.question} secondary={`버튼 ${getAnswerCount(x.answers)}개`} />
-                    </ListItem>
-                ))}
-
-                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                    <Pagination count={pages} color="primary" onChange={(e, v) => setPage(v)} />
-                </Box>
-            </Box>
+            <TextField fullWidth sx={{ mt: 2 }} label="검색어를 입력하세요..." value={search} onChange={(e) => setSearch(e.target.value)} />
+            <React.Suspense fallback={<CircularProgress />}>
+                <QuizList search={search} />
+            </React.Suspense>
         </div>
     )
 }
 
-export default QuizList
+export default QuizListPage
