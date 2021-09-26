@@ -6,6 +6,9 @@ import { restart, start } from './webManager'
 import path from 'path'
 import chokidar from 'chokidar'
 
+process.on('uncaughtException', console.error)
+process.on('unhandledRejection', console.error)
+
 export const cts = new Client()
 
 let reloading = false

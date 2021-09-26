@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import { Quiz } from '../../../models'
+import quizEdit from './quizEdit'
 
 const router = new Router({ prefix: '/quiz' })
 
@@ -22,5 +23,7 @@ router.post('/', async (ctx) => {
     await quiz.save()
     ctx.body = { id: quiz._id }
 })
+
+router.use(quizEdit.routes())
 
 export default router
