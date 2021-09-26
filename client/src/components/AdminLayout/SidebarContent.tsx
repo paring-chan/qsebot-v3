@@ -13,7 +13,7 @@ const AdminSidebarContent: React.FC = () => {
                     <ListItemIcon>
                         <Person />
                     </ListItemIcon>
-                    <ListItemText primary="관리자 관리" />
+                    <ListItemText primary="관리자 목록" />
                 </ListItem>
             </List>
         </div>
