@@ -22,4 +22,4 @@ const schema = new mongoose.Schema<IQuiz>({
     },
 })
 
-export const Quiz = mongoose.model<IQuiz>('Quiz', schema)
+export const Quiz = mongoose.model<IQuiz>('Quiz', schema, 'quiz')
