@@ -10,6 +10,7 @@ import Main from './Pages/Main'
 import AdminRequired from './components/AdminRequired'
 import Admins from './Pages/Admin/Admins'
 import AdminLayout from './components/AdminLayout'
+import SuspenseRoute from './components/SuspenseRoute'
 
 const Entry: React.FC = () => {
     return (
@@ -29,7 +30,7 @@ const Entry: React.FC = () => {
                                                     <Route exact path="/admin">
                                                         <Redirect to="/admin/admins" />
                                                     </Route>
-                                                    <Route exact path="/admin/admins" component={Admins} />
+                                                    <SuspenseRoute exact path="/admin/admins" component={Admins} />
                                                 </Switch>
                                             </AdminLayout>
                                         </AdminRequired>

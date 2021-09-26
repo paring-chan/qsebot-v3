@@ -8,6 +8,7 @@ import auth from './auth'
 import path from 'path'
 import * as fs from 'fs'
 import Static from 'koa-static'
+import api from './api'
 
 const app = new Koa()
 
@@ -51,6 +52,8 @@ app.use(async (ctx, next) => {
 const router = new Router()
 
 router.use(auth.routes())
+
+router.use(api.routes())
 
 app.use(router.routes())
 
