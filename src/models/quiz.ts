@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-export type QuestionButton = {
+export type AnswerButton = {
     emoji?: string
     label?: string
     answer: string
@@ -8,13 +8,13 @@ export type QuestionButton = {
 
 export interface IQuiz extends mongoose.Document {
     question: string
-    answers: QuestionButton[][]
+    answers: AnswerButton[][]
 }
 
 const schema = new mongoose.Schema<IQuiz>({
     answers: {
         type: [[Object]],
-        default: [] as QuestionButton[][],
+        default: [] as AnswerButton[][],
     },
     question: {
         type: String,
