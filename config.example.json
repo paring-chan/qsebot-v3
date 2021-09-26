@@ -1,5 +1,7 @@
 {
   "token": "TOKEN_HERE",
+  "prefix": "",
+  "mainGuildId": "",
   "slash": {
     "guild": ""
   },

@@ -10,7 +10,7 @@ export class Client extends CommandClient {
             }),
             owners: 'auto',
             command: {
-                prefix: '!큐세 ',
+                prefix: config.prefix,
             },
             slashCommands: {
                 autoSync: true,

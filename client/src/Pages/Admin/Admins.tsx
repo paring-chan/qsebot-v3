@@ -61,25 +61,27 @@ const Admins: React.FC = () => {
                             <ListItemText primary={x.discord.tag} />
                             <ListItemSecondaryAction>
                                 <Tooltip title="관리자 제거">
-                                    <IconButton
-                                        onClick={async () => {
-                                            try {
-                                                const { data } = await axios.delete(`/admin/admins/${x.qse.id}`)
-                                                if (data.error) {
-                                                    enqueueSnackbar(data.error, { variant: 'error' })
-                                                    return
+                                    <span>
+                                        <IconButton
+                                            onClick={async () => {
+                                                try {
+                                                    const { data } = await axios.delete(`/admin/admins/${x.qse.id}`)
+                                                    if (data.error) {
+                                                        enqueueSnackbar(data.error, { variant: 'error' })
+                                                        return
+                                                    }
+                                                    enqueueSnackbar('관리자가 성공적으로 제거되었습니다.', { variant: 'success' })
+                                                } catch (e: any) {
+                                                    enqueueSnackbar(e.message, { variant: 'error' })
+                                                } finally {
+                                                    await res.mutate()
                                                 }
-                                                enqueueSnackbar('관리자가 성공적으로 제거되었습니다.', { variant: 'success' })
-                                            } catch (e: any) {
-                                                enqueueSnackbar(e.message, { variant: 'error' })
-                                            } finally {
-                                                await res.mutate()
-                                            }
-                                        }}
-                                        disabled={me.qse.id === x.qse.id}
-                                    >
-                                        <Close />
-                                    </IconButton>
+                                            }}
+                                            disabled={me.qse.id === x.qse.id}
+                                        >
+                                            <Close />
+                                        </IconButton>
+                                    </span>
                                 </Tooltip>
                             </ListItemSecondaryAction>
                         </ListItem>
