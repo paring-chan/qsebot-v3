@@ -9,10 +9,13 @@ import path from 'path'
 import * as fs from 'fs'
 import Static from 'koa-static'
 import api from './api'
+import bodyParser from 'koa-bodyparser'
 
 const app = new Koa()
 
 app.keys = [config.web.key]
+
+app.use(bodyParser())
 
 app.use(session({ httpOnly: true, store: redisStore(config.web.redis) }, app))
 

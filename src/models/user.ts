@@ -19,7 +19,7 @@ const schema = new mongoose.Schema<IUser>({
 
 export const User = mongoose.model<IUser>('User', schema)
 
-export const getUser = async (user: DiscordUser) => {
+export const getUser = async (user: DiscordUser): Promise<IUser> => {
     let i = await User.findOne({ id: user.id })
 
     if (!i) {
