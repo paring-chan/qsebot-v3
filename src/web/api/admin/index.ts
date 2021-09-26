@@ -19,6 +19,22 @@ router.get('/admins', async (ctx) => {
     )
 })
 
+router.delete('/admins/:id', async (ctx) => {
+    const id = ctx.params.id
+    if (id === ctx.state.user.qse.id) return (ctx.body = { error: '자신의 관리자를 제거할 수 없습니다' })
+    const userToRemoveAdmin = await User.findOne({ id, admin: true })
+    if (!userToRemoveAdmin) {
+        return (ctx.body = {
+            error: '유저가 관리자가 아닙니다.',
+        })
+    }
+    userToRemoveAdmin.admin = false
+    await userToRemoveAdmin.save()
+    ctx.body = {
+        ok: 1,
+    }
+})
+
 router.post('/admins', async (ctx) => {
     const body = ctx.request.body
     if (!body.user) {

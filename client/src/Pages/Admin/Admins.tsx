@@ -1,13 +1,32 @@
 import React from 'react'
 import { axios, useRequest } from '../../utils/request'
 import { User } from '../../typings'
-import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from '@mui/material'
-import { Add } from '@mui/icons-material'
+import {
+    Avatar,
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    List,
+    ListItem,
+    ListItemAvatar,
+    ListItemSecondaryAction,
+    ListItemText,
+    TextField,
+    Tooltip,
+    Typography,
+} from '@mui/material'
+import { Add, Close } from '@mui/icons-material'
 import { useSnackbar } from 'notistack'
+import { useAccount } from '../../utils/user'
 
 const Admins: React.FC = () => {
     const res = useRequest<User[]>('/admin/admins')
     const data = res.data!
+    const me = useAccount()
     const [addDialog, setAddDialog] = React.useState(false)
     const [adding, setAdding] = React.useState(false)
     const [idToAdd, setIdToAdd] = React.useState('')
@@ -40,6 +59,29 @@ const Admins: React.FC = () => {
                                 <Avatar src={x.discord.displayAvatarURL} />
                             </ListItemAvatar>
                             <ListItemText primary={x.discord.tag} />
+                            <ListItemSecondaryAction>
+                                <Tooltip title="관리자 제거">
+                                    <IconButton
+                                        onClick={async () => {
+                                            try {
+                                                const { data } = await axios.delete(`/admin/admins/${x.qse.id}`)
+                                                if (data.error) {
+                                                    enqueueSnackbar(data.error, { variant: 'error' })
+                                                    return
+                                                }
+                                                enqueueSnackbar('관리자가 성공적으로 제거되었습니다.', { variant: 'success' })
+                                            } catch (e: any) {
+                                                enqueueSnackbar(e.message, { variant: 'error' })
+                                            } finally {
+                                                await res.mutate()
+                                            }
+                                        }}
+                                        disabled={me.qse.id === x.qse.id}
+                                    >
+                                        <Close />
+                                    </IconButton>
+                                </Tooltip>
+                            </ListItemSecondaryAction>
                         </ListItem>
                     ))}
                 </List>
@@ -63,6 +105,7 @@ const Admins: React.FC = () => {
                                     enqueueSnackbar(data.error, { variant: 'error' })
                                     return
                                 }
+                                enqueueSnackbar('관리자가 성공적으로 추가되었습니다.', { variant: 'success' })
                             } catch (e: any) {
                                 enqueueSnackbar(e.message, {
                                     variant: 'error',
