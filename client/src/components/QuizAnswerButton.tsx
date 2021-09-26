@@ -57,15 +57,40 @@ const QuizAnswerButton: React.FC<{ button: AnswerButton; update: () => void; del
                             {button.label}
                         </Button>
                         <Button onClick={(e) => setEmojiPopup(e.currentTarget)} sx={{ mr: 2 }} color="success" variant="contained" disableElevation>
-                            이모지 선택하기
+                            이모지 선택
                         </Button>
+                        {button.emoji && (
+                            <Button
+                                onClick={() => {
+                                    button.emoji = undefined
+                                    update()
+                                }}
+                                sx={{ mr: 2 }}
+                                color="error"
+                                variant="contained"
+                                disableElevation
+                            >
+                                이모지 선택 취소
+                            </Button>
+                        )}
                     </Box>
                     <TextField
                         variant="standard"
-                        label="텍스트"
+                        label="버튼"
                         value={button.label}
                         onChange={(e) => {
                             button.label = e.target.value
+                            update()
+                        }}
+                        sx={{ mt: 2 }}
+                        fullWidth
+                    />
+                    <TextField
+                        variant="standard"
+                        label="메시지 내용"
+                        value={button.answer}
+                        onChange={(e) => {
+                            button.answer = e.target.value
                             update()
                         }}
                         sx={{ mt: 2 }}
