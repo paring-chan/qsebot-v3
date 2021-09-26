@@ -1,6 +1,6 @@
 import React from 'react'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
-import { Person } from '@mui/icons-material'
+import { Person, Quiz } from '@mui/icons-material'
 import { Link, useLocation } from 'react-router-dom'
 
 const AdminSidebarContent: React.FC = () => {
@@ -14,6 +14,12 @@ const AdminSidebarContent: React.FC = () => {
                         <Person />
                     </ListItemIcon>
                     <ListItemText primary="관리자 목록" />
+                </ListItem>
+                <ListItem button component={Link} to="/admin/quiz" selected={location.pathname.startsWith('/admin/quiz')}>
+                    <ListItemIcon>
+                        <Quiz />
+                    </ListItemIcon>
+                    <ListItemText primary="퀴즈 관리" />
                 </ListItem>
             </List>
         </div>

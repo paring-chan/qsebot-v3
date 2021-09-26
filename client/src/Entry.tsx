@@ -11,6 +11,7 @@ import AdminRequired from './components/AdminRequired'
 import Admins from './Pages/Admin/Admins'
 import AdminLayout from './components/AdminLayout'
 import SuspenseRoute from './components/SuspenseRoute'
+import QuizList from './Pages/Admin/Quiz'
 
 const Entry: React.FC = () => {
     return (
@@ -31,6 +32,7 @@ const Entry: React.FC = () => {
                                                         <Redirect to="/admin/admins" />
                                                     </Route>
                                                     <SuspenseRoute exact path="/admin/admins" component={Admins} />
+                                                    <SuspenseRoute exact path="/admin/quiz" component={QuizList} />
                                                 </Switch>
                                             </AdminLayout>
                                         </AdminRequired>
