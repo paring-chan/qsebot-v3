@@ -3,8 +3,15 @@ import { Quiz } from '../../../models'
 
 const router = new Router({ prefix: '/quiz' })
 
+const amount = 20
+
 router.get('/', async (ctx) => {
-    ctx.body = await Quiz.find()
+    let page = Number(ctx.query.page)
+    const count = await Quiz.count()
+    ctx.body = {
+        data: await Quiz.find({}, [], { skip: amount * (page - 1), limit: amount }),
+        pages: Math.ceil(count / amount) || 1,
+    }
 })
 
 router.post('/', async (ctx) => {

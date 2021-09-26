@@ -1,18 +1,23 @@
 import React from 'react'
-import { Picker } from 'emoji-mart'
 import { axios, useRequest } from '../../../utils/request'
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, Typography } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Pagination, TextField, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { useSnackbar } from 'notistack'
 import { useHistory } from 'react-router-dom'
 
 const QuizList: React.FC = () => {
-    const { data } = useRequest('/admin/quiz')
-    const quizList = data!
+    const [page, setPage] = React.useState(1)
+
+    const { data: quizList, pages } = useRequest(`/admin/quiz?page=${page}`).data!
+
     const [addDialog, setAddDialog] = React.useState(false)
+
     const [adding, setAdding] = React.useState(false)
+
     const { enqueueSnackbar } = useSnackbar()
+
     const history = useHistory()
+
     const [question, setQuestion] = React.useState('')
 
     return (
@@ -66,7 +71,13 @@ const QuizList: React.FC = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
-            {JSON.stringify(quizList)}
+            <Box sx={{ mt: 2 }}>
+                {JSON.stringify(quizList)}
+
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+                    <Pagination count={pages} color="primary" onChange={(e, v) => setPage(v)} />
+                </Box>
+            </Box>
         </div>
     )
 }
