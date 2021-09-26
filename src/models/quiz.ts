@@ -4,11 +4,13 @@ export type AnswerButton = {
     emoji?: string
     label?: string
     answer: string
+    style: 'PRIMARY' | 'SECONDARY' | 'SUCCESS' | 'DANGER'
 }
 
 export interface IQuiz extends mongoose.Document {
     question: string
     answers: AnswerButton[][]
+    ready: boolean
 }
 
 const schema = new mongoose.Schema<IQuiz>({
@@ -19,6 +21,10 @@ const schema = new mongoose.Schema<IQuiz>({
     question: {
         type: String,
         required: true,
+    },
+    ready: {
+        type: Boolean,
+        default: false,
     },
 })
 

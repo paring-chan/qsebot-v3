@@ -1,10 +1,14 @@
 import React from 'react'
 import { useRouteMatch } from 'react-router-dom'
-import { useRequest } from '../../../utils/request'
-import { Box, Button, TextField, Typography } from '@mui/material'
-import { Add, Delete } from '@mui/icons-material'
+import { axios, useRequest } from '../../../utils/request'
+import { Box, Button, createTheme, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Add, Delete, Remove, Save } from '@mui/icons-material'
 import { useForceUpdate } from '../../../utils/update'
 import type { AnswerButton } from '../../../../../src/models'
+import QuizAnswerButton from '../../../components/QuizAnswerButton'
+import { LoadingButton } from '@mui/lab'
+import { useSnackbar } from 'notistack'
+import { getAnswerCount } from '../../../utils/getAnswerCount'
 
 const QuizEdit: React.FC = () => {
     const {
@@ -17,7 +21,29 @@ const QuizEdit: React.FC = () => {
 
     const [answers] = React.useState<AnswerButton[][]>(data.answers)
 
+    const [saving, setSaving] = React.useState<boolean>(false)
+
+    const { enqueueSnackbar } = useSnackbar()
+
     const forceUpdate = useForceUpdate()
+
+    const buttonColors = createTheme({
+        palette: {
+            primary: {
+                main: '#5865F2',
+            },
+            success: {
+                main: '#43B581',
+                contrastText: '#fff',
+            },
+            secondary: {
+                main: '#4F545C',
+            },
+            error: {
+                main: '#F04747',
+            },
+        },
+    })
 
     return (
         <div>
@@ -33,39 +59,103 @@ const QuizEdit: React.FC = () => {
                 </Box>
             </Box>
             <Box sx={{ mt: 4 }}>
-                <TextField label="질문" variant="standard" fullWidth value={question} onChange={(e) => setQuestion(e.target.value)} multiline />
+                <TextField label="질문" disabled={saving} variant="standard" fullWidth value={question} onChange={(e) => setQuestion(e.target.value)} multiline />
             </Box>
-            <Box sx={{ mt: 2, display: 'flex', gap: 2, flexDirection: 'column' }}>
-                {answers.map((x, i) => (
-                    <Box key={i} sx={{ display: 'flex', gap: 2 }}>
-                        {x.map((y, j) => (
-                            <Button variant="outlined" key={j}>
-                                {y.label}
+            <ThemeProvider theme={buttonColors}>
+                <Box sx={{ mt: 2, display: 'flex', gap: 2, flexDirection: 'column' }}>
+                    {answers.map((x, i) => (
+                        <Box key={i} sx={{ display: 'flex', gap: 2 }}>
+                            {x.map((y, j) => (
+                                <QuizAnswerButton
+                                    delete={() => {
+                                        x.splice(j, 1)
+                                        forceUpdate()
+                                    }}
+                                    disabled={saving}
+                                    update={forceUpdate}
+                                    button={y}
+                                    key={j}
+                                />
+                            ))}
+                            <Button
+                                startIcon={<Add />}
+                                variant="outlined"
+                                disabled={saving}
+                                onClick={() => {
+                                    x.push({ label: 'Text', answer: 'Text', emoji: '', style: 'PRIMARY' })
+                                    forceUpdate()
+                                }}
+                            >
+                                버튼 추가하기
                             </Button>
-                        ))}
-                        <Button
-                            startIcon={<Add />}
-                            variant="outlined"
-                            onClick={() => {
-                                x.push({ label: 'Text', answer: 'Text', emoji: '' })
-                                forceUpdate()
-                            }}
-                        >
-                            행 추가하기
-                        </Button>
-                    </Box>
-                ))}
-                <Button
-                    variant="outlined"
-                    startIcon={<Add />}
-                    onClick={() => {
-                        answers.push([])
-                        forceUpdate()
-                    }}
-                >
-                    열 추가하기
-                </Button>
-            </Box>
+                            <Button
+                                startIcon={<Remove />}
+                                variant="outlined"
+                                color="error"
+                                disabled={saving}
+                                onClick={() => {
+                                    answers.splice(i, 1)
+                                    forceUpdate()
+                                }}
+                            >
+                                열 삭제하기
+                            </Button>
+                        </Box>
+                    ))}
+                    <Button
+                        variant="contained"
+                        disableElevation
+                        startIcon={<Add />}
+                        onClick={() => {
+                            answers.push([])
+                            forceUpdate()
+                        }}
+                        disabled={saving}
+                    >
+                        열 추가하기
+                    </Button>
+                    <LoadingButton
+                        loading={saving}
+                        variant="contained"
+                        disableElevation
+                        color="success"
+                        startIcon={<Save />}
+                        onClick={async () => {
+                            try {
+                                setSaving(true)
+
+                                if (!getAnswerCount(answers)) {
+                                    enqueueSnackbar('최소 1개의 버튼이 필요합니다.', { variant: 'error' })
+                                    return
+                                }
+
+                                if (answers.find((x) => !x.length)) {
+                                    enqueueSnackbar('모든 열에는 최소 1개의 버튼이 필요합니다.', { variant: 'error' })
+                                    return
+                                }
+
+                                if (answers.find((x) => x.find((y) => !y.label && !y.emoji))) {
+                                    enqueueSnackbar('모든 버튼에는 텍스트 또는 이모지가 필요합니다.', { variant: 'error' })
+                                    return
+                                }
+
+                                const { data } = await axios.put(`/admin/quiz/${id}`, { question, answers })
+                                if (data.error) {
+                                    enqueueSnackbar(data.error, { variant: 'error' })
+                                    return
+                                }
+                                enqueueSnackbar('저장되었습니다.', { variant: 'success' })
+                            } catch (e: any) {
+                                enqueueSnackbar(e.message, { variant: 'error' })
+                            } finally {
+                                setSaving(false)
+                            }
+                        }}
+                    >
+                        저장하기
+                    </LoadingButton>
+                </Box>
+            </ThemeProvider>
         </div>
     )
 }

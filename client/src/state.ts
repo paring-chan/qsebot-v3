@@ -1,7 +1,7 @@
 import { selector } from 'recoil'
 import axios from 'axios'
-import { User } from './typings'
-import { CustomEmoji } from 'emoji-mart'
+import type { User } from './typings'
+import type { CustomEmoji } from 'emoji-mart'
 import { axios as api } from './utils/request'
 
 export const userState = selector<User>({
