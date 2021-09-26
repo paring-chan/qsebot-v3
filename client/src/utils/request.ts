@@ -9,6 +9,6 @@ const fetcher = (...options: [string, AxiosRequestConfig | undefined]) => {
     return axios.get(...options).then((x) => x.data)
 }
 
-export const useRequest = (url: string, config?: AxiosRequestConfig) => {
-    return useSWR([url, config], { fetcher, suspense: true })
+export function useRequest<T = any>(url: string, config?: AxiosRequestConfig) {
+    return useSWR<T>([url, config], { fetcher, suspense: true })
 }

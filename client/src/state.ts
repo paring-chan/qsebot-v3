@@ -1,16 +1,6 @@
 import { selector } from 'recoil'
 import axios from 'axios'
-
-export type User = {
-    qse: {
-        admin: boolean
-        id: string
-    }
-    discord: {
-        tag: string
-        displayAvatarURL: string
-    }
-}
+import { User } from './typings'
 
 export const userState = selector<User>({
     key: 'user',

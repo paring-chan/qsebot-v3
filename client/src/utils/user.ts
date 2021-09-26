@@ -1,5 +1,5 @@
 import { useRecoilValue } from 'recoil'
-import { userState } from '../../../src/state'
+import { userState } from '../state'
 
 export const useAccount = () => {
     return useRecoilValue(userState)
