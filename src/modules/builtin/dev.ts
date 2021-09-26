@@ -2,10 +2,19 @@ import { BuiltInModule, command, ownerOnly, rest, slashCommand } from '@pikokr/c
 import { Client } from '../../structures/client'
 import { inlineCode, SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, Message } from 'discord.js'
+import Dokdo from 'dokdo'
+import { config } from '../../config'
 
 class Dev extends BuiltInModule {
+    dokdo: Dokdo
+
     constructor(private cts: Client) {
         super()
+        this.dokdo = new Dokdo(this.cts.client, {
+            noPerm() {},
+            prefix: config.prefix,
+            owners: this.cts.owners,
+        })
     }
 
     @slashCommand({
@@ -32,6 +41,11 @@ class Dev extends BuiltInModule {
         } catch (e: any) {
             await msg.reply(`Error: ${inlineCode(e.message)}`)
         }
+    }
+
+    @command()
+    dok(msg: Message) {
+        return this.dokdo.run(msg)
     }
 }
 

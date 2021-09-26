@@ -9,9 +9,9 @@ class QuizMod extends Module {
     }
 
     private static async getRandomQuiz(): Promise<IQuiz | null> {
-        const count = await Quiz.count()
+        const count = await Quiz.count({ ready: true })
         const rand = Math.floor(Math.random() * count)
-        return Quiz.findOne().skip(rand).exec()
+        return Quiz.findOne({ ready: true }).skip(rand).exec()
     }
 
     private static renderButtons(quiz: IQuiz): MessageActionRow[] {
@@ -41,7 +41,7 @@ class QuizMod extends Module {
     async quiz(msg: Message) {
         const quiz = await QuizMod.getRandomQuiz()
         if (!quiz) {
-            await msg.reply('으에 퀴즈가 업서요')
+            await msg.reply('퀴즈가 업서요')
             return
         }
 

@@ -1,7 +1,7 @@
 import React from 'react'
-import { useRouteMatch } from 'react-router-dom'
+import { useHistory, useRouteMatch } from 'react-router-dom'
 import { axios, useRequest } from '../../../utils/request'
-import { Box, Button, createTheme, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Box, Button, createTheme, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField, ThemeProvider, Typography } from '@mui/material'
 import { Add, Delete, Remove, Save } from '@mui/icons-material'
 import { useForceUpdate } from '../../../utils/update'
 import type { AnswerButton } from '../../../../../src/models'
@@ -23,9 +23,15 @@ const QuizEdit: React.FC = () => {
 
     const [saving, setSaving] = React.useState<boolean>(false)
 
+    const [deleteDialog, setDeleteDialog] = React.useState(false)
+
+    const [deleting, setDeleting] = React.useState(false)
+
     const { enqueueSnackbar } = useSnackbar()
 
     const forceUpdate = useForceUpdate()
+
+    const history = useHistory()
 
     const buttonColors = createTheme({
         palette: {
@@ -53,9 +59,38 @@ const QuizEdit: React.FC = () => {
                 </Typography>
                 <div style={{ flexGrow: 1 }} />
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
-                    <Button color="error" variant="outlined" startIcon={<Delete />}>
+                    <Button color="error" variant="outlined" startIcon={<Delete />} onClick={() => setDeleteDialog(true)}>
                         삭제하기
                     </Button>
+                    <Dialog open={deleteDialog} onClose={deleting ? () => {} : () => setDeleteDialog(false)}>
+                        <DialogTitle>퀴즈 삭제</DialogTitle>
+                        <DialogContent>
+                            <DialogContentText>이 퀴즈를 삭제할까요?</DialogContentText>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button color="primary" onClick={() => setDeleteDialog(false)} disabled={deleting}>
+                                취소
+                            </Button>
+                            <Button
+                                color="error"
+                                disabled={deleting}
+                                onClick={async () => {
+                                    try {
+                                        setDeleting(true)
+                                        await axios.delete(`/admin/quiz/${id}`)
+                                        setDeleting(false)
+                                        enqueueSnackbar('퀴즈가 삭제되었스빈다.', { variant: 'success' })
+                                        history.push('/admin/quiz')
+                                    } catch (e: any) {
+                                        enqueueSnackbar(e.message, { variant: 'error' })
+                                        setDeleting(false)
+                                    }
+                                }}
+                            >
+                                삭제하기
+                            </Button>
+                        </DialogActions>
+                    </Dialog>
                 </Box>
             </Box>
             <Box sx={{ mt: 4 }}>

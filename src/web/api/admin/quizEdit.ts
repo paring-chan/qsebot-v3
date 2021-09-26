@@ -60,6 +60,12 @@ router.put('/', async (ctx) => {
     ctx.body = { ok: 1 }
 })
 
+router.delete('/', async (ctx) => {
+    await ctx.quiz.delete()
+
+    ctx.body = { ok: 1 }
+})
+
 router.get('/', (ctx) => {
     ctx.body = ctx.quiz
 })
