@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+    db:
+        image: mongo
+        ports:
+            - "27117:27017"
+        volumes:
+            - ./data/db:/data/db
+    redis:
+        image: redis
