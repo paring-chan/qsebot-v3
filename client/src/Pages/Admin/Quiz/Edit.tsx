@@ -79,7 +79,7 @@ const QuizEdit: React.FC = () => {
                                         setDeleting(true)
                                         await axios.delete(`/admin/quiz/${id}`)
                                         setDeleting(false)
-                                        enqueueSnackbar('퀴즈가 삭제되었스빈다.', { variant: 'success' })
+                                        enqueueSnackbar('퀴즈가 삭제되었습니다.', { variant: 'success' })
                                         history.push('/admin/quiz')
                                     } catch (e: any) {
                                         enqueueSnackbar(e.message, { variant: 'error' })
