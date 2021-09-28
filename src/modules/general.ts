@@ -1,5 +1,7 @@
 import { listener, Module } from '@pikokr/command.ts'
 import { Client } from '../structures/client'
+import { GuildMember } from 'discord.js'
+import { config } from '../config'
 
 class General extends Module {
     constructor(private cts: Client) {
@@ -14,6 +16,12 @@ class General extends Module {
     @listener('commandError')
     commandError(err: Error) {
         console.error(err)
+    }
+
+    @listener('guildMemberAdd')
+    async join(member: GuildMember) {
+        if (member.guild.id !== config.mainGuildId) return
+        await member.roles.add(config.roleId)
     }
 }
 

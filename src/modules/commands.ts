@@ -67,40 +67,42 @@ class General extends Module {
     @listener('messageCreate')
     async onMessage(msg: Message) {
         if (msg.author.bot || msg.author.system) return
-        const command = await CustomCommand.findOne({
-            $or: [
-                {
-                    message: msg.content,
-                    condition: CommandCondition.EQUALS,
-                },
-                {
-                    message: {
-                        $regex: this.escapeRegexp(msg.content),
+        try {
+            const command = await CustomCommand.findOne({
+                $or: [
+                    {
+                        message: msg.content,
+                        condition: CommandCondition.EQUALS,
                     },
-                    condition: CommandCondition.CONTAINS,
-                },
-                {
-                    message: {
-                        $regex: `^${this.escapeRegexp(msg.content)}`,
+                    {
+                        message: {
+                            $regex: this.escapeRegexp(msg.content),
+                        },
+                        condition: CommandCondition.CONTAINS,
                     },
-                    condition: CommandCondition.STARTS_WITH,
-                },
-                {
-                    message: {
-                        $regex: `${this.escapeRegexp(msg.content)}$`,
+                    {
+                        message: {
+                            $regex: `^${this.escapeRegexp(msg.content)}`,
+                        },
+                        condition: CommandCondition.STARTS_WITH,
                     },
-                    condition: CommandCondition.ENDS_WITH,
-                },
-                {
-                    message: {
-                        $regex: msg.content,
+                    {
+                        message: {
+                            $regex: `${this.escapeRegexp(msg.content)}$`,
+                        },
+                        condition: CommandCondition.ENDS_WITH,
                     },
-                    condition: CommandCondition.REGEXP,
-                },
-            ],
-        })
-        if (!command) return
-        await this.executeScript(msg, command)
+                    {
+                        message: {
+                            $regex: msg.content,
+                        },
+                        condition: CommandCondition.REGEXP,
+                    },
+                ],
+            })
+            if (!command) return
+            await this.executeScript(msg, command)
+        } catch (e) {}
     }
 }
 
