@@ -44,7 +44,7 @@ const CommandEdit: React.FC = () => {
                             삭제하기
                         </Button>
                         <Dialog open={deleteDialog} onClose={deleting ? () => {} : () => setDeleteDialog(false)}>
-                            <DialogTitle>명령 삭제</DialogTitle>
+                            <DialogTitle>명령어 삭제</DialogTitle>
                             <DialogContent>
                                 <DialogContentText>이 커맨드를 삭제할까요?</DialogContentText>
                             </DialogContent>
