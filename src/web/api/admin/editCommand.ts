@@ -1,5 +1,6 @@
 import Router from 'koa-router'
 import { CustomCommand, ICustomCommand } from '../../../models'
+import { CommandCondition } from '../../../sharedTypings'
 
 const router = new Router({ prefix: '/:id' })
 
@@ -22,5 +23,27 @@ router.use(async (ctx, next) => {
 })
 
 router.get('/', (ctx) => (ctx.body = ctx.command))
+
+router.put('/', async (ctx) => {
+    const body = ctx.request.body
+    if (!body.message) return (ctx.body = { error: '메시지는 필수입니다.' })
+    if (!body.script) return (ctx.body = { error: '스크립트는 필수입니다.' })
+    if (!CommandCondition[body.condition]) return (ctx.body = { error: '알 수 없는 실행 조건입니다.' })
+
+    ctx.command.condition = body.condition
+
+    ctx.command.message = body.message
+
+    ctx.command.script = body.script
+
+    await ctx.command.save()
+
+    ctx.body = { ok: 1 }
+})
+
+router.delete('/', async (ctx) => {
+    await ctx.command.delete()
+    ctx.body = { ok: 1 }
+})
 
 export default router
