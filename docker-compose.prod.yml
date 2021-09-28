@@ -9,3 +9,7 @@ services:
             - ./data/db:/data/db
     redis:
         image: redis
+    app:
+        build: .
+        volumes:
+            - ./config.json:/app/config.json
