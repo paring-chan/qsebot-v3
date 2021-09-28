@@ -23,10 +23,10 @@ import { CommandCondition } from '../../../../../src/sharedTypings'
 import Editor from '@monaco-editor/react'
 import { useHistory } from 'react-router-dom'
 
-const defaultCode = `// 스크립트를 입력해 주세요
-// await send('내용') -> 메시지 보내기
-// count -> 커맨드 사용 횟수
-// message -> 메시지
+const defaultCode = `// await msg.channel.send('내용') -> 메시지 보내기
+// await count() -> 커맨드 사용 횟수
+// msg -> 메시지
+// await countUp() -> 커맨드 사용 횟수 증가
 `
 
 const CustomCommands: React.FC = () => {
