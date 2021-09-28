@@ -51,6 +51,7 @@ class General extends Module {
                     const count = ((await this.getVariable(command, 'count')) || { count: 0 }).count
                     await this.setVariable(command, 'count', { count: count + 1 })
                 },
+                importModule: (path: string) => require(path),
             },
         })
 
