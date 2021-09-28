@@ -14,7 +14,6 @@ import SuspenseRoute from './components/SuspenseRoute'
 import QuizListPage from './Pages/Admin/Quiz'
 import QuizEdit from './Pages/Admin/Quiz/Edit'
 import CustomCommands from './Pages/Admin/Commands'
-import CustomCommandScripts from './Pages/Admin/Scripts'
 
 const Entry: React.FC = () => {
     return (
@@ -38,7 +37,6 @@ const Entry: React.FC = () => {
                                                     <SuspenseRoute exact path="/admin/quiz" component={QuizListPage} />
                                                     <SuspenseRoute exact path="/admin/quiz/:id" component={QuizEdit} />
                                                     <SuspenseRoute exact path="/admin/commands" component={CustomCommands} />
-                                                    <SuspenseRoute exact path="/admin/scripts" component={CustomCommandScripts} />
                                                 </Switch>
                                             </AdminLayout>
                                         </AdminRequired>

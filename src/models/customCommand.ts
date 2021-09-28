@@ -10,6 +10,7 @@ export interface ICustomCommand extends mongoose.Document {
 const schema = new mongoose.Schema<ICustomCommand>({
     message: { type: String, required: true },
     condition: {
+        enum: CommandCondition,
         type: Number,
         required: true,
     },
