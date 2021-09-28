@@ -1,5 +1,5 @@
 import Router from 'koa-router'
-import { CustomCommand, ICustomCommand } from '../../../models'
+import { CustomCommand, CustomCommandVariable, ICustomCommand } from '../../../models'
 import { CommandCondition } from '../../../sharedTypings'
 
 const router = new Router({ prefix: '/:id' })
@@ -42,6 +42,9 @@ router.put('/', async (ctx) => {
 })
 
 router.delete('/', async (ctx) => {
+    await CustomCommandVariable.deleteMany({
+        command: ctx.command._id,
+    })
     await ctx.command.delete()
     ctx.body = { ok: 1 }
 })
