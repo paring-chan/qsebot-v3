@@ -1,11 +1,33 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useSnackbar } from 'notistack'
-import { useHistory } from 'react-router-dom'
-import { Box, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material'
+import {
+    Box,
+    Button,
+    CircularProgress,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    TextField,
+    Typography,
+} from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { axios } from '../../../utils/request'
 import CommandList from '../../../components/CommandList'
 import { CommandCondition } from '../../../../../src/sharedTypings'
+import Editor from '@monaco-editor/react'
+import { useHistory } from 'react-router-dom'
+
+const defaultCode = `// 스크립트를 입력해 주세요
+// await send('내용') -> 메시지 보내기
+// count -> 커맨드 사용 횟수
+// message -> 메시지
+`
 
 const CustomCommands: React.FC = () => {
     const [search, setSearch] = React.useState('')
@@ -16,10 +38,13 @@ const CustomCommands: React.FC = () => {
 
     const { enqueueSnackbar } = useSnackbar()
 
+    const [message, setMessage] = React.useState('')
+
+    const [condition, setCondition] = React.useState<CommandCondition>(CommandCondition.EQUALS)
+
     const history = useHistory()
 
-    const [message, setMessage] = React.useState('')
-    const [condition, setCondition] = React.useState<CommandCondition>(CommandCondition.EQUALS)
+    const editorRef = useRef<any>(null)
 
     return (
         <div>
@@ -41,11 +66,11 @@ const CustomCommands: React.FC = () => {
                     </Button>
                 </Box>
             </Box>
-            <Dialog open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)} fullWidth maxWidth="sm">
+            <Dialog fullScreen open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)} fullWidth maxWidth="sm">
                 <DialogTitle>커맨드 추가</DialogTitle>
-                <DialogContent>
+                <DialogContent sx={{ display: 'flex', overflowY: 'hidden', flexDirection: 'column', gap: 2 }}>
                     <TextField value={message} fullWidth onChange={(e) => setMessage(e.target.value)} label="메시지 내용" multiline variant="standard" />
-                    <FormControl variant="standard" fullWidth sx={{ mt: 2 }}>
+                    <FormControl variant="standard" fullWidth>
                         <InputLabel>실행 조건</InputLabel>
                         <Select value={condition} onChange={(e) => setCondition(e.target.value as CommandCondition)} variant="standard">
                             <MenuItem value={CommandCondition.EQUALS}>EQUALS</MenuItem>
@@ -55,6 +80,16 @@ const CustomCommands: React.FC = () => {
                             <MenuItem value={CommandCondition.REGEXP}>REGEXP</MenuItem>
                         </Select>
                     </FormControl>
+                    <Paper variant="outlined" sx={{ flexGrow: 1 }}>
+                        <Editor
+                            onMount={(editor) => {
+                                editorRef.current = editor
+                            }}
+                            height="100%"
+                            defaultLanguage="javascript"
+                            defaultValue={defaultCode}
+                        />
+                    </Paper>
                 </DialogContent>
                 <DialogActions>
                     <Button color="error" onClick={() => setAddDialog(false)} disabled={adding}>
@@ -65,10 +100,10 @@ const CustomCommands: React.FC = () => {
                         onClick={async () => {
                             setAdding(true)
                             try {
-                                const { data } = await axios.post<{ error: string; id: string }>('/admin/commands', { question: message })
+                                const { data } = await axios.post<{ error: string; id: string }>('/admin/commands', { message, condition, script: editorRef.current.getValue() })
                                 if (data.error) {
                                     enqueueSnackbar(data.error, { variant: 'error' })
-                                    setAdding(false)
+                                    setAdding(true)
                                     return
                                 }
                                 history.push(`/admin/commands/${data.id}`)

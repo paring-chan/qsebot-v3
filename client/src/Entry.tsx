@@ -1,5 +1,5 @@
 import React from 'react'
-import { CssBaseline } from '@mui/material'
+import { createTheme, CssBaseline, ThemeProvider } from '@mui/material'
 import { RecoilRoot } from 'recoil'
 import WaitReady from './components/WaitReady'
 import LoadingScreen from './components/LoadingScreen'
@@ -14,40 +14,62 @@ import SuspenseRoute from './components/SuspenseRoute'
 import QuizListPage from './Pages/Admin/Quiz'
 import QuizEdit from './Pages/Admin/Quiz/Edit'
 import CustomCommands from './Pages/Admin/Commands'
+import CommandEdit from './Pages/Admin/Commands/Edit'
 
 const Entry: React.FC = () => {
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#5865F2',
+            },
+            success: {
+                main: '#43B581',
+                contrastText: '#fff',
+            },
+            secondary: {
+                main: '#4F545C',
+            },
+            error: {
+                main: '#F04747',
+            },
+        },
+    })
+
     return (
-        <BrowserRouter>
-            <RecoilRoot>
-                <SnackbarProvider>
-                    <CssBaseline />
-                    <React.Suspense fallback={<LoadingScreen />}>
-                        <WaitReady>
-                            <Switch>
-                                <Route exact path="/" component={Main} />
-                                <Route path="/admin">
-                                    <AuthRequired>
-                                        <AdminRequired>
-                                            <AdminLayout>
-                                                <Switch>
-                                                    <Route exact path="/admin">
-                                                        <Redirect to="/admin/admins" />
-                                                    </Route>
-                                                    <SuspenseRoute exact path="/admin/admins" component={Admins} />
-                                                    <SuspenseRoute exact path="/admin/quiz" component={QuizListPage} />
-                                                    <SuspenseRoute exact path="/admin/quiz/:id" component={QuizEdit} />
-                                                    <SuspenseRoute exact path="/admin/commands" component={CustomCommands} />
-                                                </Switch>
-                                            </AdminLayout>
-                                        </AdminRequired>
-                                    </AuthRequired>
-                                </Route>
-                            </Switch>
-                        </WaitReady>
-                    </React.Suspense>
-                </SnackbarProvider>
-            </RecoilRoot>
-        </BrowserRouter>
+        <ThemeProvider theme={theme}>
+            <BrowserRouter>
+                <RecoilRoot>
+                    <SnackbarProvider>
+                        <CssBaseline />
+                        <React.Suspense fallback={<LoadingScreen />}>
+                            <WaitReady>
+                                <Switch>
+                                    <Route exact path="/" component={Main} />
+                                    <Route path="/admin">
+                                        <AuthRequired>
+                                            <AdminRequired>
+                                                <AdminLayout>
+                                                    <Switch>
+                                                        <Route exact path="/admin">
+                                                            <Redirect to="/admin/admins" />
+                                                        </Route>
+                                                        <SuspenseRoute exact path="/admin/admins" component={Admins} />
+                                                        <SuspenseRoute exact path="/admin/quiz" component={QuizListPage} />
+                                                        <SuspenseRoute exact path="/admin/quiz/:id" component={QuizEdit} />
+                                                        <SuspenseRoute exact path="/admin/commands" component={CustomCommands} />
+                                                        <SuspenseRoute exact path="/admin/commands/:id" component={CommandEdit} />
+                                                    </Switch>
+                                                </AdminLayout>
+                                            </AdminRequired>
+                                        </AuthRequired>
+                                    </Route>
+                                </Switch>
+                            </WaitReady>
+                        </React.Suspense>
+                    </SnackbarProvider>
+                </RecoilRoot>
+            </BrowserRouter>
+        </ThemeProvider>
     )
 }
 
