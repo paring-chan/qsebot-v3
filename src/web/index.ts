@@ -10,6 +10,7 @@ import * as fs from 'fs'
 import Static from 'koa-static'
 import api from './api'
 import bodyParser from 'koa-bodyparser'
+import { pubSubHubbub } from '../websub'
 
 const app = new Koa()
 
@@ -53,6 +54,28 @@ app.use(async (ctx, next) => {
 })
 
 const router = new Router()
+
+const sub = pubSubHubbub.listener()
+
+router.all('/pubsubhubbub', (ctx) => {
+    ctx.status = 200
+
+    const promise = new Promise<void>((resolve) => {
+        const end = ctx.res.end.bind(ctx.res)
+        ctx.res.end = (cb) => {
+            resolve()
+            return end(cb)
+        }
+    })
+
+    try {
+        sub(ctx.req, ctx.res)
+    } catch (e: any) {
+        console.error(e)
+    }
+
+    return promise
+})
 
 router.use(auth.routes())
 

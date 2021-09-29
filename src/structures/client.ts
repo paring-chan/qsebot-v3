@@ -7,6 +7,7 @@ export class Client extends CommandClient {
         super({
             client: new Discord.Client({
                 intents: Object.keys(Intents.FLAGS) as IntentsString[],
+                partials: ['GUILD_MEMBER', 'CHANNEL', 'MESSAGE', 'USER', 'REACTION'],
             }),
             owners: 'auto',
             command: {
