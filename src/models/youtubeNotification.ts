@@ -4,7 +4,6 @@ export interface IYoutubeNotification extends mongoose.Document {
     channelId: string
     channel: string
     script: string
-    channelName: string
 }
 
 const schema = new mongoose.Schema<IYoutubeNotification>({
@@ -15,10 +14,6 @@ const schema = new mongoose.Schema<IYoutubeNotification>({
         index: 'text',
     },
     script: {
-        type: String,
-        required: true,
-    },
-    channelName: {
         type: String,
         required: true,
     },
