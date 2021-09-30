@@ -7,9 +7,9 @@ declare module 'pubsubhubbub' {
     function createServer(option: Options): PubSubHubBub
 
     class PubSubHubBub extends Stream {
-        setSubscription(mode: string, topic: string, callbackUrl?: string, callback?: Function)
-        subscribe(mode: string, topic: string, callbackUrl?: string, callback?: Function)
-        unsubscribe(mode: string, topic: string, callbackUrl?: string, callback?: Function)
+        setSubscription(topic: string, hub: string, callbackUrl?: string, callback?: Function)
+        subscribe(mode: string, hub: string, callback?: Function)
+        unsubscribe(mode: string, hub: string, callback?: Function)
         listen(port: number)
         listener(): (req: IncomingMessage, res: ServerResponse, next?: Function) => void
     }

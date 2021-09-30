@@ -2,17 +2,20 @@ import React from 'react'
 import { Box, ListItem, ListItemText, Pagination } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useRequest } from '../utils/request'
+import { useTextChannels } from '../utils/channels'
 
 const YTNotificationList: React.FC<{ search: string }> = ({ search }) => {
     const [page, setPage] = React.useState(1)
 
     const { data: quizList, pages } = useRequest(`/admin/notifications/youtube?page=${page}&search=${encodeURIComponent(search)}`).data!
 
+    const channels = useTextChannels()
+
     return (
         <Box sx={{ mt: 2 }}>
             {(quizList as any[]).map((x, i) => (
                 <ListItem key={i} button component={Link} to={`/admin/notifications/youtube/${x._id}`}>
-                    <ListItemText primary={x.channel} />
+                    <ListItemText primary={`${x.channelId} - ${channels.find((y) => y.id === x.channel)?.name}`} />
                 </ListItem>
             ))}
 

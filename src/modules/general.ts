@@ -18,6 +18,11 @@ class General extends Module {
         console.error(err)
     }
 
+    @listener('slashCommandError')
+    slashCommandError(err: Error) {
+        console.error(err)
+    }
+
     @listener('guildMemberAdd')
     async join(member: GuildMember) {
         if (member.user.bot) return

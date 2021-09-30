@@ -23,9 +23,15 @@ import { axios } from '../../../utils/request'
 import YTNotificationList from '../../../components/YTNotificationList'
 import { useTextChannels } from '../../../utils/channels'
 
-const defaultCode = `// await channel.send('내용') -> 메시지 보내기
-// channel -> 디스코드 채널
-// video -> 영상 데이터
+const defaultCode = `/* await channel.send('내용') -> 메시지 보내기
+channel -> 디스코드 채널
+data.video -> 영상 데이터
+data.video.link -> 영상 링크
+data.video.title -> 영상 제목
+data.video.id -> 영상 ID
+data.channel.link -> 채널 링크
+data.channel.name -> 채널 이름
+data.channel.id -> 채널 ID */
 `
 
 const YouTubeNotifications: React.FC = () => {
@@ -69,10 +75,10 @@ const YouTubeNotifications: React.FC = () => {
             <Dialog fullScreen open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)} fullWidth maxWidth="sm">
                 <DialogTitle>알림 추가</DialogTitle>
                 <DialogContent sx={{ display: 'flex', overflowY: 'hidden', flexDirection: 'column', gap: 2 }}>
-                    <TextField value={ytChannel} fullWidth onChange={(e) => setYTChannel(e.target.value)} label="유튜브 채널 ID" multiline variant="standard" />
-                    <FormControl variant="standard" fullWidth>
+                    <TextField disabled={adding} value={ytChannel} fullWidth onChange={(e) => setYTChannel(e.target.value)} label="유튜브 채널 ID" variant="standard" />
+                    <FormControl variant="standard" disabled={adding} fullWidth>
                         <InputLabel>디스코드 채널</InputLabel>
-                        <Select value={channel} onChange={(e) => setChannel(e.target.value)} variant="standard">
+                        <Select disabled={adding} value={channel} onChange={(e) => setChannel(e.target.value)} variant="standard">
                             {textChannels.map((x, i) => (
                                 <MenuItem key={i} value={x.id}>
                                     {x.name}
@@ -101,7 +107,7 @@ const YouTubeNotifications: React.FC = () => {
                             setAdding(true)
                             try {
                                 const { data } = await axios.post<{ error: string; id: string }>('/admin/notifications/youtube', {
-                                    ytChannel: '',
+                                    ytChannel,
                                     channel,
                                     script: editorRef.current.getValue(),
                                 })
