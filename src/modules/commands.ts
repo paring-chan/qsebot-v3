@@ -1,6 +1,6 @@
 import { listener, Module } from '@pikokr/command.ts'
 import { Message } from 'discord.js'
-import { CustomCommand, CustomCommandVariable, ICustomCommand, ICustomCommandVariable } from '../models'
+import { CustomCommand, CustomCommandVariable, IYoutubeNotification, ICustomCommandVariable } from '../models'
 import { CommandCondition } from '../sharedTypings'
 import { VM } from 'vm2'
 
@@ -13,7 +13,7 @@ class General extends Module {
         return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     }
 
-    async setVariable(command: ICustomCommand, key: string, value: any) {
+    async setVariable(command: IYoutubeNotification, key: string, value: any) {
         let variable = await CustomCommandVariable.findOne({
             key,
             command: command._id,
@@ -27,7 +27,7 @@ class General extends Module {
         await variable.save()
     }
 
-    async getVariable(command: ICustomCommand, key: string) {
+    async getVariable(command: IYoutubeNotification, key: string) {
         let variable: ICustomCommandVariable | null = await CustomCommandVariable.findOne({
             key,
             command: command._id,
@@ -36,7 +36,7 @@ class General extends Module {
         return variable.value
     }
 
-    async executeScript(msg: Message, command: ICustomCommand) {
+    async executeScript(msg: Message, command: IYoutubeNotification) {
         const script = command.script
 
         const vm = new VM({
