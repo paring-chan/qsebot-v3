@@ -102,7 +102,9 @@ class General extends Module {
             })
             if (!command) return
             await this.executeScript(msg, command)
-        } catch (e) {}
+        } catch (e) {
+            console.error(e)
+        }
     }
 }
 

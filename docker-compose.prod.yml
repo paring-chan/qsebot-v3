@@ -13,3 +13,8 @@ services:
         build: .
         volumes:
             - ./config.json:/app/config.json
+        ports:
+            - 127.0.0.1:32457:5000
+        depends_on:
+            - db
+            - redis
