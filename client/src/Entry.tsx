@@ -15,6 +15,7 @@ import QuizListPage from './Pages/Admin/Quiz'
 import QuizEdit from './Pages/Admin/Quiz/Edit'
 import CustomCommands from './Pages/Admin/Commands'
 import CommandEdit from './Pages/Admin/Commands/Edit'
+import YouTubeNotifications from './Pages/Admin/Notifications/YouTube'
 
 const Entry: React.FC = () => {
     const theme = createTheme({
@@ -58,6 +59,7 @@ const Entry: React.FC = () => {
                                                         <SuspenseRoute exact path="/admin/quiz/:id" component={QuizEdit} />
                                                         <SuspenseRoute exact path="/admin/commands" component={CustomCommands} />
                                                         <SuspenseRoute exact path="/admin/commands/:id" component={CommandEdit} />
+                                                        <SuspenseRoute exact path="/admin/notifications/youtube" component={YouTubeNotifications} />
                                                     </Switch>
                                                 </AdminLayout>
                                             </AdminRequired>
