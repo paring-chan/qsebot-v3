@@ -92,12 +92,6 @@ class General extends Module {
                         },
                         condition: CommandCondition.ENDS_WITH,
                     },
-                    {
-                        message: {
-                            $regex: msg.content,
-                        },
-                        condition: CommandCondition.REGEXP,
-                    },
                 ],
             })
             if (!command) return

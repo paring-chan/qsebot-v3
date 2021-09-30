@@ -3,5 +3,4 @@ export enum CommandCondition {
     CONTAINS,
     STARTS_WITH,
     ENDS_WITH,
-    REGEXP,
 }

@@ -84,7 +84,6 @@ const CommandEdit: React.FC = () => {
                         <MenuItem value={CommandCondition.CONTAINS}>CONTAINS</MenuItem>
                         <MenuItem value={CommandCondition.STARTS_WITH}>STARTS_WITH</MenuItem>
                         <MenuItem value={CommandCondition.ENDS_WITH}>ENDS_WITH</MenuItem>
-                        <MenuItem value={CommandCondition.REGEXP}>REGEXP</MenuItem>
                     </Select>
                 </FormControl>
 
