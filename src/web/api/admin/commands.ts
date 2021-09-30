@@ -2,6 +2,7 @@ import Router from 'koa-router'
 import { CustomCommand } from '../../../models'
 import { CommandCondition } from '../../../sharedTypings'
 import editCommand from './editCommand'
+import { escapeRegexp } from '../../../utils/regexp'
 
 const router = new Router({ prefix: '/commands' })
 
@@ -10,9 +11,9 @@ const amount = 20
 router.get('/', async (ctx) => {
     let page = Number(ctx.query.page)
 
-    const count = await CustomCommand.count({ $text: { $search: ctx.query.search as string } })
+    const count = await CustomCommand.count({ message: { $regex: escapeRegexp(ctx.query.search as string) } })
     ctx.body = {
-        data: await CustomCommand.find({ $text: { $search: ctx.query.search as string } }, [], { skip: amount * (page - 1), limit: amount }),
+        data: await CustomCommand.find({ message: { $regex: escapeRegexp(ctx.query.search as string) } }, [], { skip: amount * (page - 1), limit: amount }),
         pages: Math.ceil(count / amount) || 1,
     }
 })

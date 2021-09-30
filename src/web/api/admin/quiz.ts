@@ -1,6 +1,7 @@
 import Router from 'koa-router'
 import { Quiz } from '../../../models'
 import quizEdit from './quizEdit'
+import { escapeRegexp } from '../../../utils/regexp'
 
 const router = new Router({ prefix: '/quiz' })
 
@@ -10,16 +11,12 @@ router.get('/', async (ctx) => {
     let page = Number(ctx.query.page)
 
     const count = await Quiz.count({
-        $text: {
-            $search: ctx.query.search as string,
-        },
+        question: { $regex: escapeRegexp(ctx.query.search as string) },
     })
     ctx.body = {
         data: await Quiz.find(
             {
-                $text: {
-                    $search: ctx.query.search as string,
-                },
+                question: { $regex: escapeRegexp(ctx.query.search as string) },
             },
             [],
             { skip: amount * (page - 1), limit: amount }
