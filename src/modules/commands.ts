@@ -75,11 +75,11 @@ class General extends Module {
                     case CommandCondition.EQUALS:
                         return x.message === msg.content
                     case CommandCondition.CONTAINS:
-                        return x.message.includes(msg.content)
+                        return msg.content.includes(x.message)
                     case CommandCondition.STARTS_WITH:
-                        return x.message.startsWith(msg.content)
+                        return msg.content.startsWith(x.message)
                     case CommandCondition.ENDS_WITH:
-                        return x.message.endsWith(msg.content)
+                        return msg.content.endsWith(x.message)
                     default:
                         return false
                 }
