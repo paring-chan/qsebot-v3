@@ -13,7 +13,7 @@ const AdminHeader: React.FC<DevelopersDrawerProps> = ({ openDrawer }) => {
     const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
     return (
-        <AppBar sx={{ zIndex: theme.zIndex.drawer + 1 }}>
+        <AppBar sx={{ zIndex: theme.zIndex.drawer + 1 }} elevation={0}>
             <Toolbar>
                 {isMobile && (
                     <IconButton sx={{ mr: 2 }} color="inherit" onClick={openDrawer}>

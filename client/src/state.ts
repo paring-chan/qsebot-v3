@@ -28,3 +28,14 @@ export const customEmojisState = selector<CustomEmoji[]>({
         )
     },
 })
+
+type TextChannel = { name: string; id: string }
+
+export const textChannelsState = selector<TextChannel[]>({
+    key: 'textChannels',
+    get: async () => {
+        const { data } = await api.get<TextChannel[]>('/admin/textChannels')
+
+        return data
+    },
+})

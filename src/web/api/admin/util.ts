@@ -13,4 +13,13 @@ router.get('/emojis', (ctx) => {
         }))
 })
 
+router.get('/textChannels', (ctx) => {
+    ctx.body = getMainGuild()
+        .channels.cache.filter((x) => x.type === 'GUILD_TEXT')
+        .map((x) => ({
+            name: x.name,
+            id: x.id,
+        }))
+})
+
 export default router

@@ -33,6 +33,7 @@ const AdminSidebarContent: React.FC = () => {
                     </ListItemIcon>
                     <ListItemText primary="유튜브 알림 관리" />
                 </ListItem>
+                와앙
             </List>
         </div>
     )

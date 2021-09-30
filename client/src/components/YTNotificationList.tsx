@@ -1,10 +1,9 @@
 import React from 'react'
 import { Box, ListItem, ListItemText, Pagination } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { getAnswerCount } from '../utils/getAnswerCount'
 import { useRequest } from '../utils/request'
 
-const QuizList: React.FC<{ search: string }> = ({ search }) => {
+const YTNotificationList: React.FC<{ search: string }> = ({ search }) => {
     const [page, setPage] = React.useState(1)
 
     const { data: quizList, pages } = useRequest(`/admin/notifications/youtube?page=${page}&search=${encodeURIComponent(search)}`).data!
@@ -13,7 +12,7 @@ const QuizList: React.FC<{ search: string }> = ({ search }) => {
         <Box sx={{ mt: 2 }}>
             {(quizList as any[]).map((x, i) => (
                 <ListItem key={i} button component={Link} to={`/admin/notifications/youtube/${x._id}`}>
-                    <ListItemText primary={x.question} secondary={`버튼 ${getAnswerCount(x.answers)}개`} />
+                    <ListItemText primary={x.channel} />
                 </ListItem>
             ))}
 
@@ -24,4 +23,4 @@ const QuizList: React.FC<{ search: string }> = ({ search }) => {
     )
 }
 
-export default QuizList
+export default YTNotificationList

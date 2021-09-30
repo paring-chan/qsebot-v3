@@ -102,7 +102,7 @@ const CustomCommands: React.FC = () => {
                                 const { data } = await axios.post<{ error: string; id: string }>('/admin/commands', { message, condition, script: editorRef.current.getValue() })
                                 if (data.error) {
                                     enqueueSnackbar(data.error, { variant: 'error' })
-                                    setAdding(true)
+                                    setAdding(false)
                                     return
                                 }
                                 history.push(`/admin/commands/${data.id}`)

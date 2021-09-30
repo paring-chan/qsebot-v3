@@ -1,5 +1,7 @@
-import { Module } from '@pikokr/command.ts'
+import { Module, slashCommand } from '@pikokr/command.ts'
 import { pubSubHubbub } from '../websub'
+import { SlashCommandBuilder } from '@discordjs/builders'
+import { CommandInteraction } from 'discord.js'
 
 class Notification extends Module {
     load() {
@@ -13,6 +15,9 @@ class Notification extends Module {
     unload() {
         pubSubHubbub.removeListener('feed', this.feed)
     }
+
+    @slashCommand({ command: new SlashCommandBuilder().setName('test').setDescription('test') })
+    async test(i: CommandInteraction) {}
 }
 
 export function install() {
