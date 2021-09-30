@@ -9,8 +9,8 @@ export async function registerAll() {
         ids.map(
             (x) =>
                 new Promise<void>((resolve) =>
-                    pubSubHubbub.subscribe(YT_TOPIC_URL(x), HUB_URL, () => {
-                        console.log(`Subscribed ${x}`)
+                    pubSubHubbub.subscribe(YT_TOPIC_URL(x), HUB_URL, (err) => {
+                        console.log(`Subscribed ${x}`, err)
                         resolve()
                     })
                 )
