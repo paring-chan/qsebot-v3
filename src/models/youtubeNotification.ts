@@ -7,10 +7,11 @@ export interface IYoutubeNotification extends mongoose.Document {
 }
 
 const schema = new mongoose.Schema<IYoutubeNotification>({
-    channelId: { type: String, required: true },
+    channelId: { type: String, required: true, unique: true, index: 'text' },
     channel: {
         type: String,
         required: true,
+        index: 'text',
     },
     script: {
         type: String,

@@ -67,32 +67,22 @@ class General extends Module {
     @listener('messageCreate')
     async onMessage(msg: Message) {
         if (msg.author.bot || msg.author.system) return
+        if (!msg.content) return
         try {
-            const command = await CustomCommand.findOne({
-                $or: [
-                    {
-                        message: msg.content,
-                        condition: CommandCondition.EQUALS,
-                    },
-                    {
-                        message: {
-                            $regex: this.escapeRegexp(msg.content),
-                        },
-                        condition: CommandCondition.CONTAINS,
-                    },
-                    {
-                        message: {
-                            $regex: `^${this.escapeRegexp(msg.content)}`,
-                        },
-                        condition: CommandCondition.STARTS_WITH,
-                    },
-                    {
-                        message: {
-                            $regex: `${this.escapeRegexp(msg.content)}$`,
-                        },
-                        condition: CommandCondition.ENDS_WITH,
-                    },
-                ],
+            const commands: ICustomCommand[] = await CustomCommand.find()
+            const command = commands.find((x) => {
+                switch (x.condition) {
+                    case CommandCondition.EQUALS:
+                        return x.message === msg.content
+                    case CommandCondition.CONTAINS:
+                        return x.message.includes(msg.content)
+                    case CommandCondition.STARTS_WITH:
+                        return x.message.startsWith(msg.content)
+                    case CommandCondition.ENDS_WITH:
+                        return x.message.endsWith(msg.content)
+                    default:
+                        return false
+                }
             })
             if (!command) return
             await this.executeScript(msg, command)

@@ -9,9 +9,21 @@ const amount = 20
 router.get('/', async (ctx) => {
     let page = Number(ctx.query.page)
 
-    const count = await Quiz.count({ question: { $regex: new RegExp(ctx.query.search as string, 'i') } })
+    const count = await Quiz.count({
+        $text: {
+            $search: ctx.query.search as string,
+        },
+    })
     ctx.body = {
-        data: await Quiz.find({ question: { $regex: new RegExp(ctx.query.search as string, 'i') } }, [], { skip: amount * (page - 1), limit: amount }),
+        data: await Quiz.find(
+            {
+                $text: {
+                    $search: ctx.query.search as string,
+                },
+            },
+            [],
+            { skip: amount * (page - 1), limit: amount }
+        ),
         pages: Math.ceil(count / amount) || 1,
     }
 })
