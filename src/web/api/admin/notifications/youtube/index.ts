@@ -3,10 +3,13 @@ import { YoutubeNotification } from '../../../../../models'
 import { escapeRegexp } from '../../../../../utils/regexp'
 import { cts } from '../../../../../index'
 import { registerAll, unregisterAll } from '../../../../../utils/notification'
+import edit from './edit'
 
 const router = new Router({ prefix: '/youtube' })
 
 const amount = 20
+
+router.use(edit.routes())
 
 router.get('/', async (ctx) => {
     let page = Number(ctx.query.page)
