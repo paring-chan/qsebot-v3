@@ -20,6 +20,7 @@ class General extends Module {
 
     @listener('guildMemberAdd')
     async join(member: GuildMember) {
+        if (member.user.bot) return
         if (member.guild.id !== config.mainGuildId) return
         await member.roles.add(config.roleId)
     }
