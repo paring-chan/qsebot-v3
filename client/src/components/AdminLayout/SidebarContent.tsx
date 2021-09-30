@@ -1,6 +1,6 @@
 import React from 'react'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
-import { Message, Person, Quiz } from '@mui/icons-material'
+import { Message, Notifications, Person, Quiz } from '@mui/icons-material'
 import { Link, useLocation } from 'react-router-dom'
 
 const AdminSidebarContent: React.FC = () => {
@@ -26,6 +26,12 @@ const AdminSidebarContent: React.FC = () => {
                         <Message />
                     </ListItemIcon>
                     <ListItemText primary="커스텀 커맨드 관리" />
+                </ListItem>
+                <ListItem button component={Link} to="/admin/notifications/youtube" selected={location.pathname.startsWith('/admin/notifications/youtube')}>
+                    <ListItemIcon>
+                        <Notifications />
+                    </ListItemIcon>
+                    <ListItemText primary="유튜브 알림 관리" />
                 </ListItem>
             </List>
         </div>

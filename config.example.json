@@ -19,5 +19,6 @@
     }
   },
   "dev": false,
-  "roleId": ""
+  "roleId": "",
+  "pubsubCallback": ""
 }
