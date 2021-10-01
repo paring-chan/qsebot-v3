@@ -23,7 +23,8 @@ type FeedData = {
 
 class Notification extends Module {
     load() {
-        pubSubHubbub.on('feed', (data: any) => this.feed(data))
+        this.feed = this.feed.bind(this)
+        pubSubHubbub.on('feed', this.feed)
     }
 
     async feed(payload: any) {
