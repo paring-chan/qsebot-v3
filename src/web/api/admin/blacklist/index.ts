@@ -2,7 +2,7 @@ import Router from 'koa-router'
 import { Blacklist } from '../../../../models'
 import { escapeRegexp } from '../../../../utils/regexp'
 import edit from './edit'
-import yup from 'yup'
+import * as yup from 'yup'
 
 const router = new Router({ prefix: '/blacklist' })
 
@@ -23,7 +23,7 @@ router.get('/', async (ctx) => {
 export const blacklistSchema = yup
     .object()
     .shape({
-        trigger: yup.array(yup.string().required()).min(1),
+        trigger: yup.array().of(yup.string().required()).min(1),
         script: yup.string().required(),
     })
     .required()
@@ -31,11 +31,15 @@ export const blacklistSchema = yup
 router.post('/', async (ctx) => {
     const body = await blacklistSchema.validate(ctx.request.body)
 
+    console.log(body)
+
     const item = new Blacklist()
 
     item.trigger = body.trigger
 
     item.script = body.script
+
+    await item.save()
 
     ctx.body = { ok: 1, id: item._id }
 })

@@ -18,6 +18,7 @@ import CommandEdit from './Pages/Admin/Commands/Edit'
 import YouTubeNotifications from './Pages/Admin/Notifications/YouTube'
 import YouTubeEdit from './Pages/Admin/Notifications/YouTubeEdit'
 import BlackListList from './Pages/Admin/Blacklist'
+import BlacklistEdit from './Pages/Admin/Blacklist/Edit'
 
 const Entry: React.FC = () => {
     const theme = createTheme({
@@ -64,6 +65,7 @@ const Entry: React.FC = () => {
                                                         <SuspenseRoute exact path="/admin/notifications/youtube" component={YouTubeNotifications} />
                                                         <SuspenseRoute exact path="/admin/notifications/youtube/:id" component={YouTubeEdit} />
                                                         <SuspenseRoute exact path="/admin/blacklist" component={BlackListList} />
+                                                        <SuspenseRoute exact path="/admin/blacklist/:id" component={BlacklistEdit} />
                                                     </Switch>
                                                 </AdminLayout>
                                             </AdminRequired>

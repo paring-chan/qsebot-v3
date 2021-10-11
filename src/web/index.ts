@@ -11,6 +11,7 @@ import Static from 'koa-static'
 import api from './api'
 import bodyParser from 'koa-bodyparser'
 import { pubSubHubbub } from '../websub'
+import { ValidationError } from 'yup'
 
 const app = new Koa()
 
@@ -37,6 +38,11 @@ app.use(async (ctx, next) => {
         }
     } catch (err: any) {
         ctx.status = err.status || 500
+        if (err instanceof ValidationError) {
+            ctx.status = 200
+            ctx.body = { error: err.message, code: 200 }
+            return
+        }
         if (ctx.status === 404) {
             if (ctx.path.startsWith('/api')) {
                 ctx.body = {

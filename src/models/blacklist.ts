@@ -18,4 +18,4 @@ const schema = new mongoose.Schema<IBlackList>({
     },
 })
 
-export const Blacklist = mongoose.model<IBlackList>('CustomCommand', schema, 'customCommands')
+export const Blacklist = mongoose.model<IBlackList>('Blacklist', schema, 'blacklists')

@@ -5,6 +5,7 @@ import util from './util'
 import quiz from './quiz'
 import commands from './commands'
 import notifications from './notifications'
+import blacklist from './blacklist'
 
 const router = new Router({ prefix: '/admin' })
 
@@ -19,5 +20,7 @@ router.use(quiz.routes())
 router.use(commands.routes())
 
 router.use(notifications.routes())
+
+router.use(blacklist.routes())
 
 export default router
