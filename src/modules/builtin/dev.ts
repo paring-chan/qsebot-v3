@@ -26,7 +26,7 @@ class Dev extends BuiltInModule {
             ephemeral: true,
         })
         const data = await this.cts.registry.reloadAll()
-        await this.cts.registry.syncCommands()
+        // await this.cts.registry.syncCommands()
         await i.editReply({
             content: '```\n' + data.map((x) => (x.success ? `✅ ${x.path}` : `❌ ${x.path}\n${x.error}`)).join('\n') + '```',
         })
