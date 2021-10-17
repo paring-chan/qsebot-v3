@@ -15,7 +15,7 @@ class Ticket extends Module {
 
         if (!id) return
 
-        const tc = await category.guild.members.fetch({user: id, cache: true})
+        const tc = await category.guild.members.fetch({ user: id, cache: true })
 
         if (!tc) return
 
@@ -24,7 +24,7 @@ class Ticket extends Module {
         try {
             await tc.user.send({
                 content: msg.content ? msg.author.tag + ' - ' + msg.content : null,
-                files: msg.attachments.map(x=>x),
+                files: msg.attachments.map(x => x)
             })
         } catch {
             await msg.react('❌')
@@ -40,11 +40,11 @@ class Ticket extends Module {
         if (msg.channel.type !== 'DM') return
         const category = await getTicketChannel()
 
-        let tc: TextChannel = category.children.find(x=>x.name.split('-').pop()===msg.author.id && x.type === 'GUILD_TEXT') as TextChannel
+        let tc: TextChannel = category.children.find(x => x.name.split('-').pop() === msg.author.id && x.type === 'GUILD_TEXT') as TextChannel
 
         if (!tc) {
             const archive = await getTicketArchiveChannel()
-            const c = archive.children.find(x=>x.name.split('-').pop()===msg.author.id && x.type === 'GUILD_TEXT') as TextChannel
+            const c = archive.children.find(x => x.name.split('-').pop() === msg.author.id && x.type === 'GUILD_TEXT') as TextChannel
 
             if (c) {
                 await c.setParent(category)
@@ -55,7 +55,7 @@ class Ticket extends Module {
         if (!tc) {
             const id = msg.author.id
 
-            const channelName = `${msg.author.tag.slice(0, 100-id.length-1)}-${msg.author.id}`
+            const channelName = `${msg.author.tag.slice(0, 100 - id.length - 1)}-${msg.author.id}`
 
             tc = await category.guild.channels.create(channelName,
                 {
@@ -76,12 +76,19 @@ class Ticket extends Module {
             })
         }
 
-        await webhook.send({
-            username: msg.author.username,
-            avatarURL: msg.author.displayAvatarURL({size: 4096,dynamic: true, format: 'png'}),
-            content: msg.content || null,
-            files: msg.attachments.map(x=>x),
-        })
+        try {
+            await webhook.send({
+                username: msg.author.username,
+                avatarURL: msg.author.displayAvatarURL({ size: 4096, dynamic: true, format: 'png' }),
+                content: msg.content || null,
+                files: msg.attachments.map(x => x)
+            })
+        } catch {
+            await msg.react('❌')
+            return
+        }
+
+        await msg.react('✅')
     }
 
     @listener('channelUpdate')
