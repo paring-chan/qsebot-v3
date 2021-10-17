@@ -11,7 +11,7 @@ const BlackList: React.FC<{ search: string }> = ({ search }) => {
     return (
         <Box sx={{ mt: 2 }}>
             {(quizList as any[]).map((x, i) => (
-                <ListItem key={i} button component={Link} to={`/admin/quiz/${x._id}`}>
+                <ListItem key={i} button component={Link} to={`/admin/blacklist/${x._id}`}>
                     <ListItemText primary={x.trigger.join(', ')} />
                 </ListItem>
             ))}
