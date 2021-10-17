@@ -20,5 +20,9 @@
   },
   "dev": false,
   "roleId": "",
-  "pubsubCallback": ""
+  "pubsubCallback": "",
+  "ticketCategoryID": "",
+  "ticketArchiveCategoryID": "",
+  "ticketDeleteCategoryID": "",
+  "pinRole": ""
 }
