@@ -16,9 +16,9 @@ import * as http from 'http'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { getMongoExpress } from '../mongoExpress'
-import expressSession from 'express-session'
 import Redis from 'ioredis'
 import { IUser, User } from '../models'
+import * as fs from 'fs'
 
 const httpServer = http.createServer((req, res) => {
     if (req.url?.startsWith('/admin/db')) {
@@ -120,20 +120,6 @@ getMongoExpress().then((express: any) => {
         },
         express
     )
-
-    app.use((ctx, next) => {
-        if (!ctx.isAuthenticated() || !ctx.state.user.qse.admin) {
-            // return ctx.throw(401)
-        }
-
-        if (ctx.path.startsWith('/admin/db')) {
-            return new Promise<void>((resolve) => {
-                expressApp(ctx.req, ctx.res)
-            })
-        }
-        return
-    })
-
     app.use(async (ctx, next) => {
         try {
             await next()
@@ -155,8 +141,8 @@ getMongoExpress().then((express: any) => {
                         error: 'Page not found.',
                     }
                 } else {
-                    // ctx.status = 200
-                    // ctx.body = (await fs.promises.readFile(path.join(publicPath, 'index.html'))).toString()
+                    ctx.status = 200
+                    ctx.body = (await fs.promises.readFile(path.join(publicPath, 'index.html'))).toString()
                 }
             } else {
                 console.log(err)
