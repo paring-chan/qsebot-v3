@@ -8,7 +8,7 @@ import * as oauth2 from 'passport-oauth2'
 import { getUser } from './models'
 import { cts } from './index'
 
-export let koa: Koa
+export let app: Server
 
 export let server: Server
 
@@ -46,8 +46,8 @@ koaPassport.deserializeUser(async (id: string, done) => {
 export function start() {
     return new Promise<void>(async (resolve) => {
         console.log('Starting server..')
-        koa = (await import('./web')).default
-        server = koa.listen(config.web.port, () => {
+        app = (await import('./web')).default
+        server = app.listen(config.web.port, () => {
             console.log(`Server is listening on port ${config.web.port}`)
             resolve()
         })

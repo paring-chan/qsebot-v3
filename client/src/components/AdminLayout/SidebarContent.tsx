@@ -1,6 +1,6 @@
 import React from 'react'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
-import { AutoFixNormal, Message, Notifications, Person, Quiz } from '@mui/icons-material'
+import { AutoFixNormal, Dns, Message, Notifications, Person, Quiz } from '@mui/icons-material'
 import { Link, useLocation } from 'react-router-dom'
 
 const AdminSidebarContent: React.FC = () => {
@@ -38,6 +38,12 @@ const AdminSidebarContent: React.FC = () => {
                         <AutoFixNormal />
                     </ListItemIcon>
                     <ListItemText primary="검열 관리" />
+                </ListItem>
+                <ListItem button component="a" href="/admin/db">
+                    <ListItemIcon>
+                        <Dns />
+                    </ListItemIcon>
+                    <ListItemText primary="데이터베이스 관리" />
                 </ListItem>
             </List>
         </div>
