@@ -21,9 +21,8 @@ const messages: ActivitiesOptions[] = [
         type: 'PLAYING',
     },
     {
-        name: '큐세 우튜브',
-        type: 'STREAMING',
-        url: 'https://www.youtube.com/c/%ED%81%90%EC%84%B8',
+        name: '큐세 유튜브',
+        type: 'WATCHING',
     },
     {
         name: '큐세 트위치 다시보기',
