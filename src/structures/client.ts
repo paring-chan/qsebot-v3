@@ -54,7 +54,7 @@ export class Client extends CommandClient {
         this.client.once('ready', () => {
             let i = 0
             setInterval(() => {
-                if (messages[i + 1]) {
+                if (!messages[i + 1]) {
                     i = 0
                     return
                 }
