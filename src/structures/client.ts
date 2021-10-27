@@ -54,12 +54,13 @@ export class Client extends CommandClient {
         this.client.once('ready', () => {
             let i = 0
             setInterval(() => {
-                if (!messages[i + 1]) {
+                if (!messages[i]) {
                     i = 0
-                    return
                 }
 
-                const item = messages[i + 1]
+                const item = messages[i]
+
+                console.log(item)
 
                 this.client.user?.setPresence({
                     activities: [item],
