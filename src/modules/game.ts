@@ -1,6 +1,6 @@
-import { command, Module } from '@pikokr/command.ts'
-import { Message, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
-import { RCPRate } from '../models'
+import { command, Module, optional } from '@pikokr/command.ts'
+import { Message, MessageActionRow, MessageButton, MessageEmbed, MessageSelectMenu, SelectMenuInteraction } from 'discord.js'
+import { RCPRate, DiceRate } from '../models'
 
 enum RCPType {
     ROCK,
@@ -132,6 +132,77 @@ class Game extends Module {
         await msg.reply({
             content: win,
         })
+    }
+
+    @command({ name: '주사위' })
+    async dice(msg: Message, @optional command: string = '') {
+        let rate =
+            (await DiceRate.findOne({
+                user: msg.author.id,
+            })) ??
+            new DiceRate({
+                user: msg.author.id,
+            })
+        if (command === '') {
+            const int = Math.floor(Math.random() * 6) + 1
+
+            const m = await msg.reply({
+                content: `1-6 중에 선택해 주세요`,
+                components: [
+                    new MessageActionRow().addComponents(
+                        new MessageSelectMenu({
+                            customId: 'select',
+                            options: [1, 2, 3, 4, 5, 6].map((x) => ({
+                                label: x.toString(),
+                                value: x.toString(),
+                            })),
+                        })
+                    ),
+                ],
+            })
+
+            try {
+                const i = (await m.awaitMessageComponent({
+                    time: 30000,
+                    filter: async (args) => {
+                        await args.deferUpdate()
+                        return args.user.id === msg.author.id
+                    },
+                    componentType: 'SELECT_MENU',
+                })) as SelectMenuInteraction
+                if (i.customId !== 'select') return
+                const value = parseInt(i.values[0])
+                if (int === value) {
+                    await m.edit({
+                        content: `맞앗서요\n주사위: ${int}`,
+                    })
+                    rate.correct++
+                } else {
+                    await m.edit({
+                        content: `틀렷서요(${value})\n주사위: ${int}`,
+                    })
+                    rate.incorrect++
+                }
+                await rate.save()
+            } finally {
+                await m.edit({
+                    components: [],
+                })
+            }
+        } else if (command === '승률') {
+            if (!rate.correct && !rate.incorrect) return msg.reply('전적이 업서요!!!')
+
+            await msg.reply({
+                content: `${msg.author} 님의 전적은 ${rate.correct} / ${rate.incorrect}, 승률 ${
+                    msg.author.id === '333557403352301588' ? Infinity : ((rate.correct / (rate.correct + rate.incorrect)) * 100).toFixed(4)
+                }% 입니다.`,
+            })
+        } else if (command === '승률초기화') {
+            rate.correct = 0
+            rate.incorrect = 0
+            await rate.save()
+            await msg.reply('✅')
+        }
     }
 
     @command({ name: '승률' })

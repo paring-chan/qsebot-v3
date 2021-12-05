@@ -59,8 +59,6 @@ export class Client extends CommandClient {
 
                 const item = messages[i]
 
-                console.log(item)
-
                 this.client.user?.setPresence({
                     activities: [item],
                 })
