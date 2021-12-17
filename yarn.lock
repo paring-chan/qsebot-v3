@@ -1312,10 +1312,10 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pikokr/command.ts@^3.0.6":
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/@pikokr/command.ts/-/command.ts-3.0.6.tgz#b8045390822b0d971fc4f3db954452b4f59e6150"
-  integrity sha512-uzuG9bUdssSUCvzZ5j+KcvVEFHKmjZITewHqnGwpgSuwx9a/n5zNPMdp40WsVtnU16lDG6Y2JczD0u3JKmcnUQ==
+"@pikokr/command.ts@^3.0.8-dev.f90db26":
+  version "3.0.8-dev.f90db26"
+  resolved "https://registry.yarnpkg.com/@pikokr/command.ts/-/command.ts-3.0.8-dev.f90db26.tgz#84681fd474e0de42538787ec0c55742ed1dd5f06"
+  integrity sha512-1A//+4cC4Mcq1YE1GmcIFj3ve86YZhzV9e4ArzlG05Jr1vbmAczXWKFjbu0+J7sqycq2yF9iYoIPswrxKgPEYw==
   dependencies:
     "@types/node" "^14.14.37"
     discord-api-types "^0.23.1"

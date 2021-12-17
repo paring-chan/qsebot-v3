@@ -19,6 +19,7 @@ import YouTubeNotifications from './Pages/Admin/Notifications/YouTube'
 import YouTubeEdit from './Pages/Admin/Notifications/YouTubeEdit'
 import BlackListList from './Pages/Admin/Blacklist'
 import BlacklistEdit from './Pages/Admin/Blacklist/Edit'
+import Layout from './components/Layout'
 
 const Entry: React.FC = () => {
     const theme = createTheme({
@@ -48,7 +49,6 @@ const Entry: React.FC = () => {
                         <React.Suspense fallback={<LoadingScreen />}>
                             <WaitReady>
                                 <Switch>
-                                    <Route exact path="/" component={Main} />
                                     <Route path="/admin">
                                         <AuthRequired>
                                             <AdminRequired>
@@ -70,6 +70,11 @@ const Entry: React.FC = () => {
                                                 </AdminLayout>
                                             </AdminRequired>
                                         </AuthRequired>
+                                    </Route>
+                                    <Route>
+                                        <Layout>
+                                            <Route exact path="/" component={Main} />
+                                        </Layout>
                                     </Route>
                                 </Switch>
                             </WaitReady>

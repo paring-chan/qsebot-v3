@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useAccount } from '../../utils/user'
 import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material'
-import { LockOpen } from '@mui/icons-material'
+import { LockOpen, Settings } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 
 const AccountMenu: React.FC = () => {
     const user = useAccount()
@@ -60,6 +61,14 @@ const AccountMenu: React.FC = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
+                {user.qse.admin && (
+                    <MenuItem component={Link} to="/admin">
+                        <ListItemIcon>
+                            <Settings />
+                        </ListItemIcon>
+                        관리자
+                    </MenuItem>
+                )}
                 <MenuItem component="a" href="/auth/logout">
                     <ListItemIcon>
                         <LockOpen />

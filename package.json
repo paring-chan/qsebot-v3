@@ -41,7 +41,7 @@
     "@mui/icons-material": "^5.0.1",
     "@mui/lab": "^5.0.0-alpha.48",
     "@mui/material": "^5.0.0-rc.1",
-    "@pikokr/command.ts": "^3.0.6",
+    "@pikokr/command.ts": "^3.0.8-dev.f90db26",
     "axios": "^0.21.4",
     "axios-hooks": "^2.7.0",
     "chokidar": "^3.5.2",
