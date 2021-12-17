@@ -24,5 +24,6 @@
   "ticketCategoryID": "",
   "ticketArchiveCategoryID": "",
   "ticketDeleteCategoryID": "",
-  "pinRole": ""
+  "pinRole": "",
+  "commandChannels": []
 }
