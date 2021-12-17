@@ -44,7 +44,7 @@ export class Client extends CommandClient {
                 check: (msg) => {
                     if (msg.member?.permissions.has('ADMINISTRATOR')) return true
                     if (this.owners.includes(msg.author.id)) return true
-                    return !!config.commandChannels.includes(msg.channelId)
+                    return !!config.commandChannels.includes((msg.channel.isThread() && msg.channel.parentId) || msg.channelId)
                 },
             },
             slashCommands: {
