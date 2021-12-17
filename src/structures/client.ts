@@ -41,6 +41,11 @@ export class Client extends CommandClient {
             owners: 'auto',
             command: {
                 prefix: config.prefix,
+                check: (msg) => {
+                    if (msg.member?.permissions.has('ADMINISTRATOR')) return true
+                    if (this.owners.includes(msg.author.id)) return true
+                    return !!config.commandChannels.includes(msg.channelId)
+                },
             },
             slashCommands: {
                 autoSync: true,
