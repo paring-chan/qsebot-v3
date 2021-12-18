@@ -4,3 +4,9 @@ export enum CommandCondition {
     STARTS_WITH,
     ENDS_WITH,
 }
+
+export enum ReactionRoleType {
+    GIVE = 'give',
+    REMOVE = 'remove',
+    MULTI = 'multi',
+}

@@ -1,6 +1,10 @@
 import { useRecoilValue } from 'recoil'
-import { textChannelsState } from '../state'
+import { guildRolesState, textChannelsState } from '../state'
 
 export const useTextChannels = () => {
     return useRecoilValue(textChannelsState)
+}
+
+export const useGuildRoles = () => {
+    return useRecoilValue(guildRolesState)
 }

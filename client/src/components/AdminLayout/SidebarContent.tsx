@@ -39,6 +39,12 @@ const AdminSidebarContent: React.FC = () => {
                     </ListItemIcon>
                     <ListItemText primary="검열 관리" />
                 </ListItem>
+                <ListItem button component={Link} to="/admin/reactionroles" selected={location.pathname.startsWith('/admin/reactionroles')}>
+                    <ListItemIcon>
+                        <AutoFixNormal />
+                    </ListItemIcon>
+                    <ListItemText primary="역할지급 관리" />
+                </ListItem>
                 <ListItem button component="a" href="/admin/db">
                     <ListItemIcon>
                         <Dns />

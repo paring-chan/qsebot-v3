@@ -30,11 +30,21 @@ export const customEmojisState = selector<CustomEmoji[]>({
 })
 
 type TextChannel = { name: string; id: string }
+type Role = { name: string; id: string }
 
 export const textChannelsState = selector<TextChannel[]>({
     key: 'textChannels',
     get: async () => {
         const { data } = await api.get<TextChannel[]>('/admin/textChannels')
+
+        return data
+    },
+})
+
+export const guildRolesState = selector<Role[]>({
+    key: 'roles',
+    get: async () => {
+        const { data } = await api.get<TextChannel[]>('/admin/roles')
 
         return data
     },

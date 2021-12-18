@@ -22,4 +22,13 @@ router.get('/textChannels', (ctx) => {
         }))
 })
 
+router.get('/roles', (ctx) => {
+    ctx.body = getMainGuild()
+        .roles.cache.filter((x) => x !== getMainGuild().roles.everyone && x.position < (getMainGuild().me?.roles.highest || 0))
+        .map((x) => ({
+            name: x.name,
+            id: x.id,
+        }))
+})
+
 export default router

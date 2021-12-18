@@ -2,6 +2,7 @@ import { command, Module } from '@pikokr/command.ts'
 import { Client } from '../structures/client'
 import { ButtonInteraction, Message, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { IQuiz, Quiz } from '../models'
+import { blockQuote, quote } from '@discordjs/builders'
 
 class QuizMod extends Module {
     constructor(private cts: Client) {
@@ -66,9 +67,9 @@ class QuizMod extends Module {
 
         const [x, y] = b.customId.split('.').map((x) => parseInt(x))
 
-        const { answer } = quiz.answers.find((_, i) => i === x)!.find((_, i) => i === y)!
+        const { answer, label } = quiz.answers.find((_, i) => i === x)!.find((_, i) => i === y)!
 
-        await m.edit({ components: [], content: answer, embeds: [] })
+        await m.edit({ components: [], content: `Q: ${quiz.question}\nA: ${label}\n${blockQuote(answer)}`, embeds: [] })
     }
 }
 
