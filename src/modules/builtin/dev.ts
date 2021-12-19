@@ -22,9 +22,7 @@ class Dev extends BuiltInModule {
     })
     @ownerOnly
     async reload(i: CommandInteraction) {
-        await i.deferReply({
-            ephemeral: true,
-        })
+        await i.deferReply()
         const data = await this.cts.registry.reloadAll()
         // await this.cts.registry.syncCommands()
         await i.editReply({

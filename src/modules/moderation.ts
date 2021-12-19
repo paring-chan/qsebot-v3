@@ -1,6 +1,7 @@
-import { command, Module, requireUserPermissions } from '@pikokr/command.ts'
-import { GuildMember, Message, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
+import { command, Module, ownerOnly, requireUserPermissions } from '@pikokr/command.ts'
+import { GuildMember, Message, MessageActionRow, MessageButton, MessageEmbed, User } from 'discord.js'
 import { codeBlock } from '@discordjs/builders'
+import { getUser } from '../models'
 
 class Moderation extends Module {
     @command({ name: 'banwave' })
@@ -79,6 +80,26 @@ class Moderation extends Module {
                 reason: '스팸 차단',
             })
         }
+    }
+
+    @command({ name: '돈주기' })
+    @ownerOnly
+    async giveMoney(msg: Message, user: User, money: number) {
+        if (!user) return
+        const u = await getUser(user)
+        await msg.reply(`${user.tag} - ${u.money} + ${money} => ${u.money + money}`)
+        u.money += money
+        await u.save()
+    }
+
+    @command({ name: '돈설정' })
+    @ownerOnly
+    async setMoney(msg: Message, user: User, money: number) {
+        if (!user) return
+        const u = await getUser(user)
+        await msg.reply(`${user.tag} - ${u.money}  => ${money}`)
+        u.money = money
+        await u.save()
     }
 }
 
