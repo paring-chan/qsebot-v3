@@ -22,6 +22,7 @@ import BlacklistEdit from './Pages/Admin/Blacklist/Edit'
 import Layout from './components/Layout'
 import ReactionRoleList from './Pages/Admin/ReactionRole'
 import Ranking from './Pages/Ranking'
+import Shop from './Pages/Shop'
 
 const Entry: React.FC = () => {
     const theme = createTheme({
@@ -78,6 +79,11 @@ const Entry: React.FC = () => {
                                         <Layout>
                                             <Route exact path="/" component={Main} />
                                             <Route exact path="/ranking" component={Ranking} />
+                                            <Route path="/shop">
+                                                <AuthRequired>
+                                                    <Route exact path="/shop" component={Shop} />
+                                                </AuthRequired>
+                                            </Route>
                                         </Layout>
                                     </Route>
                                 </Switch>

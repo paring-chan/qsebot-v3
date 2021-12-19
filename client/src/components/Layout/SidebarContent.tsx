@@ -1,6 +1,6 @@
 import React from 'react'
 import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
-import { Bookmark, SavingsOutlined } from '@mui/icons-material'
+import { Bookmark, SavingsOutlined, ShopOutlined } from '@mui/icons-material'
 import { Link, useLocation } from 'react-router-dom'
 
 const SidebarContent: React.FC = () => {
@@ -20,6 +20,12 @@ const SidebarContent: React.FC = () => {
                         <SavingsOutlined />
                     </ListItemIcon>
                     <ListItemText primary="랭킹" />
+                </ListItem>
+                <ListItem button component={Link} to="/shop" selected={location.pathname === '/shop'}>
+                    <ListItemIcon>
+                        <ShopOutlined />
+                    </ListItemIcon>
+                    <ListItemText primary="상점" />
                 </ListItem>
             </List>
         </div>
