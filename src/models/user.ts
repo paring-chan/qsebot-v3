@@ -4,6 +4,7 @@ import { User as DiscordUser } from 'discord.js'
 export interface IUser extends mongoose.Document {
     id: string
     admin: boolean
+    money: number
 }
 
 const schema = new mongoose.Schema<IUser>({
@@ -14,6 +15,10 @@ const schema = new mongoose.Schema<IUser>({
     admin: {
         type: Boolean,
         default: false,
+    },
+    money: {
+        type: Number,
+        default: 0,
     },
 })
 
