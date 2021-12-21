@@ -24,6 +24,7 @@ import ReactionRoleList from './Pages/Admin/ReactionRole'
 import Ranking from './Pages/Ranking'
 import Shop from './Pages/Shop'
 import ShopItemList from './Pages/Admin/Shop'
+import ShopItemEditor from './Pages/Admin/Shop/Edit'
 
 const Entry: React.FC = () => {
     const theme = createTheme({
@@ -72,6 +73,7 @@ const Entry: React.FC = () => {
                                                         <SuspenseRoute exact path="/admin/blacklist/:id" component={BlacklistEdit} />
                                                         <SuspenseRoute exact path="/admin/reactionroles" component={ReactionRoleList} />
                                                         <SuspenseRoute exact path="/admin/shop" component={ShopItemList} />
+                                                        <SuspenseRoute exact path="/admin/shop/:id" component={ShopItemEditor} />
                                                     </Switch>
                                                 </AdminLayout>
                                             </AdminRequired>

@@ -1,8 +1,7 @@
 import { listener, Module } from '@pikokr/command.ts'
 import { Client } from '../structures/client'
-import { GuildMember } from 'discord.js'
+import { GuildMember, Message } from 'discord.js'
 import { config } from '../config'
-
 class General extends Module {
     constructor(private cts: Client) {
         super()

@@ -10,3 +10,13 @@ export enum ReactionRoleType {
     REMOVE = 'remove',
     MULTI = 'multi',
 }
+
+export enum ShopQuestionType {
+    TEXT,
+    SELECT,
+}
+
+export type SelectOption = {
+    label: string
+    value: string
+}

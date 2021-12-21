@@ -7,6 +7,7 @@ import commands from './commands'
 import notifications from './notifications'
 import blacklist from './blacklist'
 import reactionRole from './reactionRole'
+import shop from './shop'
 
 const router = new Router({ prefix: '/admin' })
 
@@ -25,5 +26,7 @@ router.use(notifications.routes())
 router.use(blacklist.routes())
 
 router.use(reactionRole.routes())
+
+router.use(shop.routes())
 
 export default router

@@ -1,4 +1,4 @@
-import { selector } from 'recoil'
+import { atom, selector } from 'recoil'
 import axios from 'axios'
 import type { User } from './typings'
 import type { CustomEmoji } from 'emoji-mart'
@@ -10,6 +10,11 @@ export const userState = selector<User>({
         const { data } = await axios.get('/auth/current')
         return data
     },
+})
+
+export const adminDisablePaddingState = atom<boolean>({
+    key: 'adminDisablePadding',
+    default: false,
 })
 
 export const customEmojisState = selector<CustomEmoji[]>({
