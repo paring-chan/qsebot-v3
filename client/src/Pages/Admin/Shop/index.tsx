@@ -1,25 +1,68 @@
 import React from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, Typography } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { shopItemCreateSchema } from '../../../../../src/web/api/admin/shop/validation'
+import { LoadingButton } from '@mui/lab'
+import { axios } from '../../../utils/request'
+import { useSnackbar } from 'notistack'
+import { useHistory } from 'react-router-dom'
+
+type CreateFormData = {
+    name: string
+}
 
 const ShopItemList: React.FC = () => {
     const [createDialog, setCreateDialog] = React.useState(false)
 
-    const createForm = useForm()
+    const createForm = useForm<CreateFormData>({
+        resolver: yupResolver(shopItemCreateSchema),
+    })
+
+    const { enqueueSnackbar } = useSnackbar()
+
+    const history = useHistory()
+
+    const submitHandler: SubmitHandler<CreateFormData> = async (data) => {
+        try {
+            const {
+                data: { id },
+            } = await axios.post('/admin/shop')
+            history.push(`/admin/shop/${id}`)
+        } catch (e) {
+            enqueueSnackbar(`${e}`, {
+                variant: 'error',
+            })
+        }
+    }
 
     return (
         <Stack direction="column" gap={2}>
-            <form>
-                <Dialog open={createDialog} fullWidth maxWidth="sm">
+            <Dialog open={createDialog} fullWidth maxWidth="sm">
+                <form onSubmit={createForm.handleSubmit(submitHandler)}>
                     <DialogTitle>추가하기</DialogTitle>
-                    <DialogContent></DialogContent>
+                    <DialogContent>
+                        <TextField
+                            disabled={createForm.formState.isSubmitting}
+                            error={!!createForm.formState.errors.name}
+                            helperText={createForm.formState.errors.name?.message}
+                            label="이름"
+                            variant="standard"
+                            fullWidth
+                            {...createForm.register('name')}
+                        />
+                    </DialogContent>
                     <DialogActions>
-                        <Button onClick={() => setCreateDialog(false)}>취소</Button>
-                        <Button>만들기</Button>
+                        <LoadingButton loading={createForm.formState.isSubmitting} onClick={() => setCreateDialog(false)}>
+                            취소
+                        </LoadingButton>
+                        <LoadingButton loading={createForm.formState.isSubmitting} type="submit">
+                            만들기
+                        </LoadingButton>
                     </DialogActions>
-                </Dialog>
-            </form>
+                </form>
+            </Dialog>
             <div style={{ display: 'flex', alignItems: 'flex-end', gap: 10 }}>
                 <Typography variant="h4" fontWeight={600} flexGrow={1}>
                     상점 아이템 관리
