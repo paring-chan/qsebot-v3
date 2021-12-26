@@ -28,7 +28,7 @@ const ShopItemList: React.FC = () => {
         try {
             const {
                 data: { id },
-            } = await axios.post('/admin/shop')
+            } = await axios.post('/admin/shop', data)
             history.push(`/admin/shop/${id}`)
         } catch (e) {
             enqueueSnackbar(`${e}`, {
