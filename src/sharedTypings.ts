@@ -11,6 +11,19 @@ export enum ReactionRoleType {
     MULTI = 'multi',
 }
 
+export interface IShopQuestion {
+    name: string
+    type: ShopQuestionType
+    data: any
+}
+
+export interface IShopItem {
+    questions: IShopQuestion[]
+    name: string
+    desc: string
+    isPublished: boolean
+}
+
 export enum ShopQuestionType {
     TEXT,
     SELECT,

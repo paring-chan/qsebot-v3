@@ -1,34 +1,70 @@
 import React from 'react'
+import { Button, Container, Stack, TextField, Typography } from '@mui/material'
+import { useRouteMatch } from 'react-router-dom'
+import { useRequest } from '../../../utils/request'
+import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import MDEditor from '@uiw/react-md-editor'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { shopItemUpdateSchema } from '../../../../../src/web/api/admin/shop/validation'
+import { IShopItem } from '../../../../../src/sharedTypings'
 import { useSetRecoilState } from 'recoil'
 import { adminDisablePaddingState } from '../../../state'
-import { Box, Button, Drawer, Toolbar } from '@mui/material'
-import { Menu } from '@mui/icons-material'
 
 const ShopItemEditor: React.FC = () => {
+    const {
+        params: { id },
+    } = useRouteMatch<{ id: string }>()
+
     const setDisablePadding = useSetRecoilState(adminDisablePaddingState)
-    const [menu, setMenu] = React.useState(false)
 
     React.useEffect(() => {
         setDisablePadding(true)
-        return () => {
-            setDisablePadding(false)
-        }
+
+        return () => setDisablePadding(false)
     }, [])
 
+    const { data } = useRequest<any>(`/admin/shop/${id}`)
+
+    const {
+        register,
+        control,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<IShopItem>({
+        defaultValues: data,
+        resolver: yupResolver(shopItemUpdateSchema),
+    })
+
+    const submitHandler: SubmitHandler<IShopItem> = (data) => {
+        console.log(data)
+    }
+
     return (
-        <Box sx={{ height: '100%', display: 'flex' }}>
-            <div style={{ position: 'relative', flexGrow: 1 }}>
-                <div style={{ color: '#fff', position: 'absolute', right: 10, top: 10 }}>
-                    <Button onClick={() => setMenu(!menu)} color="primary" variant="contained">
-                        <Menu />
-                    </Button>
-                </div>
-            </div>
-            <Drawer onClose={() => setMenu(false)} anchor="right" open={menu} sx={{ width: 240, flexShrink: 0, [`& .MuiDrawer-paper`]: { width: 240, boxSizing: 'border-box' } }}>
-                <Toolbar />
-                히히
-            </Drawer>
-        </Box>
+        <form onSubmit={handleSubmit(submitHandler)} style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+            <Container sx={{ flexGrow: 1 }}>
+                <Stack direction="column" gap={2} py={2}>
+                    <TextField label="이름" {...register('name')} error={!!errors.name} helperText={errors.name?.message} />
+                    <Controller control={control} name="desc" render={({ field, fieldState, formState }) => <MDEditor onChange={field.onChange} value={field.value} />} />
+                    {errors.desc && <Typography color="error">{errors.desc.message}</Typography>}
+                </Stack>
+            </Container>
+            <Stack
+                direction="row"
+                gap={2}
+                position="sticky"
+                bottom={0}
+                sx={{
+                    background: '#fff',
+                    borderTop: '1px solid rgba(0,0,0,0.3)',
+                    p: 2,
+                    zIndex: 1000,
+                }}
+            >
+                <Button disableElevation variant="contained" type="submit">
+                    저장
+                </Button>
+            </Stack>
+        </form>
     )
 }
 

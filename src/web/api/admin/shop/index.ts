@@ -22,4 +22,12 @@ router.post('/', async (ctx) => {
     }
 })
 
+router.get('/:id', async (ctx) => {
+    const item = await ShopItem.findById(ctx.params.id)
+
+    if (!item) return
+
+    ctx.body = item
+})
+
 export default router

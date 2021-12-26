@@ -1,18 +1,5 @@
 import * as mongoose from 'mongoose'
-import { ShopQuestionType } from '../sharedTypings'
-
-export interface IShopQuestion {
-    name: string
-    type: ShopQuestionType
-    data: any
-}
-
-export interface IShopItem {
-    questions: IShopQuestion[]
-    name: string
-    desc: string
-    isPublished: boolean
-}
+import { IShopItem } from '../sharedTypings'
 
 const schema = new mongoose.Schema<IShopItem>({
     name: {

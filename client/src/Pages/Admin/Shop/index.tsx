@@ -1,13 +1,13 @@
 import React from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, Stack, TextField, Typography } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, List, ListItem, ListItemText, Stack, TextField, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { shopItemCreateSchema } from '../../../../../src/web/api/admin/shop/validation'
 import { LoadingButton } from '@mui/lab'
-import { axios } from '../../../utils/request'
+import { axios, useRequest } from '../../../utils/request'
 import { useSnackbar } from 'notistack'
-import { useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 type CreateFormData = {
     name: string
@@ -36,6 +36,8 @@ const ShopItemList: React.FC = () => {
             })
         }
     }
+
+    const { data } = useRequest<any[]>('/admin/shop')
 
     return (
         <Stack direction="column" gap={2}>
@@ -71,6 +73,13 @@ const ShopItemList: React.FC = () => {
                     <Add />
                 </IconButton>
             </div>
+            <List>
+                {data.map((x, i) => (
+                    <ListItem component={Link} button to={`/admin/shop/${x._id}`} key={i}>
+                        <ListItemText primary={x.name} />
+                    </ListItem>
+                ))}
+            </List>
         </Stack>
     )
 }
