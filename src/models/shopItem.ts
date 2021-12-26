@@ -21,7 +21,7 @@ const schema = new mongoose.Schema<IShopItem>({
     },
     desc: {
         type: String,
-        required: true,
+        default: '',
     },
     questions: [
         {
