@@ -18,6 +18,7 @@ export interface IShopQuestion {
 }
 
 export interface IShopItem {
+    cost: number
     questions: IShopQuestion[]
     name: string
     desc: string

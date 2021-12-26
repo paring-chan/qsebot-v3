@@ -7,16 +7,17 @@ import { useAccount } from '../../utils/user'
 
 type DrawerProps = {
     openDrawer: () => void
+    previewMode?: boolean
 }
 
-const AdminHeader: React.FC<DrawerProps> = ({ openDrawer }) => {
+const Header: React.FC<DrawerProps> = ({ openDrawer, previewMode }) => {
     const theme = useTheme()
     const isMobile = useMediaQuery(theme.breakpoints.down('md'))
     const user = useAccount()
 
     return (
-        <AppBar sx={{ zIndex: theme.zIndex.drawer + 1, background: '#fd8eaa' }} elevation={0}>
-            <Toolbar>
+        <AppBar sx={{ zIndex: theme.zIndex.drawer + 1, background: '#fd8eaa', top: 0, position: previewMode ? 'sticky' : 'fixed' }} elevation={0}>
+            <Toolbar sx={{ pointerEvents: previewMode ? 'none' : 'inherit' }}>
                 {isMobile && (
                     <IconButton sx={{ mr: 2 }} color="inherit" onClick={openDrawer}>
                         <Menu />
@@ -38,4 +39,4 @@ const AdminHeader: React.FC<DrawerProps> = ({ openDrawer }) => {
     )
 }
 
-export default AdminHeader
+export default Header

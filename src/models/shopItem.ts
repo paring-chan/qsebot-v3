@@ -19,6 +19,10 @@ const schema = new mongoose.Schema<IShopItem>({
         type: Boolean,
         default: false,
     },
+    cost: {
+        type: Number,
+        default: 0,
+    },
 })
 
 export const ShopItem = mongoose.model('shopItem', schema, 'shopItems')

@@ -1,6 +1,6 @@
 import Router from 'koa-router'
 import { ShopItem } from '../../../../models/shopItem'
-import { shopItemCreateSchema } from './validation'
+import { shopItemCreateSchema, shopItemUpdateSchema } from './validation'
 
 const router = new Router({ prefix: '/shop' })
 
@@ -28,6 +28,26 @@ router.get('/:id', async (ctx) => {
     if (!item) return
 
     ctx.body = item
+})
+
+router.put('/:id', async (ctx) => {
+    const item = await ShopItem.findById(ctx.params.id)
+
+    if (!item) return
+
+    const data = await shopItemUpdateSchema.validate(ctx.request.body)
+
+    item.name = data.name
+
+    item.desc = data.desc
+
+    item.isPublished = data.isPublished
+
+    item.cost = data.cost
+
+    await item.save()
+
+    ctx.body = { ok: true }
 })
 
 export default router
