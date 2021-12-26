@@ -1,20 +1,34 @@
 import React from 'react'
-import { Button, Container, Dialog, FormControlLabel, IconButton, Slide, Stack, Switch, TextField, Toolbar, Typography } from '@mui/material'
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Button,
+    Container,
+    Dialog,
+    FormControlLabel,
+    IconButton,
+    Slide,
+    Stack,
+    Switch,
+    TextField,
+    Toolbar,
+    Typography,
+} from '@mui/material'
 import { useRouteMatch } from 'react-router-dom'
 import { axios, useRequest } from '../../../utils/request'
-import { useForm, Controller, SubmitHandler } from 'react-hook-form'
+import { useForm, Controller, SubmitHandler, useFieldArray } from 'react-hook-form'
 import MDEditor from '@uiw/react-md-editor'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { shopItemUpdateSchema } from '../../../../../src/web/api/admin/shop/validation'
-import { IShopItem } from '../../../../../src/sharedTypings'
+import { IShopItem, ShopQuestionType } from '../../../../../src/sharedTypings'
 import { useSetRecoilState } from 'recoil'
 import { adminDisablePaddingState } from '../../../state'
 import ShopItem from '../../../components/ShopItem'
-import { Close } from '@mui/icons-material'
+import { Close, Delete } from '@mui/icons-material'
 import { TransitionProps } from '@mui/material/transitions'
 import Layout from '../../../components/Layout'
 import { useSnackbar } from 'notistack'
-import { loremIpsum } from 'lorem-ipsum'
 import { LoadingButton } from '@mui/lab'
 
 const Transition = React.forwardRef(function Transition(
@@ -66,6 +80,15 @@ const ShopItemEditor: React.FC = () => {
         }
     }
 
+    const {
+        fields: questions,
+        append,
+        remove,
+    } = useFieldArray({
+        control: control,
+        name: 'questions',
+    })
+
     return (
         <form onSubmit={handleSubmit(submitHandler)} style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
             <Dialog TransitionComponent={Transition} open={previewOpen} fullScreen>
@@ -89,6 +112,46 @@ const ShopItemEditor: React.FC = () => {
                         <Controller control={control} name="desc" render={({ field }) => <MDEditor height={600} onChange={field.onChange} value={field.value} />} />
                     </div>
                     {errors.desc && <Typography color="error">{errors.desc.message}</Typography>}
+                    <div>
+                        <Accordion>
+                            <AccordionSummary>질문</AccordionSummary>
+                            <AccordionDetails>
+                                {questions.map((x, i) => (
+                                    <div key={x.id} style={{ padding: 5 }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                                            <TextField
+                                                variant="standard"
+                                                sx={{
+                                                    flexGrow: 1,
+                                                }}
+                                                placeholder="필드 이름"
+                                                {...register(`questions.${i}.name`)}
+                                            />
+                                            <IconButton
+                                                onClick={() => {
+                                                    remove(i)
+                                                }}
+                                            >
+                                                <Delete />
+                                            </IconButton>
+                                        </div>
+                                    </div>
+                                ))}
+                                <Button
+                                    fullWidth
+                                    onClick={() => {
+                                        append({
+                                            name: '테스트',
+                                            type: ShopQuestionType.TEXT,
+                                            data: {},
+                                        })
+                                    }}
+                                >
+                                    추가하기
+                                </Button>
+                            </AccordionDetails>
+                        </Accordion>
+                    </div>
                 </Stack>
             </Container>
             <Stack
