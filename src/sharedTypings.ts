@@ -23,6 +23,7 @@ export interface IShopItem {
     name: string
     desc: string
     isPublished: boolean
+    script: string
 }
 
 export enum ShopQuestionType {

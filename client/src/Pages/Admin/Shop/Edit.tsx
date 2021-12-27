@@ -151,6 +151,10 @@ const ShopItemEditor: React.FC = () => {
                                 </Button>
                             </AccordionDetails>
                         </Accordion>
+                        <Accordion>
+                            <AccordionSummary>스크립트</AccordionSummary>
+                            <AccordionDetails></AccordionDetails>
+                        </Accordion>
                     </div>
                 </Stack>
             </Container>

@@ -23,6 +23,10 @@ const schema = new mongoose.Schema<IShopItem>({
         type: Number,
         default: 0,
     },
+    script: {
+        type: String,
+        default: '',
+    },
 })
 
 export const ShopItem = mongoose.model('shopItem', schema, 'shopItems')
