@@ -26,10 +26,11 @@ const RightArea = styled('div')({
 
 const RightCard = styled('div')({
     padding: 10,
-    background: '#e8e8e8',
     display: 'flex',
     flexDirection: 'column',
     gap: 5,
+    border: '1px solid rgba(0,0,0,0.1)',
+    borderRadius: 5,
 })
 
 const CostText = styled('div')({

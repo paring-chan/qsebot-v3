@@ -30,6 +30,9 @@ import { TransitionProps } from '@mui/material/transitions'
 import Layout from '../../../components/Layout'
 import { useSnackbar } from 'notistack'
 import { LoadingButton } from '@mui/lab'
+import Editor from '@monaco-editor/react'
+
+const defaultCode = `// user = 구매한 디스코드 유저\n// args = 값 배열`
 
 const Transition = React.forwardRef(function Transition(
     props: TransitionProps & {
@@ -63,6 +66,7 @@ const ShopItemEditor: React.FC = () => {
         handleSubmit,
         formState: { errors, isSubmitting },
         getValues,
+        setValue,
     } = useForm<IShopItem>({
         defaultValues: data,
         resolver: yupResolver(shopItemUpdateSchema),
@@ -89,8 +93,17 @@ const ShopItemEditor: React.FC = () => {
         name: 'questions',
     })
 
+    const scriptEditorRef = React.useRef<any>(null)
+
     return (
-        <form onSubmit={handleSubmit(submitHandler)} style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+        <form
+            onSubmit={(e) => {
+                setValue('script', scriptEditorRef.current.getValue())
+
+                return handleSubmit(submitHandler)(e)
+            }}
+            style={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}
+        >
             <Dialog TransitionComponent={Transition} open={previewOpen} fullScreen>
                 <Toolbar>
                     <Typography variant="h6">프리뷰</Typography>
@@ -153,7 +166,16 @@ const ShopItemEditor: React.FC = () => {
                         </Accordion>
                         <Accordion>
                             <AccordionSummary>스크립트</AccordionSummary>
-                            <AccordionDetails></AccordionDetails>
+                            <AccordionDetails>
+                                <Editor
+                                    onMount={(editor) => {
+                                        scriptEditorRef.current = editor
+                                    }}
+                                    defaultLanguage="javascript"
+                                    defaultValue={getValues('script') || defaultCode}
+                                    height={300}
+                                />
+                            </AccordionDetails>
                         </Accordion>
                     </div>
                 </Stack>

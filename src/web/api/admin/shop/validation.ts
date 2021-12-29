@@ -9,4 +9,5 @@ export const shopItemUpdateSchema = yup.object().shape({
     desc: yup.string().required(),
     isPublished: yup.boolean(),
     cost: yup.number().required(),
+    script: yup.string().default(''),
 })

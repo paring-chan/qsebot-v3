@@ -45,6 +45,8 @@ router.put('/:id', async (ctx) => {
 
     item.cost = data.cost
 
+    item.script = data.script
+
     await item.save()
 
     ctx.body = { ok: true }
