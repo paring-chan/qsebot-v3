@@ -120,4 +120,3 @@ dist
 /.idea
 /data
 /static/dist
-yarn.lock
