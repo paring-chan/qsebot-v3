@@ -1,6 +1,7 @@
 import Router from 'koa-router'
 import { ShopItem } from '../../../../models/shopItem'
 import { shopItemCreateSchema, shopItemUpdateSchema } from './validation'
+import { IShopQuestion } from '../../../../sharedTypings'
 
 const router = new Router({ prefix: '/shop' })
 
@@ -41,13 +42,13 @@ router.put('/:id', async (ctx) => {
 
     item.desc = data.desc
 
-    item.isPublished = data.isPublished
+    item.isPublished = !!data.isPublished
 
     item.cost = data.cost
 
     item.script = data.script
 
-    item.questions = data.questions
+    item.questions = data.questions as any
 
     await item.save()
 

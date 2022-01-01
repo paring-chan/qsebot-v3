@@ -145,7 +145,7 @@ const ShopItemEditor: React.FC = () => {
                                             <Controller
                                                 name={`questions.${i}.type`}
                                                 control={control}
-                                                render={({ field: { ref, onChange } }) => (
+                                                render={({ field: { ref, onChange, value } }) => (
                                                     <Select
                                                         disabled={isSubmitting}
                                                         error={!!errors.questions}
@@ -153,7 +153,7 @@ const ShopItemEditor: React.FC = () => {
                                                         ref={ref}
                                                         onChange={onChange}
                                                         fullWidth
-                                                        defaultValue={ShopQuestionType.TEXT}
+                                                        value={value || ShopQuestionType.TEXT}
                                                     >
                                                         <MenuItem value={ShopQuestionType.TEXT}>텍스트</MenuItem>
                                                         <MenuItem value={ShopQuestionType.SELECT}>셀렉트</MenuItem>

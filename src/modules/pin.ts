@@ -1,5 +1,5 @@
 import { listener, Module } from '@pikokr/command.ts'
-import { GuildMember, Message, TextBasedChannels, TextChannel } from 'discord.js'
+import { GuildMember, Message, TextChannel, TextBasedChannels } from 'discord.js'
 import { getPinRole } from '../utils/roles'
 
 class Pin extends Module {

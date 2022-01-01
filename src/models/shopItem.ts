@@ -29,4 +29,4 @@ const schema = new mongoose.Schema<IShopItem>({
     },
 })
 
-export const ShopItem = mongoose.model('shopItem', schema, 'shopItems')
+export const ShopItem = mongoose.model<IShopItem>('shopItem', schema, 'shopItems')
