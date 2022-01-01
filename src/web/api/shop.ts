@@ -16,7 +16,7 @@ router.get('/:id', async (ctx) => {
     const i = await ShopItem.findOne({
         _id: ctx.params.id,
         isPublished: true,
-    })
+    }).select('-script')
 
     if (i) {
         ctx.body = i

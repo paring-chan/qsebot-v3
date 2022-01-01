@@ -1,6 +1,6 @@
 import React from 'react'
 import { IShopItem } from '../../../../src/sharedTypings'
-import { Button, ListItem, ListItemIcon, ListItemText, styled, Tooltip, Typography } from '@mui/material'
+import { Button, Dialog, DialogContent, DialogTitle, ListItem, ListItemIcon, ListItemText, styled, Tooltip, Typography } from '@mui/material'
 import MDEditor from '@uiw/react-md-editor'
 import { Money } from '@mui/icons-material'
 import { useAccount } from '../../utils/user'
@@ -43,42 +43,48 @@ const ShopItem: React.FC<{ item: IShopItem; preview?: boolean }> = ({ item, prev
     const user = useAccount()
 
     return (
-        <ItemContainer>
-            <div style={{ flexGrow: 1 }}>
-                <MDEditor.Markdown source={item.desc} />
-            </div>
-            <div>
-                <RightArea>
-                    <RightCard>
-                        <Typography variant="h6">{item.name}</Typography>
+        <>
+            <Dialog open={true}>
+                <DialogTitle>{item.name} 구매하기</DialogTitle>
+                <DialogContent>Wa Sans</DialogContent>
+            </Dialog>
+            <ItemContainer>
+                <div style={{ flexGrow: 1 }}>
+                    <MDEditor.Markdown source={item.desc} />
+                </div>
+                <div>
+                    <RightArea>
+                        <RightCard>
+                            <Typography variant="h6">{item.name}</Typography>
 
-                        <CostText>
-                            <Money />
-                            <ListItemText primary={item.cost} />
-                        </CostText>
-                    </RightCard>
-                    {preview ? (
-                        <Tooltip title="프리뷰 모드입니다.">
-                            <span>
-                                <Button variant="outlined" disabled fullWidth>
-                                    구매하기
-                                </Button>
-                            </span>
-                        </Tooltip>
-                    ) : user.qse.money >= item.cost ? (
-                        <Button variant="outlined">구매하기</Button>
-                    ) : (
-                        <Tooltip title="돈이 부족합니다.">
-                            <span>
-                                <Button variant="outlined" disabled fullWidth>
-                                    구매하기
-                                </Button>
-                            </span>
-                        </Tooltip>
-                    )}
-                </RightArea>
-            </div>
-        </ItemContainer>
+                            <CostText>
+                                <Money />
+                                <ListItemText primary={item.cost} />
+                            </CostText>
+                        </RightCard>
+                        {preview ? (
+                            <Tooltip title="프리뷰 모드입니다.">
+                                <span>
+                                    <Button variant="outlined" disabled fullWidth>
+                                        구매하기
+                                    </Button>
+                                </span>
+                            </Tooltip>
+                        ) : user.qse.money >= item.cost ? (
+                            <Button variant="outlined">구매하기</Button>
+                        ) : (
+                            <Tooltip title="돈이 부족합니다.">
+                                <span>
+                                    <Button variant="outlined" disabled fullWidth>
+                                        구매하기
+                                    </Button>
+                                </span>
+                            </Tooltip>
+                        )}
+                    </RightArea>
+                </div>
+            </ItemContainer>
+        </>
     )
 }
 

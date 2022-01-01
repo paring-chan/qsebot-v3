@@ -8,6 +8,8 @@ import {
     Dialog,
     FormControlLabel,
     IconButton,
+    MenuItem,
+    Select,
     Slide,
     Stack,
     Switch,
@@ -130,7 +132,7 @@ const ShopItemEditor: React.FC = () => {
                             <AccordionSummary>질문</AccordionSummary>
                             <AccordionDetails>
                                 {questions.map((x, i) => (
-                                    <div key={x.id} style={{ padding: 5 }}>
+                                    <Stack direction="column" gap={2} key={x.id} style={{ padding: 5 }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                                             <TextField
                                                 variant="standard"
@@ -140,6 +142,24 @@ const ShopItemEditor: React.FC = () => {
                                                 placeholder="필드 이름"
                                                 {...register(`questions.${i}.name`)}
                                             />
+                                            <Controller
+                                                name={`questions.${i}.type`}
+                                                control={control}
+                                                render={({ field: { ref, onChange } }) => (
+                                                    <Select
+                                                        disabled={isSubmitting}
+                                                        error={!!errors.questions}
+                                                        variant="standard"
+                                                        ref={ref}
+                                                        onChange={onChange}
+                                                        fullWidth
+                                                        defaultValue={ShopQuestionType.TEXT}
+                                                    >
+                                                        <MenuItem value={ShopQuestionType.TEXT}>텍스트</MenuItem>
+                                                        <MenuItem value={ShopQuestionType.SELECT}>셀렉트</MenuItem>
+                                                    </Select>
+                                                )}
+                                            />
                                             <IconButton
                                                 onClick={() => {
                                                     remove(i)
@@ -148,7 +168,31 @@ const ShopItemEditor: React.FC = () => {
                                                 <Delete />
                                             </IconButton>
                                         </div>
-                                    </div>
+                                        <Controller
+                                            render={({ field: { value } }) =>
+                                                value === ShopQuestionType.SELECT && (
+                                                    <Controller
+                                                        control={control}
+                                                        render={({ field: { ref, onChange, value } }) => (
+                                                            <TextField
+                                                                variant="standard"
+                                                                label="옵션(쉼표로 구분)"
+                                                                fullWidth
+                                                                ref={ref}
+                                                                value={value}
+                                                                onChange={(e) => {
+                                                                    onChange(e.target.value.split(','))
+                                                                }}
+                                                            />
+                                                        )}
+                                                        name={`questions.${i}.options` as any}
+                                                    />
+                                                )
+                                            }
+                                            name={`questions.${i}.type` as any}
+                                            control={control}
+                                        />
+                                    </Stack>
                                 ))}
                                 <Button
                                     fullWidth

@@ -47,6 +47,8 @@ router.put('/:id', async (ctx) => {
 
     item.script = data.script
 
+    item.questions = data.questions
+
     await item.save()
 
     ctx.body = { ok: true }
