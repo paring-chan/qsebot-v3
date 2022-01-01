@@ -25,6 +25,7 @@ import Ranking from './Pages/Ranking'
 import Shop from './Pages/Shop'
 import ShopItemList from './Pages/Admin/Shop'
 import ShopItemEditor from './Pages/Admin/Shop/Edit'
+import ShopItemView from './Pages/ShopItemView'
 
 const Entry: React.FC = () => {
     const theme = createTheme({
@@ -86,6 +87,7 @@ const Entry: React.FC = () => {
                                             <Route path="/shop">
                                                 <AuthRequired>
                                                     <Route exact path="/shop" component={Shop} />
+                                                    <Route exact path="/shop/:id" component={ShopItemView} />
                                                 </AuthRequired>
                                             </Route>
                                         </Layout>

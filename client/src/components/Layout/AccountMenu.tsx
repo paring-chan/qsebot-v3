@@ -61,6 +61,7 @@ const AccountMenu: React.FC = () => {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
+                <MenuItem>현재 ${user.qse.money} 보유중</MenuItem>
                 {user.qse.admin && (
                     <MenuItem component={Link} to="/admin">
                         <ListItemIcon>
