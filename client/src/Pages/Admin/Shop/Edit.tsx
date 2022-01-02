@@ -262,7 +262,17 @@ const ShopItemEditor: React.FC = () => {
                 >
                     프리뷰
                 </LoadingButton>
-                <FormControlLabel disabled={isSubmitting} control={<Switch disabled={isSubmitting} {...register('isPublished')} />} label="목록 페이지에 표시" />
+                <FormControlLabel
+                    label="아이템 목록에 표시"
+                    disabled={isSubmitting}
+                    control={
+                        <Controller
+                            control={control}
+                            name="isPublished"
+                            render={({ field }) => <Switch checked={field.value} disabled={isSubmitting} {...field} label="목록 페이지에 표시" />}
+                        />
+                    }
+                />
             </Stack>
         </form>
     )
