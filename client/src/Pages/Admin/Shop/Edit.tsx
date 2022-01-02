@@ -123,6 +123,14 @@ const ShopItemEditor: React.FC = () => {
             <Container sx={{ flexGrow: 1 }}>
                 <Stack direction="column" gap={2} py={2}>
                     <TextField disabled={isSubmitting} label="이름" {...register('name')} error={!!errors.name} helperText={errors.name?.message} />
+                    <TextField
+                        disabled={isSubmitting}
+                        label="가격"
+                        {...register('cost', { valueAsNumber: true })}
+                        type="number"
+                        error={!!errors.cost}
+                        helperText={errors.cost?.message}
+                    />
                     <div style={{ pointerEvents: isSubmitting ? 'none' : 'inherit' }}>
                         <Controller control={control} name="desc" render={({ field }) => <MDEditor height={600} onChange={field.onChange} value={field.value} />} />
                     </div>
