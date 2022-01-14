@@ -68,6 +68,13 @@ class Money extends Module {
             }\n남은 돈: ${u1.money}`,
         })
     }
+
+    @command({ name: '돈' })
+    async money(msg: Message) {
+        const user = await getUser(msg.author)
+
+        await msg.reply(`${msg.author.tag}님의 돈: ${user.money}`)
+    }
 }
 
 export function install() {
