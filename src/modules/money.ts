@@ -12,14 +12,16 @@ class Money extends Module {
 
         const noFee = msg.member!.roles.cache.has(msg.guild!.roles.premiumSubscriberRole!.id)
 
+        const fee = noFee ? 0 : Number((money * 1.05 - money).toFixed(2))
+
         if (!noFee && u1.money < money * 1.05) {
-            return msg.reply(`돈이업서요 필요한 돈: ${money} + 수수료(${money * 1.05 - money}) => ${money * 1.05}`)
+            return msg.reply(`돈이업서요 필요한 돈: ${money} + 수수료(${fee}) => ${money * 1.05}`)
         } else if (noFee && u1.money < money) {
             return msg.reply(`돈이업서요 필요한 돈: ${money}(수수료 없음)`)
         }
 
         const m = await msg.reply({
-            content: `${money}원을 ${user.tag}님에게 보냅니다.${noFee ? '' : `수수료: ${money * 1.05 - money}`}`,
+            content: `${money}원을 ${user.tag}님에게 보냅니다.${noFee ? '' : `수수료: ${fee}`}`,
             components: [
                 new MessageActionRow().addComponents(
                     new MessageButton().setCustomId('ok').setStyle('SUCCESS').setLabel('OK'),
@@ -55,17 +57,15 @@ class Money extends Module {
 
         const q = await getUser(qse.user)
 
-        u1.money -= money * (noFee ? 1 : 1.05)
+        u1.money -= money + fee
         u2.money += money
-        q.money += money * (noFee ? 1 : 1.05) - money
+        q.money += fee
         await u1.save()
         await u2.save()
 
         return m.edit({
             components: [],
-            content: `${user}님에게 ${money}원을 보냈습니다\n수수료로 큐세가 ${money * 1.05 - money}원을 꺼억${
-                noFee ? '하려 했는데 부스트방패에 막혀서 실패했습니다' : ''
-            }\n남은 돈: ${u1.money}`,
+            content: `${user}님에게 ${money}원을 보냈습니다\n수수료로 큐세가 ${fee}원을 꺼억${noFee ? '하려 했는데 부스트방패에 막혀서 실패했습니다' : ''}\n남은 돈: ${u1.money}`,
         })
     }
 
