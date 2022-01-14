@@ -6,22 +6,28 @@ import { restart, start } from './webManager'
 import path from 'path'
 import chokidar from 'chokidar'
 import { registerAll } from './utils/notification'
+import { Logger } from 'tslog'
 
-process.on('uncaughtException', console.error)
-process.on('unhandledRejection', console.error)
+export const logger = new Logger({ overwriteConsole: true })
+process.on('uncaughtException', logger.error)
+process.on('unhandledRejection', logger.error)
 
-export const cts = new Client()
+export const cts = new Client(logger)
 
 let reloading = false
 
+logger.info('Connecting to database')
+
 mongoose
     .connect(config.db)
+    .then(() => logger.info('Logging in'))
     .then(() => cts.client.login(config.token))
+    .then(() => logger.info('Starting web...'))
     .then(() => start())
     .then(async () => {
-        console.log('Registering subscriptions...')
+        logger.info('Registering subscriptions...')
         await registerAll()
-        console.log('Registered subscriptions.')
+        logger.info('Registered subscriptions.')
         if (config.dev) {
             chokidar.watch(path.join(__dirname, 'web')).on('change', async () => {
                 if (reloading) return

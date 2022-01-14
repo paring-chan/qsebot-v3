@@ -1,7 +1,7 @@
 import { CommandClient } from '@pikokr/command.ts'
 import Discord, { ActivitiesOptions, Intents, IntentsString } from 'discord.js'
-import _ from 'lodash'
 import { config } from '../config'
+import { Logger } from 'tslog'
 
 const messages: ActivitiesOptions[] = [
     {
@@ -32,7 +32,7 @@ const messages: ActivitiesOptions[] = [
 ]
 
 export class Client extends CommandClient {
-    constructor() {
+    constructor(logger: Logger) {
         super({
             client: new Discord.Client({
                 intents: Object.keys(Intents.FLAGS) as IntentsString[],
@@ -52,6 +52,8 @@ export class Client extends CommandClient {
                 guild: config.slash.guild,
             },
         })
+
+        this.logger = logger
 
         this.registry.loadModulesIn('modules')
 

@@ -9,17 +9,17 @@ class General extends Module {
 
     @listener('ready')
     ready() {
-        console.log(`Logged in as ${this.cts.client.user!.tag}`)
+        this.logger.info(`Logged in as ${this.cts.client.user!.tag}`)
     }
 
     @listener('commandError')
     commandError(err: Error) {
-        console.error(err)
+        this.logger.error(err)
     }
 
     @listener('slashCommandError')
     slashCommandError(err: Error) {
-        console.error(err)
+        this.logger.error(err)
     }
 
     @listener('guildMemberAdd')

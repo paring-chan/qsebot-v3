@@ -42,7 +42,7 @@
     "@mui/icons-material": "^5.0.1",
     "@mui/lab": "^5.0.0-alpha.48",
     "@mui/material": "^5.0.0-rc.1",
-    "@pikokr/command.ts": "^3.0.8-dev.745e02b",
+    "@pikokr/command.ts": "^3.1.7",
     "@uiw/react-md-editor": "^3.9.1",
     "@uiw/react-textarea-code-editor": "^1.4.14",
     "axios": "^0.21.4",

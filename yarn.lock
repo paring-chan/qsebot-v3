@@ -1403,15 +1403,16 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@pikokr/command.ts@^3.0.8-dev.745e02b":
-  version "3.0.8-dev.745e02b"
-  resolved "https://registry.yarnpkg.com/@pikokr/command.ts/-/command.ts-3.0.8-dev.745e02b.tgz#4a9bb258eab55a9f3771b99b6d5efa0395b17cbe"
-  integrity sha512-qtUmw9/Q+FPzEAvn4c06BsoMD3fZelG7KdoQUz4qKAlLZjftpLfJX/l4fRra1FszyUdho/26QVxHQfcKM0JXRw==
+"@pikokr/command.ts@^3.1.7":
+  version "3.1.7"
+  resolved "https://registry.yarnpkg.com/@pikokr/command.ts/-/command.ts-3.1.7.tgz#29a7fb5e34815c956b845700b28b1e20de64fb10"
+  integrity sha512-4djYXHZ0z2TIkBUBfaUpADPjSgd76eplhx/8H32C+DTWrgS/ehMLDO7s5bj47phgwfLslPWUnug4IV5haNZT1Q==
   dependencies:
     "@types/node" "^14.14.37"
     discord-api-types "^0.23.1"
     lodash "^4.17.21"
     reflect-metadata "^0.1.13"
+    tslog "^3.3.1"
     typescript "^4.2.3"
     walk-sync "^3.0.0"
 
@@ -9689,7 +9690,7 @@ source-map-js@^1.0.1:
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.1.tgz#a1741c131e3c77d048252adfa24e23b908670caf"
   integrity sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA==
 
-source-map-support@~0.5.12, source-map-support@~0.5.20:
+source-map-support@^0.5.21, source-map-support@~0.5.12, source-map-support@~0.5.20:
   version "0.5.21"
   resolved "https://registry.yarnpkg.com/source-map-support/-/source-map-support-0.5.21.tgz#04fe7c7f9e1ed2d662233c28cb2b35b9f63f6e4f"
   integrity sha512-uBHU3L3czsIyYXKX88fdrGovxdSCoTGDRZ6SYXtSRxLZUzHg5P/66Ht6uoUlHu9EZod+inXhKo3qQgwXUT/y1w==
@@ -10242,6 +10243,13 @@ tslib@^2.0.3, tslib@^2.3.0, tslib@^2.3.1:
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.3.1.tgz#e8a335add5ceae51aa261d32a490158ef042ef01"
   integrity sha512-77EbyPPpMz+FRFRuAFlWMtmgUWGe9UOG2Z25NqCwiIjRhOf5iKGuzSe5P2w1laq+FkRy4p+PCuVkJSGkzTEKVw==
+
+tslog@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/tslog/-/tslog-3.3.1.tgz#cf5b236772c05c59e183dc1d088e4dbf5bcd8f85"
+  integrity sha512-An3uyXX95uU/X7v5H6G9OKW6ip/gVOpvsERGJ/nR4Or5TP5GwoI9nUjhNWEc8mJOWC7uhPMg2UzkrVDUtadELg==
+  dependencies:
+    source-map-support "^0.5.21"
 
 tsscmp@1.0.6:
   version "1.0.6"
