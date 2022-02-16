@@ -77,7 +77,7 @@ class Money extends Module {
     }
 
     @command({ name: '돈조' })
-    @coolDown(CoolDownType.USER, 60)
+    @coolDown(CoolDownType.USER, 60 * 60 * 12)
     async getMoney(msg: Message) {
         const user = await getUser(msg.author)
 
