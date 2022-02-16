@@ -43,12 +43,13 @@ export class Client extends CommandClient {
             command: {
                 prefix: config.prefix,
                 check: (msg) => {
+                    if (!msg.guild) return false
                     if (msg.member?.permissions.has('ADMINISTRATOR')) return true
                     if (this.owners.includes(msg.author.id)) return true
                     return !!config.commandChannels.includes((msg.channel.isThread() && msg.channel.parentId) || msg.channelId)
                 },
             },
-            slashCommands: {
+            applicationCommands: {
                 autoSync: true,
                 guild: config.slash.guild,
             },

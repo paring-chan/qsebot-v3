@@ -79,7 +79,19 @@ class Money extends Module {
     @command({ name: '돈조' })
     @coolDown(CoolDownType.USER, 60)
     async getMoney(msg: Message) {
-        await msg.reply('asdf')
+        const user = await getUser(msg.author)
+
+        const rand = Math.floor(Math.random() * 10)
+
+        await user.save()
+
+        if (rand === 10) {
+            await msg.reply('헊 완전운좋기 무려최고금액!! 10원!!')
+        } else if (rand === 0) {
+            await msg.reply(`0원 당첨! 큐세를 핑하면 1원을 지급해드립니다`)
+        } else {
+            await msg.reply(`${rand}원을 얻었습니다.`)
+        }
     }
 }
 

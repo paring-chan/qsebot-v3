@@ -1,4 +1,4 @@
-import { BuiltInModule, command, ownerOnly, rest, slashCommand } from '@pikokr/command.ts'
+import { applicationCommand, BuiltInModule, command, ownerOnly, rest } from '@pikokr/command.ts'
 import { Client } from '../../structures/client'
 import { inlineCode, SlashCommandBuilder } from '@discordjs/builders'
 import { CommandInteraction, Message } from 'discord.js'
@@ -17,8 +17,12 @@ class Dev extends BuiltInModule {
         })
     }
 
-    @slashCommand({
-        command: new SlashCommandBuilder().setName('reload').setDescription('리로드 커맨드'),
+    @applicationCommand({
+        command: {
+            type: 'CHAT_INPUT',
+            name: 'reload',
+            description: '리로드',
+        },
     })
     @ownerOnly
     async reload(i: CommandInteraction) {

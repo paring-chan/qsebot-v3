@@ -1,4 +1,4 @@
-import { listener, Module } from '@pikokr/command.ts'
+import { CoolDownError, listener, Module } from '@pikokr/command.ts'
 import { Client } from '../structures/client'
 import { GuildMember, Message } from 'discord.js'
 import { config } from '../config'
@@ -13,7 +13,11 @@ class General extends Module {
     }
 
     @listener('commandError')
-    commandError(err: Error) {
+    async commandError(err: Error, msg: Message) {
+        if (err instanceof CoolDownError) {
+            await msg.reply('쿨타임 남아잇기')
+            return
+        }
         this.logger.error(err)
     }
 

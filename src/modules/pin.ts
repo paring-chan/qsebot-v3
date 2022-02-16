@@ -1,10 +1,10 @@
 import { listener, Module } from '@pikokr/command.ts'
-import { GuildMember, Message, TextChannel, TextBasedChannels } from 'discord.js'
+import { GuildMember, Message, TextChannel, TextBasedChannel } from 'discord.js'
 import { getPinRole } from '../utils/roles'
 
 class Pin extends Module {
     @listener('channelPinsUpdate')
-    async pin(channel: TextBasedChannels) {
+    async pin(channel: TextBasedChannel) {
         if (!(channel instanceof TextChannel)) return
         const channels: TextChannel[] = channel.guild.channels.cache.filter((x) => x.type === 'GUILD_TEXT').map((x) => x as TextChannel)
         const allMessages: Message[][] = await Promise.all(channels.map(async (x) => (await x.messages.fetchPinned(true)).map((x) => x)))
