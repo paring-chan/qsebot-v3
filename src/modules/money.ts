@@ -1,4 +1,4 @@
-import { command, guildOnly, Module } from '@pikokr/command.ts'
+import { command, coolDown, CoolDownType, guildOnly, Module } from '@pikokr/command.ts'
 import { Message, MessageActionRow, MessageButton, User } from 'discord.js'
 import { getUser } from '../models'
 import { getMainGuild } from '../utils/guild'
@@ -74,6 +74,12 @@ class Money extends Module {
         const user = await getUser(msg.author)
 
         await msg.reply(`${msg.author.tag}님의 돈: ${user.money}`)
+    }
+
+    @command({ name: '돈조' })
+    @coolDown(CoolDownType.USER, 60)
+    async getMoney(msg: Message) {
+        await msg.reply('asdf')
     }
 }
 

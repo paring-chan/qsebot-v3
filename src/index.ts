@@ -9,8 +9,8 @@ import { registerAll } from './utils/notification'
 import { Logger } from 'tslog'
 
 export const logger = new Logger({ overwriteConsole: true })
-process.on('uncaughtException', logger.error)
-process.on('unhandledRejection', logger.error)
+process.on('uncaughtException', (d) => logger.error(d))
+process.on('unhandledRejection', (d) => logger.error(d))
 
 export const cts = new Client(logger)
 

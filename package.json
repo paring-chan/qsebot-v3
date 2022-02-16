@@ -43,7 +43,7 @@
     "@mui/lab": "^5.0.0-alpha.48",
     "@mui/material": "^5.0.0-rc.1",
     "@pikokr/command.ts": "^3.1.7",
-    "@uiw/react-md-editor": "^3.9.1",
+    "@uiw/react-md-editor": "^3.9.4",
     "@uiw/react-textarea-code-editor": "^1.4.14",
     "axios": "^0.21.4",
     "axios-hooks": "^2.7.0",
@@ -84,7 +84,7 @@
     "dev": "ts-node src",
     "build": "tsc",
     "prod": "node dist",
-    "build:client": "parcel build ./client/src/index.tsx --dist-dir static/dist",
-    "dev:client": "parcel watch ./client/src/index.tsx --host localhost --dist-dir static/dist"
+    "build:client": "parcel build ./client/index.html --dist-dir static/dist --public-url /dist",
+    "dev:client": "parcel watch ./client/index.html --host localhost --dist-dir static/dist --public-url /dist"
   }
 }

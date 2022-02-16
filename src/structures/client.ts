@@ -2,6 +2,7 @@ import { CommandClient } from '@pikokr/command.ts'
 import Discord, { ActivitiesOptions, Intents, IntentsString } from 'discord.js'
 import { config } from '../config'
 import { Logger } from 'tslog'
+import { QseCoolDownAdapter } from './QseCoolDownAdapter'
 
 const messages: ActivitiesOptions[] = [
     {
@@ -51,6 +52,7 @@ export class Client extends CommandClient {
                 autoSync: true,
                 guild: config.slash.guild,
             },
+            coolDownAdapter: new QseCoolDownAdapter(),
         })
 
         this.logger = logger

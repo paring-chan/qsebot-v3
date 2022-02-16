@@ -141,7 +141,7 @@ getMongoExpress().then((express: any) => {
                     }
                 } else {
                     ctx.status = 200
-                    ctx.body = (await fs.promises.readFile(path.join(publicPath, 'index.html'))).toString()
+                    ctx.body = (await fs.promises.readFile(path.join(publicPath, 'dist', 'index.html'))).toString()
                 }
             } else {
                 console.log(err)
