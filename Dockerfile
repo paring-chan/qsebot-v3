@@ -8,7 +8,7 @@ COPY . .
 
 RUN yarn
 
-RUN NODE_ENV=production yarn mix
+RUN NODE_ENV=production yarn build:client
 
 RUN yarn build
 
