@@ -15,7 +15,11 @@ class General extends Module {
     @listener('commandError')
     async commandError(err: Error, msg: Message) {
         if (err instanceof CoolDownError) {
-            await msg.reply('쿨타임 남아잇기')
+            const current = err.endsAt.getTime() - Date.now()
+            const seconds = Math.floor((current / 1000) % 60)
+            const minutes = Math.floor((current / (1000 * 60)) % 60)
+            const hours = Math.floor(current / 3_600_000)
+            await msg.reply('쿨타임 남아잇기\n남은시간: ' + (hours ? hours + '시간 ' : '') + (minutes ? minutes + '분 ' : '') + (seconds + '초'))
             return
         }
         this.logger.error(err)
