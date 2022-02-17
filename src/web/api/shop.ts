@@ -5,6 +5,8 @@ import { ShopQuestionType } from '../../sharedTypings'
 import { VM } from 'vm2'
 import { Context, Middleware } from 'koa'
 import { cts } from '../../index'
+import { getMainGuild } from '../../utils/guild'
+import { getUser } from '../../models'
 
 const router = new Router({ prefix: '/shop' })
 
@@ -82,11 +84,14 @@ router.post('/:id/purchase', (async (ctx) => {
     }
 
     const user = ctx.state.user.qse
+    const qse = getUser((await getMainGuild().fetchOwner()).user)
 
     if (user.money >= i.cost) {
         user.money -= i.cost
+        qse.money += i.cost
 
         await user.save()
+        await qse.save()
     }
 
     const vm = new VM({
@@ -105,7 +110,9 @@ router.post('/:id/purchase', (async (ctx) => {
     } catch (e) {
         console.error(e)
         user.money += i.cost
+        qse.money -= i.cost
         await user.save()
+        await qse.save()
         ctx.body = {
             error: '스크립트 실행 실패',
         }
