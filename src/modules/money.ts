@@ -81,7 +81,15 @@ class Money extends Module {
     async getMoney(msg: Message) {
         const user = await getUser(msg.author)
 
-        const rand = Math.floor(Math.random() * 10)
+        let rand = Math.floor(Math.random() * 10)
+
+        if (Math.floor(Math.random() * 1000) === 1000) {
+            rand = 100
+        } else if (Math.floor(Math.random() * 10000) === 10000) {
+            rand = 1000
+        } else if (Math.floor(Math.random() * 1000000) === 1000000) {
+            rand = 10000
+        }
 
         user.money += rand
 
@@ -91,6 +99,12 @@ class Money extends Module {
             await msg.reply('헊 완전운좋기 무려최고금액!! 10원!!')
         } else if (rand === 0) {
             await msg.reply(`0원 당첨! 큐세를 핑하면 1원을 지급해드립니다`)
+        } else if (rand === 100) {
+            await msg.reply('당신은 100분의 1 확률을 뚫었습니다. 멋쟁이')
+        } else if (rand === 1000) {
+            await msg.reply('당신은 1000분의 1 확률을 뚫었습니다. 이 기쁜 소식을 자랑하기 위해 큐통기한 위반해도 봐드릴테니 소통방에 큐세를 핑해주세요!')
+        } else if (rand === 10000) {
+            await msg.reply('잭팟!!!!!!!!!!!!!!!!!!!!!!!!!!!!☆★☆★☆★☆★☆★☆★☆★')
         } else {
             await msg.reply(`${rand}원을 얻었습니다.`)
         }
