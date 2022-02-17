@@ -83,6 +83,8 @@ class Money extends Module {
 
         const rand = Math.floor(Math.random() * 10)
 
+        user.money += rand
+
         await user.save()
 
         if (rand === 10) {
