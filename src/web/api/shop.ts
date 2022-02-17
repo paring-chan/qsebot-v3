@@ -84,7 +84,7 @@ router.post('/:id/purchase', (async (ctx) => {
     }
 
     const user = ctx.state.user.qse
-    const qse = getUser((await getMainGuild().fetchOwner()).user)
+    const qse = await getUser((await getMainGuild().fetchOwner()).user)
 
     if (user.money >= i.cost) {
         user.money -= i.cost
