@@ -6,6 +6,7 @@ import { ReactionRoleType } from '../sharedTypings'
 class ReactionRoles extends Module {
     @listener('messageReactionAdd')
     async onReact(reaction: MessageReaction, user: User) {
+        if (user.bot) return
         const mem = reaction.message.guild?.members.cache.get(user.id)
         if (!mem) return
         const item = (await ReactionRole.findOne({
@@ -26,6 +27,7 @@ class ReactionRoles extends Module {
 
     @listener('messageReactionRemove')
     async onReactionRemove(reaction: MessageReaction, user: User) {
+        if (user.bot) return
         const mem = reaction.message.guild?.members.cache.get(user.id)
         if (!mem) return
         const item = (await ReactionRole.findOne({
