@@ -6,6 +6,7 @@ import { ReactionRoleType } from '../sharedTypings'
 class ReactionRoles extends Module {
     @listener('messageReactionAdd')
     async onReact(reaction: MessageReaction, user: User) {
+        console.log(`${user.tag} - ${reaction.emoji}`)
         if (user.bot) return
         const mem = reaction.message.guild?.members.cache.get(user.id)
         if (!mem) return
