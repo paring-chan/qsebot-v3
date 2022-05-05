@@ -13,7 +13,8 @@ class Pin extends Module {
 
         for (const channel of allMessages) {
             for (const msg of channel) {
-                pins.add(msg.member!)
+                if (!msg.member) continue
+                pins.add(msg.member)
             }
         }
 
