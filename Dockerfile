@@ -8,7 +8,7 @@ COPY package.json .
 
 COPY yarn.lock .
 
-RUN yarn
+RUN yarn --network-timeout 1000000000
 
 COPY . .
 
