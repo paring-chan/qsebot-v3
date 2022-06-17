@@ -2,6 +2,7 @@ import { command, coolDown, CoolDownType, guildOnly, Module } from '@pikokr/comm
 import { Message, MessageActionRow, MessageButton, User } from 'discord.js'
 import { getUser } from '../models'
 import { getMainGuild } from '../utils/guild'
+import _ from 'lodash'
 
 class Money extends Module {
     @command({ name: '송금' })
@@ -81,15 +82,7 @@ class Money extends Module {
     async getMoney(msg: Message) {
         const user = await getUser(msg.author)
 
-        let rand = Math.floor(Math.random() * 10)
-
-        if (Math.floor(Math.random() * 1000) === 1000) {
-            rand = 100
-        } else if (Math.floor(Math.random() * 10000) === 10000) {
-            rand = 1000
-        } else if (Math.floor(Math.random() * 1000000) === 1000000) {
-            rand = 10000
-        }
+        let rand = _.rand(1, 50)
 
         user.money += rand
 
