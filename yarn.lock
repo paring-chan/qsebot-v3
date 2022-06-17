@@ -1035,10 +1035,10 @@
     chrome-trace-event "^1.0.2"
     nullthrows "^1.1.1"
 
-"@pikokr/command.ts@^4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@pikokr/command.ts/-/command.ts-4.0.4.tgz#f57e35ad2246960830b8feffd183dab62476f967"
-  integrity sha512-AxqOZmPtt1tbcf23n6ie2owW8u4nvjxQcENyr5zucRSNmCqhhtQ4TMrx5TUHvw+mTtkKzMom+xWfJI1IpS/wWw==
+"@pikokr/command.ts@4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@pikokr/command.ts/-/command.ts-4.0.7.tgz#1ba740bf38edbc0426c0e6cfb87100fcb487edf3"
+  integrity sha512-zHHwCco1ERjTpuyY0vhDwsBPMgBT6BLh5yLqYKzgj7847N9wLqZ4V4XZb4Zgc4J3w3KBC4lIXOfh9pTs483m7w==
   dependencies:
     "@types/node" "^14.14.37"
     discord-api-types "^0.23.1"
