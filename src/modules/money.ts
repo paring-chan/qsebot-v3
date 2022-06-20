@@ -88,7 +88,7 @@ class Money extends Module {
 
         await user.save()
 
-        Dawait msg.reply(`${rand}원을 얻었습니다.`)
+        await msg.reply(`${rand}원을 얻었습니다.`)
     }
 }
 
