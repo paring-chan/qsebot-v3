@@ -82,25 +82,13 @@ class Money extends Module {
     async getMoney(msg: Message) {
         const user = await getUser(msg.author)
 
-        let rand = _.random(1, 50)
+        let rand = _.random(1, 25)
 
         user.money += rand
 
         await user.save()
 
-        if (rand === 10) {
-            await msg.reply('헊 완전운좋기 무려최고금액!! 10원!!')
-        } else if (rand === 0) {
-            await msg.reply(`0원 당첨! 큐세를 핑하면 1원을 지급해드립니다`)
-        } else if (rand === 100) {
-            await msg.reply('당신은 100분의 1 확률을 뚫었습니다. 멋쟁이')
-        } else if (rand === 1000) {
-            await msg.reply('당신은 1000분의 1 확률을 뚫었습니다. 이 기쁜 소식을 자랑하기 위해 큐통기한 위반해도 봐드릴테니 소통방에 큐세를 핑해주세요!')
-        } else if (rand === 10000) {
-            await msg.reply('잭팟!!!!!!!!!!!!!!!!!!!!!!!!!!!!☆★☆★☆★☆★☆★☆★☆★')
-        } else {
-            await msg.reply(`${rand}원을 얻었습니다.`)
-        }
+        Dawait msg.reply(`${rand}원을 얻었습니다.`)
     }
 }
 
