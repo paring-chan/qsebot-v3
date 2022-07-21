@@ -1335,10 +1335,24 @@
     "@types/koa" "*"
     "@types/koa-send" "*"
 
-"@types/koa@*", "@types/koa@2.13.4":
+"@types/koa@*":
   version "2.13.4"
   resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.13.4.tgz#10620b3f24a8027ef5cbae88b393d1b31205726b"
   integrity sha512-dfHYMfU+z/vKtQB7NUrthdAEiSvnLebvBjwHtfFmpZmB7em2N3WVQdHgnFq+xvyVgxW5jKDmjWfLD3lw4g4uTw==
+  dependencies:
+    "@types/accepts" "*"
+    "@types/content-disposition" "*"
+    "@types/cookies" "*"
+    "@types/http-assert" "*"
+    "@types/http-errors" "*"
+    "@types/keygrip" "*"
+    "@types/koa-compose" "*"
+    "@types/node" "*"
+
+"@types/koa@2.13.5":
+  version "2.13.5"
+  resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.13.5.tgz#64b3ca4d54e08c0062e89ec666c9f45443b21a61"
+  integrity sha512-HSUOdzKz3by4fnqagwthW/1w/yJspTgppyyalPVbgZf8jQWvdIXcVW5h2DGtw4zYntOaeRGx49r1hxoPWrD4aA==
   dependencies:
     "@types/accepts" "*"
     "@types/content-disposition" "*"
@@ -4706,10 +4720,10 @@ koa-static@5.0.0:
     debug "^3.1.0"
     koa-send "^5.0.0"
 
-koa@2.13.3:
-  version "2.13.3"
-  resolved "https://registry.yarnpkg.com/koa/-/koa-2.13.3.tgz#a62641ba753ec54bee2c6da1a4f294c5fac35407"
-  integrity sha512-XhXIoR+ylAwqG3HhXwnMPQAM/4xfywz52OvxZNmxmTWGGHsvmBv4NSIhURha6yMuvEex1WdtplUTHnxnKpQiGw==
+koa@2.13.4:
+  version "2.13.4"
+  resolved "https://registry.yarnpkg.com/koa/-/koa-2.13.4.tgz#ee5b0cb39e0b8069c38d115139c774833d32462e"
+  integrity sha512-43zkIKubNbnrULWlHdN5h1g3SEKXOEzoAlRsHOTFpnlDu8JlAOZSMJBLULusuXRequboiwJcj5vtYXKB3k7+2g==
   dependencies:
     accepts "^1.3.5"
     cache-content-type "^1.0.0"
