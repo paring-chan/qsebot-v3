@@ -65,7 +65,7 @@
     "lorem-ipsum": "2.0.8",
     "mongo-express": "1.0.0-alpha.4",
     "mongoose": "6.0.7",
-    "notistack": "1.0.6-next.3",
+    "notistack": "1.0.10",
     "passport": "0.5.0",
     "passport-discord": "0.1.4",
     "process": "0.11.10",
