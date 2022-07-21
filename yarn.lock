@@ -1281,10 +1281,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa-passport@4.0.2":
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/@types/koa-passport/-/koa-passport-4.0.2.tgz#a0277352538f12e7bef2b9991475861eb6938ae9"
-  integrity sha512-WDQhhOW+coTCe//wTaPViim9oodEuAscXiwDUSRlcNH2j7MYa4bqlLq3UdkUp5rY/b0wE4blkBxI90jpwEc1Mg==
+"@types/koa-passport@4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/koa-passport/-/koa-passport-4.0.3.tgz#063ec6310edee76cf854aadaa717b97f04b104fb"
+  integrity sha512-tNMYd/bcv0Zw7fc0CzEBYM9uUzVtn4XWzdUYfkTgSkEljP6nap7eI4E5x43ukrUQvztgXSYFkz3Uk+ujFeUzTg==
   dependencies:
     "@types/koa" "*"
     "@types/passport" "*"
