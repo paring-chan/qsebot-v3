@@ -10,7 +10,7 @@
     "@types/express": "4.17.13",
     "@types/express-session": "1.17.5",
     "@types/koa": "2.13.4",
-    "@types/koa-bodyparser": "4.3.3",
+    "@types/koa-bodyparser": "4.3.7",
     "@types/koa-passport": "4.0.2",
     "@types/koa-redis": "4.0.1",
     "@types/koa-router": "7.4.4",
