@@ -1289,13 +1289,13 @@
     "@types/koa" "*"
     "@types/passport" "*"
 
-"@types/koa-redis@4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@types/koa-redis/-/koa-redis-4.0.1.tgz#90ba45a5d8afc80facbe46ace816a1a355428915"
-  integrity sha512-V/EHznN1WoZzsIwIgrAyfRfh2EpYUOM2N1v+YqEgedIsXzGYUC8Ml6UbZHDZtDZBrBmR34Npc1YNf8gGBGL+LQ==
+"@types/koa-redis@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@types/koa-redis/-/koa-redis-4.0.2.tgz#0dc053064f64d8692ad572a6eef4a85777d9e0bb"
+  integrity sha512-h7kUEAzZXtBfKA6CHXYrqv9DF4vasnU0Hz3QqyPKtCWWhZs59i6dGF8RST672vUwKVdzSl0KpsCuVcmlUzLBIw==
   dependencies:
     "@types/koa-session" "*"
-    "@types/redis" "*"
+    "@types/redis" "^2.8.0"
 
 "@types/koa-router@7.4.4":
   version "7.4.4"
@@ -1531,7 +1531,7 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/redis@*", "@types/redis@^2.8.0":
+"@types/redis@^2.8.0":
   version "2.8.32"
   resolved "https://registry.yarnpkg.com/@types/redis/-/redis-2.8.32.tgz#1d3430219afbee10f8cfa389dad2571a05ecfb11"
   integrity sha512-7jkMKxcGq9p242exlbsVzuJb57KqHRhNl4dHoQu2Y5v9bCAbtIXXH0R3HleSQW4CTOqpHIYUW3t6tpUj4BVQ+w==
