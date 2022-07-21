@@ -19,7 +19,7 @@
     "@types/mongoose": "5.11.97",
     "@types/node": "16.9.2",
     "@types/passport": "1.0.9",
-    "@types/passport-discord": "0.1.5",
+    "@types/passport-discord": "0.1.6",
     "@types/pubsub-js": "1.8.3",
     "@types/react": "17.0.24",
     "@types/react-dom": "17.0.17",
