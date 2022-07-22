@@ -38,7 +38,7 @@
     "@emotion/react": "11.4.1",
     "@emotion/styled": "11.3.0",
     "@hookform/resolvers": "2.9.6",
-    "@monaco-editor/react": "4.2.2",
+    "@monaco-editor/react": "4.4.5",
     "@mui/icons-material": "5.0.1",
     "@mui/lab": "5.0.0-alpha.48",
     "@mui/material": "5.0.0-rc.1",
