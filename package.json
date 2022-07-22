@@ -50,7 +50,7 @@
     "chokidar": "3.5.3",
     "cookie-parser": "1.4.6",
     "discord-api-types": "0.36.3",
-    "discord.js": "13.6.0",
+    "discord.js": "13.9.0",
     "dokdo": "0.5.1",
     "emoji-mart": "3.0.1",
     "express": "4.17.1",
