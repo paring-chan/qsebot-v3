@@ -66,7 +66,7 @@
     "mongo-express": "1.0.0-alpha.4",
     "mongoose": "6.4.6",
     "notistack": "1.0.10",
-    "passport": "0.5.0",
+    "passport": "0.6.0",
     "passport-discord": "0.1.4",
     "process": "0.11.10",
     "pubsubhubbub": "pikokr/pubsubhubbub",
