@@ -35,8 +35,8 @@
   "dependencies": {
     "@discordjs/builders": "0.16.0",
     "@discordjs/rest": "0.6.0",
-    "@emotion/react": "11.4.1",
-    "@emotion/styled": "11.3.0",
+    "@emotion/react": "11.9.3",
+    "@emotion/styled": "11.9.3",
     "@hookform/resolvers": "2.9.6",
     "@monaco-editor/react": "4.4.5",
     "@mui/icons-material": "5.0.1",
