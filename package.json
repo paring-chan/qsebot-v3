@@ -51,7 +51,7 @@
     "cookie-parser": "1.4.6",
     "discord-api-types": "0.37.36",
     "discord.js": "13.14.0",
-    "dokdo": "0.5.1",
+    "dokdo": "0.6.2",
     "emoji-mart": "3.0.1",
     "express": "4.18.2",
     "ioredis": "4.28.5",
