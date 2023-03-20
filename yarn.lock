@@ -3077,10 +3077,10 @@ discord.js@13.14.0:
     node-fetch "^2.6.7"
     ws "^8.9.0"
 
-dokdo@0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/dokdo/-/dokdo-0.5.1.tgz#5974ac32af31fce51935c8036de2667d98e22c9e"
-  integrity sha512-LzPgNtZOBjvDzTUAlRsZMGV/HeFYl8aODhEO6hkVrHBIy7ndZdIrLF0Px9GJ4XSJWp2rnYymJJ1hgHu0B6/4Fg==
+dokdo@0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/dokdo/-/dokdo-0.6.2.tgz#1e276999f9230f0df54f561992f33a79044d31dc"
+  integrity sha512-o0m3SSFok+OOvX+Oh8hD17Gx4K/AXSeIv7nZtLPmjkUWDzXO4d4mgQK1s82PDy/QOkDEipV9mm5x8gUNoYHRqA==
   dependencies:
     node-fetch "^2.6.1"
 
