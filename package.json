@@ -55,7 +55,7 @@
     "emoji-mart": "3.0.1",
     "express": "4.18.2",
     "ioredis": "4.28.5",
-    "koa": "2.13.4",
+    "koa": "2.14.1",
     "koa-bodyparser": "4.3.0",
     "koa-passport": "4.1.4",
     "koa-redis": "4.0.1",
