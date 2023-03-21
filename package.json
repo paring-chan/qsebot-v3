@@ -17,7 +17,7 @@
     "@types/koa-session": "5.10.6",
     "@types/koa-static": "4.0.2",
     "@types/mongoose": "5.11.97",
-    "@types/node": "16.18.16",
+    "@types/node": "16.18.18",
     "@types/passport": "1.0.12",
     "@types/passport-discord": "0.1.6",
     "@types/pubsub-js": "1.8.3",
