@@ -64,7 +64,7 @@
     "koa-static": "5.0.0",
     "lorem-ipsum": "2.0.8",
     "mongo-express": "1.0.0-alpha.4",
-    "mongoose": "6.10.3",
+    "mongoose": "6.10.4",
     "notistack": "1.0.10",
     "passport": "0.6.0",
     "passport-discord": "0.1.4",
