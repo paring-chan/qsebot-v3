@@ -43,7 +43,7 @@
     "@mui/lab": "5.0.0-alpha.124",
     "@mui/material": "5.11.14",
     "@pikokr/command.ts": "4.0.7",
-    "@uiw/react-md-editor": "3.20.5",
+    "@uiw/react-md-editor": "3.20.8",
     "@uiw/react-textarea-code-editor": "1.6.0",
     "axios": "0.27.2",
     "axios-hooks": "2.7.0",
