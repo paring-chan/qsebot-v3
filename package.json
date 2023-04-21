@@ -49,7 +49,7 @@
     "axios-hooks": "2.7.0",
     "chokidar": "3.5.3",
     "cookie-parser": "1.4.6",
-    "discord-api-types": "0.37.36",
+    "discord-api-types": "0.37.39",
     "discord.js": "13.14.0",
     "dokdo": "0.6.2",
     "emoji-mart": "3.0.1",
