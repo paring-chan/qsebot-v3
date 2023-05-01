@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "@discordjs/builders": "0.16.0",
-    "@discordjs/rest": "0.6.0",
+    "@discordjs/rest": "1.7.1",
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
     "@hookform/resolvers": "2.9.11",
