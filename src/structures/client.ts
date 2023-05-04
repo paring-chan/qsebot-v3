@@ -25,11 +25,6 @@ const messages: ActivitiesOptions[] = [
         name: '큐세 유튜브',
         type: 'WATCHING',
     },
-    {
-        name: '큐세 트위치 다시보기',
-        type: 'STREAMING',
-        url: 'https://twitch.tv/qse__',
-    },
 ]
 
 export class Client extends CommandClient {
