@@ -3,14 +3,17 @@ version: "3"
 services:
     db:
         image: mongo
+        restart: unless-stopped
         ports:
             - "27117:27017"
         volumes:
             - ./data/db:/data/db
     redis:
+        restart: unless-stopped
         image: redis
     app:
         build: .
+        restart: unless-stopped
         volumes:
             - ./config.json:/app/config.json
         ports:
