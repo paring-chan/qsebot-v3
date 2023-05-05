@@ -25,7 +25,14 @@
     "@types/react-dom": "17.0.19",
     "@types/react-router-dom": "5.3.3",
     "@types/xml2js": "0.4.11",
+    "@typescript-eslint/eslint-plugin": "^5.43.0",
+    "@typescript-eslint/parser": "^5.59.2",
     "babel-preset-preact": "2.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "parcel": "2.8.3",
     "prettier": "2.8.7",
     "ts-loader": "9.4.2",
@@ -83,6 +90,7 @@
   "scripts": {
     "dev": "ts-node src",
     "build": "tsc",
+    "lint": "eslint . --ignore-path .gitignore",
     "prod": "node dist",
     "build:client": "parcel build ./client/index.html --dist-dir static/dist --public-url /dist",
     "dev:client": "parcel watch ./client/index.html --host localhost --dist-dir static/dist --public-url /dist"
