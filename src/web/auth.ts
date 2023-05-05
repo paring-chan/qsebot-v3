@@ -5,20 +5,20 @@ import { Middleware } from 'koa'
 const router = new Router({ prefix: '/auth' })
 
 router.get(
-    '/login',
-    koaPassport.authenticate('discord', {
-        successRedirect: '/',
-        failureRedirect: '/',
-    })
+  '/login',
+  koaPassport.authenticate('discord', {
+    successRedirect: '/',
+    failureRedirect: '/',
+  })
 )
 
 router.get('/logout', ((ctx) => {
-    ctx.logout()
-    ctx.redirect('/')
+  ctx.logout()
+  ctx.redirect('/')
 }) as Middleware)
 
 router.get('/current', (ctx) => {
-    ctx.body = ctx.state.user || null
+  ctx.body = ctx.state.user || null
 })
 
 export default router

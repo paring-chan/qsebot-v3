@@ -28,78 +28,78 @@ import ShopItemEditor from './Pages/Admin/Shop/Edit'
 import ShopItemView from './Pages/ShopItemView'
 
 const Entry: React.FC = () => {
-    const theme = createTheme({
-        palette: {
-            primary: {
-                main: '#5865F2',
-            },
-            success: {
-                main: '#43B581',
-                contrastText: '#fff',
-            },
-            secondary: {
-                main: '#4F545C',
-            },
-            error: {
-                main: '#F04747',
-            },
-        },
-    })
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#5865F2',
+      },
+      success: {
+        main: '#43B581',
+        contrastText: '#fff',
+      },
+      secondary: {
+        main: '#4F545C',
+      },
+      error: {
+        main: '#F04747',
+      },
+    },
+  })
 
-    return (
-        <ThemeProvider theme={theme}>
-            <BrowserRouter>
-                <RecoilRoot>
-                    <SnackbarProvider>
-                        <CssBaseline />
-                        <React.Suspense fallback={<LoadingScreen />}>
-                            <WaitReady>
-                                <Switch>
-                                    <Route path="/admin">
-                                        <AuthRequired>
-                                            <AdminRequired>
-                                                <AdminLayout>
-                                                    <Switch>
-                                                        <Route exact path="/admin">
-                                                            <Redirect to="/admin/admins" />
-                                                        </Route>
-                                                        <SuspenseRoute exact path="/admin/admins" component={Admins} />
-                                                        <SuspenseRoute exact path="/admin/quiz" component={QuizListPage} />
-                                                        <SuspenseRoute exact path="/admin/quiz/:id" component={QuizEdit} />
-                                                        <SuspenseRoute exact path="/admin/commands" component={CustomCommands} />
-                                                        <SuspenseRoute exact path="/admin/commands/:id" component={CommandEdit} />
-                                                        <SuspenseRoute exact path="/admin/notifications/youtube" component={YouTubeNotifications} />
-                                                        <SuspenseRoute exact path="/admin/notifications/youtube/:id" component={YouTubeEdit} />
-                                                        <SuspenseRoute exact path="/admin/blacklist" component={BlackListList} />
-                                                        <SuspenseRoute exact path="/admin/blacklist/:id" component={BlacklistEdit} />
-                                                        <SuspenseRoute exact path="/admin/reactionroles" component={ReactionRoleList} />
-                                                        <SuspenseRoute exact path="/admin/shop" component={ShopItemList} />
-                                                        <SuspenseRoute exact path="/admin/shop/:id" component={ShopItemEditor} />
-                                                    </Switch>
-                                                </AdminLayout>
-                                            </AdminRequired>
-                                        </AuthRequired>
-                                    </Route>
-                                    <Route>
-                                        <Layout>
-                                            <Route exact path="/" component={Main} />
-                                            <Route exact path="/ranking" component={Ranking} />
-                                            <Route path="/shop">
-                                                <AuthRequired>
-                                                    <Route exact path="/shop" component={Shop} />
-                                                    <Route exact path="/shop/:id" component={ShopItemView} />
-                                                </AuthRequired>
-                                            </Route>
-                                        </Layout>
-                                    </Route>
-                                </Switch>
-                            </WaitReady>
-                        </React.Suspense>
-                    </SnackbarProvider>
-                </RecoilRoot>
-            </BrowserRouter>
-        </ThemeProvider>
-    )
+  return (
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <RecoilRoot>
+          <SnackbarProvider>
+            <CssBaseline />
+            <React.Suspense fallback={<LoadingScreen />}>
+              <WaitReady>
+                <Switch>
+                  <Route path="/admin">
+                    <AuthRequired>
+                      <AdminRequired>
+                        <AdminLayout>
+                          <Switch>
+                            <Route exact path="/admin">
+                              <Redirect to="/admin/admins" />
+                            </Route>
+                            <SuspenseRoute exact path="/admin/admins" component={Admins} />
+                            <SuspenseRoute exact path="/admin/quiz" component={QuizListPage} />
+                            <SuspenseRoute exact path="/admin/quiz/:id" component={QuizEdit} />
+                            <SuspenseRoute exact path="/admin/commands" component={CustomCommands} />
+                            <SuspenseRoute exact path="/admin/commands/:id" component={CommandEdit} />
+                            <SuspenseRoute exact path="/admin/notifications/youtube" component={YouTubeNotifications} />
+                            <SuspenseRoute exact path="/admin/notifications/youtube/:id" component={YouTubeEdit} />
+                            <SuspenseRoute exact path="/admin/blacklist" component={BlackListList} />
+                            <SuspenseRoute exact path="/admin/blacklist/:id" component={BlacklistEdit} />
+                            <SuspenseRoute exact path="/admin/reactionroles" component={ReactionRoleList} />
+                            <SuspenseRoute exact path="/admin/shop" component={ShopItemList} />
+                            <SuspenseRoute exact path="/admin/shop/:id" component={ShopItemEditor} />
+                          </Switch>
+                        </AdminLayout>
+                      </AdminRequired>
+                    </AuthRequired>
+                  </Route>
+                  <Route>
+                    <Layout>
+                      <Route exact path="/" component={Main} />
+                      <Route exact path="/ranking" component={Ranking} />
+                      <Route path="/shop">
+                        <AuthRequired>
+                          <Route exact path="/shop" component={Shop} />
+                          <Route exact path="/shop/:id" component={ShopItemView} />
+                        </AuthRequired>
+                      </Route>
+                    </Layout>
+                  </Route>
+                </Switch>
+              </WaitReady>
+            </React.Suspense>
+          </SnackbarProvider>
+        </RecoilRoot>
+      </BrowserRouter>
+    </ThemeProvider>
+  )
 }
 
 export default Entry

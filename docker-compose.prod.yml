@@ -1,23 +1,23 @@
-version: "3"
+version: '3'
 
 services:
-    db:
-        image: mongo
-        restart: unless-stopped
-        ports:
-            - "27117:27017"
-        volumes:
-            - ./data/db:/data/db
-    redis:
-        restart: unless-stopped
-        image: redis
-    app:
-        build: .
-        restart: unless-stopped
-        volumes:
-            - ./config.json:/app/config.json
-        ports:
-            - 127.0.0.1:32457:5000
-        depends_on:
-            - db
-            - redis
+  db:
+    image: mongo
+    restart: unless-stopped
+    ports:
+      - '27117:27017'
+    volumes:
+      - ./data/db:/data/db
+  redis:
+    restart: unless-stopped
+    image: redis
+  app:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./config.json:/app/config.json
+    ports:
+      - 127.0.0.1:32457:5000
+    depends_on:
+      - db
+      - redis

@@ -5,43 +5,43 @@ import { blacklistSchema } from './index'
 const router = new Router({ prefix: '/:id' })
 
 declare module 'koa' {
-    interface BaseContext {
-        blacklist: IBlackList
-    }
+  interface BaseContext {
+    blacklist: IBlackList
+  }
 }
 
 router.use(async (ctx, next) => {
-    const id = ctx.params.id
+  const id = ctx.params.id
 
-    const item = await Blacklist.findById(id)
+  const item = await Blacklist.findById(id)
 
-    if (!item) return ctx.throw(404)
+  if (!item) return ctx.throw(404)
 
-    ctx.blacklist = item
+  ctx.blacklist = item
 
-    return next()
+  return next()
 })
 
 router.put('/', async (ctx) => {
-    const body = await blacklistSchema.validate(ctx.request.body)
+  const body = await blacklistSchema.validate(ctx.request.body)
 
-    ctx.blacklist.trigger = body.trigger
+  ctx.blacklist.trigger = body.trigger
 
-    ctx.blacklist.script = body.script
+  ctx.blacklist.script = body.script
 
-    await ctx.blacklist.save()
+  await ctx.blacklist.save()
 
-    ctx.body = { ok: 1 }
+  ctx.body = { ok: 1 }
 })
 
 router.delete('/', async (ctx) => {
-    await ctx.blacklist.delete()
+  await ctx.blacklist.delete()
 
-    ctx.body = { ok: 1 }
+  ctx.body = { ok: 1 }
 })
 
 router.get('/', (ctx) => {
-    ctx.body = ctx.blacklist
+  ctx.body = ctx.blacklist
 })
 
 export default router

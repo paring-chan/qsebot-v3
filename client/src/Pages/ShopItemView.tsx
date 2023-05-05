@@ -5,13 +5,13 @@ import ShopItem from '../components/ShopItem'
 import { IShopItem } from '../../../src/sharedTypings'
 
 const ShopItemView: React.FC = () => {
-    const {
-        params: { id },
-    } = useRouteMatch<{ id: string }>()
+  const {
+    params: { id },
+  } = useRouteMatch<{ id: string }>()
 
-    const { data } = useRequest<IShopItem>(`/shop/${id}`)
+  const { data } = useRequest<IShopItem>(`/shop/${id}`)
 
-    return <ShopItem item={data} />
+  return <ShopItem item={data} />
 }
 
 export default ShopItemView
