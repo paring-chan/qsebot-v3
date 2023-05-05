@@ -8,10 +8,10 @@ declare module 'pubsubhubbub' {
   function createServer(option: Options): PubSubHubBub
 
   class PubSubHubBub extends Stream {
-    setSubscription(topic: string, hub: string, callbackUrl?: string, callback?: Function)
-    subscribe(mode: string, hub: string, callback?: Function)
-    unsubscribe(mode: string, hub: string, callback?: Function)
+    setSubscription(topic: string, hub: string, callbackUrl?: string, callback?: (unknown) => unknown)
+    subscribe(mode: string, hub: string, callback?: (unknown) => unknown)
+    unsubscribe(mode: string, hub: string, callback?: (unknown) => unknown)
     listen(port: number)
-    listener(): (req: IncomingMessage, res: ServerResponse, next?: Function) => void
+    listener(): (req: IncomingMessage, res: ServerResponse, next?: (unknown) => unknown) => void
   }
 }
