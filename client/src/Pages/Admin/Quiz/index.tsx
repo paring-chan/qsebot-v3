@@ -38,7 +38,7 @@ const QuizListPage: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      <Dialog open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)}>
+      <Dialog open={addDialog} onClose={adding ? () => null : () => setAddDialog(false)}>
         <DialogTitle>퀴즈 추가</DialogTitle>
         <DialogContent>
           <TextField value={question} onChange={(e) => setQuestion(e.target.value)} label="질문 내용" multiline variant="standard" />

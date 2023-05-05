@@ -50,7 +50,7 @@ const BlacklistListPage: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      <Dialog fullScreen open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)}>
+      <Dialog fullScreen open={addDialog} onClose={adding ? () => null : () => setAddDialog(false)}>
         <DialogTitle>검열 트리거 추가</DialogTitle>
         <DialogContent sx={{ display: 'flex', overflowY: 'hidden', flexDirection: 'column', gap: 2 }}>
           <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', maxWidth: '100%' }}>

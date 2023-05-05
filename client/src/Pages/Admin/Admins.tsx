@@ -88,7 +88,7 @@ const Admins: React.FC = () => {
           ))}
         </List>
       </Box>
-      <Dialog open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)}>
+      <Dialog open={addDialog} onClose={adding ? () => null : () => setAddDialog(false)}>
         <DialogTitle>관리자 추가하기</DialogTitle>
         <DialogContent>
           <TextField label="추가할 유저 ID" disabled={adding} value={idToAdd} onChange={(e) => setIdToAdd(e.target.value)} variant="standard" />

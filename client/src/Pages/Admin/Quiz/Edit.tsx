@@ -44,7 +44,7 @@ const QuizEdit: React.FC = () => {
           <Button color="error" variant="outlined" startIcon={<Delete />} onClick={() => setDeleteDialog(true)}>
             삭제하기
           </Button>
-          <Dialog open={deleteDialog} onClose={deleting ? () => {} : () => setDeleteDialog(false)}>
+          <Dialog open={deleteDialog} onClose={deleting ? () => null : () => setDeleteDialog(false)}>
             <DialogTitle>퀴즈 삭제</DialogTitle>
             <DialogContent>
               <DialogContentText>이 퀴즈를 삭제할까요?</DialogContentText>

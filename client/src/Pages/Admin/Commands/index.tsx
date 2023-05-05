@@ -66,7 +66,7 @@ const CustomCommands: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      <Dialog fullScreen open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)} fullWidth maxWidth="sm">
+      <Dialog fullScreen open={addDialog} onClose={adding ? () => null : () => setAddDialog(false)} fullWidth maxWidth="sm">
         <DialogTitle>커맨드 추가</DialogTitle>
         <DialogContent sx={{ display: 'flex', overflowY: 'hidden', flexDirection: 'column', gap: 2 }}>
           <TextField value={message} fullWidth onChange={(e) => setMessage(e.target.value)} label="메시지 내용" multiline variant="standard" />

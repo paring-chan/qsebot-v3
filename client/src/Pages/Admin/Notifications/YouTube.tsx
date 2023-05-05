@@ -72,7 +72,7 @@ const YouTubeNotifications: React.FC = () => {
           </Button>
         </Box>
       </Box>
-      <Dialog fullScreen open={addDialog} onClose={adding ? () => {} : () => setAddDialog(false)} fullWidth maxWidth="sm">
+      <Dialog fullScreen open={addDialog} onClose={adding ? () => null : () => setAddDialog(false)} fullWidth maxWidth="sm">
         <DialogTitle>알림 추가</DialogTitle>
         <DialogContent sx={{ display: 'flex', overflowY: 'hidden', flexDirection: 'column', gap: 2 }}>
           <TextField disabled={adding} value={ytChannel} fullWidth onChange={(e) => setYTChannel(e.target.value)} label="유튜브 채널 ID" variant="standard" />
