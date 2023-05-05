@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, List, ListItem, ListItemText, Stack, TextField, Typography } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, List, ListItemButton, ListItemText, Stack, TextField, Typography } from '@mui/material'
 import { Add } from '@mui/icons-material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -75,9 +75,9 @@ const ShopItemList: React.FC = () => {
             </div>
             <List>
                 {data.map((x, i) => (
-                    <ListItem component={Link} button to={`/admin/shop/${x._id}`} key={i}>
+                    <ListItemButton component={Link} to={`/admin/shop/${x._id}`} key={i}>
                         <ListItemText primary={x.name} />
-                    </ListItem>
+                    </ListItemButton>
                 ))}
             </List>
         </Stack>
