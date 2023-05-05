@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, ListItem, ListItemText, Pagination } from '@mui/material'
+import { Box, ListItemButton, ListItemText, Pagination } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { useRequest } from '../utils/request'
 import { useTextChannels } from '../utils/channels'
@@ -14,9 +14,9 @@ const YTNotificationList: React.FC<{ search: string }> = ({ search }) => {
     return (
         <Box sx={{ mt: 2 }}>
             {(quizList as any[]).map((x, i) => (
-                <ListItem key={i} button component={Link} to={`/admin/notifications/youtube/${x._id}`}>
+                <ListItemButton key={i} component={Link} to={`/admin/notifications/youtube/${x._id}`}>
                     <ListItemText primary={`${x.channelId} - ${channels.find((y) => y.id === x.channel)?.name}`} />
-                </ListItem>
+                </ListItemButton>
             ))}
 
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
