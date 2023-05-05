@@ -57,7 +57,7 @@ const BlacklistListPage: React.FC = () => {
                         {messages.map((x, i) => (
                             <Chip
                                 onDelete={() => {
-                                    setMessages(messages.filter((y, j) => j !== i))
+                                    setMessages(messages.filter((_, j) => j !== i))
                                 }}
                                 key={i}
                                 label={x}

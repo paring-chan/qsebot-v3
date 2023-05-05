@@ -1,11 +1,10 @@
 import { command, Module } from '@pikokr/command.ts'
-import { Client } from '../structures/client'
 import { ButtonInteraction, Message, MessageActionRow, MessageButton, MessageEmbed } from 'discord.js'
 import { IQuiz, Quiz } from '../models'
-import { blockQuote, quote } from '@discordjs/builders'
+import { blockQuote } from '@discordjs/builders'
 
 class QuizMod extends Module {
-    constructor(private cts: Client) {
+    constructor() {
         super()
     }
 
@@ -73,6 +72,6 @@ class QuizMod extends Module {
     }
 }
 
-export function install(cts: Client) {
-    return new QuizMod(cts)
+export function install() {
+    return new QuizMod()
 }

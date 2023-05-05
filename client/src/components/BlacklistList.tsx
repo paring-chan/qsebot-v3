@@ -17,7 +17,7 @@ const BlackList: React.FC<{ search: string }> = ({ search }) => {
             ))}
 
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-                <Pagination count={pages} page={page} color="primary" onChange={(e, v) => setPage(v)} />
+                <Pagination count={pages} page={page} color="primary" onChange={(_, v) => setPage(v)} />
             </Box>
         </Box>
     )

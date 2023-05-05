@@ -1,6 +1,6 @@
 import React from 'react'
 import { Divider, List, ListItemButton, ListItemIcon, ListItemText, ListSubheader } from '@mui/material'
-import { AutoFixNormal, Dns, ListOutlined, Message, Notifications, Person, Quiz, Shop } from '@mui/icons-material'
+import { AutoFixNormal, Dns, ListOutlined, Message, Notifications, Person, Quiz } from '@mui/icons-material'
 import { Link, useLocation } from 'react-router-dom'
 
 const AdminSidebarContent: React.FC = () => {

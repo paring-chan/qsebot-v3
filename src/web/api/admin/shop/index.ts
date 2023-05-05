@@ -1,7 +1,6 @@
 import Router from 'koa-router'
 import { ShopItem } from '../../../../models/shopItem'
 import { shopItemCreateSchema, shopItemUpdateSchema } from './validation'
-import { IShopQuestion } from '../../../../sharedTypings'
 
 const router = new Router({ prefix: '/shop' })
 

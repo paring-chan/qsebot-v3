@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRequest } from '../utils/request'
-import { Avatar, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material'
+import { Avatar, List, ListItem, ListItemIcon, ListItemText } from '@mui/material'
 
 const Ranking: React.FC = () => {
     const { data } = useRequest<any[]>('/currency/ranking')

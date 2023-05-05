@@ -29,7 +29,6 @@ import { Controller } from 'react-hook-form'
 import { axios, useRequest } from '../../../utils/request'
 import { Picker } from 'emoji-mart'
 import { useCustomEmojis } from '../../../utils/emojis'
-import { useHistory } from 'react-router-dom'
 import { useSnackbar } from 'notistack'
 
 const Item: React.FC<{ item: any; onClick: () => void }> = ({ item, onClick }) => {
