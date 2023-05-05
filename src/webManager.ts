@@ -20,7 +20,7 @@ koaPassport.use(
             callbackURL: config.web.oauth2.redirectURI,
             scope: 'identify',
         },
-        async (accessToken: string, refreshToken: string, params: any, profile: Profile, done: oauth2.VerifyCallback) => {
+        async (_accessToken: string, _refreshToken: string, _params: any, profile: Profile, done: oauth2.VerifyCallback) => {
             const user = await cts.client.users.fetch(profile.id, { cache: true, force: false })
 
             done(null, {

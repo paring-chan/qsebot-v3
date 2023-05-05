@@ -85,7 +85,7 @@ const BlacklistEdit: React.FC = () => {
                                     enqueueSnackbar('최소 1개의 단어가 필요합니다', { variant: 'error' })
                                     return
                                 }
-                                setMessages(messages.filter((y, j) => j !== i))
+                                setMessages(messages.filter((_, j) => j !== i))
                             }}
                             key={i}
                             label={x}

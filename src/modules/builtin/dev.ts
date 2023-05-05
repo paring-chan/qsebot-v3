@@ -1,6 +1,6 @@
 import { applicationCommand, BuiltInModule, command, ownerOnly, rest } from '@pikokr/command.ts'
 import { Client } from '../../structures/client'
-import { inlineCode, SlashCommandBuilder } from '@discordjs/builders'
+import { inlineCode } from '@discordjs/builders'
 import { CommandInteraction, Message } from 'discord.js'
 import Dokdo from 'dokdo'
 import { config } from '../../config'
