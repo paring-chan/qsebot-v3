@@ -4,105 +4,101 @@ import { codeBlock } from '@discordjs/builders'
 import { getUser } from '../models'
 
 class Moderation extends Module {
-    @command({ name: 'banwave' })
-    @requireUserPermissions('ADMINISTRATOR')
-    async banWave(msg: Message, from: string, to: string) {
-        let firstMsg = (
-            await msg.channel.messages.fetch({
-                limit: 3,
-                around: from,
-            })
-        ).last()
+  @command({ name: 'banwave' })
+  @requireUserPermissions('ADMINISTRATOR')
+  async banWave(msg: Message, from: string, to: string) {
+    let firstMsg = (
+      await msg.channel.messages.fetch({
+        limit: 3,
+        around: from,
+      })
+    ).last()
 
-        if (!firstMsg) return
+    if (!firstMsg) return
 
-        const lastMsg = await msg.channel.messages.fetch(to)
+    const lastMsg = await msg.channel.messages.fetch(to)
 
-        const after = await msg.channel.messages.fetch({
-            after: firstMsg.id,
-            limit: 100,
-        })
+    const after = await msg.channel.messages.fetch({
+      after: firstMsg.id,
+      limit: 100,
+    })
 
-        if (!after.get(lastMsg.id)) return msg.reply('메시지 개수가 100개를 초과합니다아')
-        const messages = after.filter((x) => x.createdTimestamp >= firstMsg!.createdTimestamp && x.createdTimestamp <= lastMsg.createdTimestamp)
-        const users = Array.from(new Set(messages.map((x) => x.member).filter((x) => x instanceof GuildMember && !x.user.bot))) as GuildMember[]
+    if (!after.get(lastMsg.id)) return msg.reply('메시지 개수가 100개를 초과합니다아')
+    const messages = after.filter((x) => x.createdTimestamp >= firstMsg!.createdTimestamp && x.createdTimestamp <= lastMsg.createdTimestamp)
+    const users = Array.from(new Set(messages.map((x) => x.member).filter((x) => x instanceof GuildMember && !x.user.bot))) as GuildMember[]
 
-        const m = await msg.channel.send({
-            content: `${users.length}명의 유저를 차단합니다. 진행할까요?\n${codeBlock('diff', `${users.map((x) => `- ${x.user.tag}`).join('\n')}`)}`,
-            components: [
-                new MessageActionRow().addComponents(
-                    new MessageButton({
-                        customId: 'confirm',
-                        style: 'DANGER',
-                        label: '차단',
-                    }),
-                    new MessageButton({
-                        customId: 'cancel',
-                        style: 'SUCCESS',
-                        label: '취소',
-                    })
-                ),
-            ],
-        })
+    const m = await msg.channel.send({
+      content: `${users.length}명의 유저를 차단합니다. 진행할까요?\n${codeBlock('diff', `${users.map((x) => `- ${x.user.tag}`).join('\n')}`)}`,
+      components: [
+        new MessageActionRow().addComponents(
+          new MessageButton({
+            customId: 'confirm',
+            style: 'DANGER',
+            label: '차단',
+          }),
+          new MessageButton({
+            customId: 'cancel',
+            style: 'SUCCESS',
+            label: '취소',
+          })
+        ),
+      ],
+    })
 
-        try {
-            const i = await m.awaitMessageComponent({
-                filter: async (x) => {
-                    await x.deferUpdate()
-                    return x.user.id === msg.author.id
-                },
-                time: 15000,
-            })
+    try {
+      const i = await m.awaitMessageComponent({
+        filter: async (x) => {
+          await x.deferUpdate()
+          return x.user.id === msg.author.id
+        },
+        time: 15000,
+      })
 
-            if (i.customId !== 'confirm') return msg.reply('취소되었습니다.')
-        } catch (e) {
-            return msg.reply('Timed Out')
-        } finally {
-            await m.edit({
-                components: [
-                    new MessageActionRow({
-                        components: m.components[0].components.map((x) => x.setDisabled(true)),
-                    }),
-                ],
-            })
-        }
-
-        for (const user of users) {
-            await user.user.send({
-                embeds: [
-                    new MessageEmbed()
-                        .setDescription(`당신은 큐세월듀에서 차단되었습니다.\n차단 사유: 스팸 차단\n이의제기를 하려면 주인#2222로 DM을 보내주세요.`)
-                        .setColor(0xff6ee7),
-                ],
-            })
-
-            await user.ban({
-                reason: '스팸 차단',
-            })
-        }
+      if (i.customId !== 'confirm') return msg.reply('취소되었습니다.')
+    } catch (e) {
+      return msg.reply('Timed Out')
+    } finally {
+      await m.edit({
+        components: [
+          new MessageActionRow({
+            components: m.components[0].components.map((x) => x.setDisabled(true)),
+          }),
+        ],
+      })
     }
 
-    @command({ name: '돈주기' })
-    @ownerOnly
-    async giveMoney(msg: Message, user: User, money: number) {
-        if (!user) return
-        const u = await getUser(user)
-        await msg.reply(`${user.tag} - ${u.money} + ${money} => ${u.money + money}`)
-        u.money += money
-        await u.save()
-    }
+    for (const user of users) {
+      await user.user.send({
+        embeds: [new MessageEmbed().setDescription(`당신은 큐세월듀에서 차단되었습니다.\n차단 사유: 스팸 차단\n이의제기를 하려면 주인#2222로 DM을 보내주세요.`).setColor(0xff6ee7)],
+      })
 
-    @command({ name: '돈설정' })
-    @ownerOnly
-    async setMoney(msg: Message, user: User, money: number) {
-        if (!user) return
-        const u = await getUser(user)
-        await msg.reply(`${user.tag} - ${u.money}  => ${money}`)
-        u.money = money
-        await u.save()
+      await user.ban({
+        reason: '스팸 차단',
+      })
     }
+  }
+
+  @command({ name: '돈주기' })
+  @ownerOnly
+  async giveMoney(msg: Message, user: User, money: number) {
+    if (!user) return
+    const u = await getUser(user)
+    await msg.reply(`${user.tag} - ${u.money} + ${money} => ${u.money + money}`)
+    u.money += money
+    await u.save()
+  }
+
+  @command({ name: '돈설정' })
+  @ownerOnly
+  async setMoney(msg: Message, user: User, money: number) {
+    if (!user) return
+    const u = await getUser(user)
+    await msg.reply(`${user.tag} - ${u.money}  => ${money}`)
+    u.money = money
+    await u.save()
+  }
 }
 
 export function install() {
-    return new Moderation()
+  return new Moderation()
 }

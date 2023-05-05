@@ -19,24 +19,24 @@ let reloading = false
 logger.info('Connecting to database')
 
 mongoose
-    .connect(config.db)
-    .then(() => logger.info('Logging in'))
-    .then(() => cts.client.login(config.token))
-    .then(() => logger.info('Starting web...'))
-    .then(() => start())
-    .then(async () => {
-        logger.info('Registering subscriptions...')
-        await registerAll()
-        logger.info('Registered subscriptions.')
-        if (config.dev) {
-            chokidar.watch(path.join(__dirname, 'web')).on('change', async () => {
-                if (reloading) return
-                reloading = true
-                try {
-                    await restart()
-                } finally {
-                    reloading = false
-                }
-            })
+  .connect(config.db)
+  .then(() => logger.info('Logging in'))
+  .then(() => cts.client.login(config.token))
+  .then(() => logger.info('Starting web...'))
+  .then(() => start())
+  .then(async () => {
+    logger.info('Registering subscriptions...')
+    await registerAll()
+    logger.info('Registered subscriptions.')
+    if (config.dev) {
+      chokidar.watch(path.join(__dirname, 'web')).on('change', async () => {
+        if (reloading) return
+        reloading = true
+        try {
+          await restart()
+        } finally {
+          reloading = false
         }
-    })
+      })
+    }
+  })
