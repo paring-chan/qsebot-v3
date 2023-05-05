@@ -2,6 +2,7 @@ declare module 'pubsubhubbub' {
   import { Stream } from 'stream'
   import { IncomingMessage, ServerResponse } from 'http'
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface Options {}
 
   function createServer(option: Options): PubSubHubBub
