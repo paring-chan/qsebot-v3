@@ -79,7 +79,7 @@ class Game extends Module {
       embeds: [],
       content: emojis[rand],
     })
-    const button = res!
+    const button = res
     let type: RCPType
     switch (button.customId) {
       case 'SCISSORS':

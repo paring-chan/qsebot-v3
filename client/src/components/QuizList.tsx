@@ -7,7 +7,7 @@ import { useRequest } from '../utils/request'
 const QuizList: React.FC<{ search: string }> = ({ search }) => {
   const [page, setPage] = React.useState(1)
 
-  const { data: quizList, pages } = useRequest(`/admin/quiz?page=${page}&search=${encodeURIComponent(search)}`).data!
+  const { data: quizList, pages } = useRequest(`/admin/quiz?page=${page}&search=${encodeURIComponent(search)}`).data
 
   return (
     <Box sx={{ mt: 2 }}>

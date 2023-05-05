@@ -9,9 +9,11 @@ class Money extends Module {
   @guildOnly
   async sendMoney(msg: Message, user: User, money: number) {
     const u1 = await getUser(msg.author)
-    const qse = await getMainGuild().fetchOwner({ cache: true })
+    const qse = await getMainGuild()?.fetchOwner({ cache: true })
 
-    const noFee = msg.member!.roles.cache.has(msg.guild!.roles.premiumSubscriberRole!.id)
+    if (!qse) return
+
+    const noFee = msg.member?.roles.cache.has(msg.guild?.roles.premiumSubscriberRole?.id ?? '')
 
     const fee = noFee ? 0 : Number((money * 1.05 - money).toFixed(2))
 

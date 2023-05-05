@@ -25,7 +25,7 @@ import { useAccount } from '../../utils/user'
 
 const Admins: React.FC = () => {
   const res = useRequest<User[]>('/admin/admins')
-  const data = res.data!
+  const data = res.data
   const me = useAccount()
   const [addDialog, setAddDialog] = React.useState(false)
   const [adding, setAdding] = React.useState(false)

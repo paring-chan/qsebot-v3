@@ -10,7 +10,7 @@ router.get('/admins', async (ctx) => {
     (
       await Promise.all(admins.map((x) => cts.client.users.fetch(x.id, { cache: true }).catch(() => null))).then((x) => x.filter((y) => y))
     ).map(async (x) => ({
-      qse: await getUser(x!),
+      qse: await getUser(x),
       discord: x,
     }))
   )

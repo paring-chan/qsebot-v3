@@ -4,4 +4,4 @@ import { render } from 'react-dom'
 import 'emoji-mart/css/emoji-mart.css'
 import './index.css'
 
-render(<Entry />, document.querySelector('#root')!)
+render(<Entry />, document.querySelector('#root'))

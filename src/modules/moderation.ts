@@ -24,7 +24,7 @@ class Moderation extends Module {
     })
 
     if (!after.get(lastMsg.id)) return msg.reply('메시지 개수가 100개를 초과합니다아')
-    const messages = after.filter((x) => x.createdTimestamp >= firstMsg!.createdTimestamp && x.createdTimestamp <= lastMsg.createdTimestamp)
+    const messages = after.filter((x) => x.createdTimestamp >= firstMsg.createdTimestamp && x.createdTimestamp <= lastMsg.createdTimestamp)
     const users = Array.from(new Set(messages.map((x) => x.member).filter((x) => x instanceof GuildMember && !x.user.bot))) as GuildMember[]
 
     const m = await msg.channel.send({

@@ -8,7 +8,7 @@ const QuizList: React.FC<{ search: string }> = ({ search }) => {
 
   const request = useRequest(`/admin/commands?page=${page}&search=${encodeURIComponent(search)}`)
 
-  const { data: quizList, pages } = request.data!
+  const { data: quizList, pages } = request.data
 
   return (
     <Box sx={{ mt: 2 }}>

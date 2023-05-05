@@ -6,7 +6,7 @@ import { useRequest } from '../utils/request'
 const BlackList: React.FC<{ search: string }> = ({ search }) => {
   const [page, setPage] = React.useState(1)
 
-  const { data: quizList, pages } = useRequest(`/admin/blacklist?page=${page}&search=${encodeURIComponent(search)}`).data!
+  const { data: quizList, pages } = useRequest(`/admin/blacklist?page=${page}&search=${encodeURIComponent(search)}`).data
 
   return (
     <Box sx={{ mt: 2 }}>

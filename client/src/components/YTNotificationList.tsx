@@ -7,7 +7,7 @@ import { useTextChannels } from '../utils/channels'
 const YTNotificationList: React.FC<{ search: string }> = ({ search }) => {
   const [page, setPage] = React.useState(1)
 
-  const { data: quizList, pages } = useRequest(`/admin/notifications/youtube?page=${page}&search=${encodeURIComponent(search)}`).data!
+  const { data: quizList, pages } = useRequest(`/admin/notifications/youtube?page=${page}&search=${encodeURIComponent(search)}`).data
 
   const channels = useTextChannels()
 

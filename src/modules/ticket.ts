@@ -96,13 +96,15 @@ class Ticket extends Module {
     const oldC = oldChannel as TextChannel
     const newC = newChannel as TextChannel
 
+    if (!oldC.parentId) return
+
     const ticketId = (await getTicketChannel()).id
     const archiveId = (await getTicketArchiveChannel()).id
     const deleteId = (await getTicketDeleteChannel()).id
 
     const ids = [ticketId, archiveId, deleteId]
-    if (!ids.includes(oldC.parentId!)) return
-    if (!ids.includes(oldC.parentId!)) return
+    if (!ids.includes(oldC.parentId)) return
+    if (!ids.includes(oldC.parentId)) return
 
     if (oldC.parentId === ticketId && newC.parentId === archiveId) {
       await newC.send('티켓이 아카이브 처리되었습니다.')

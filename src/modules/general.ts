@@ -9,7 +9,7 @@ class General extends Module {
 
   @listener('ready')
   ready() {
-    this.logger.info(`Logged in as ${this.cts.client.user!.tag}`)
+    this.logger.info(`Logged in as ${this.cts.client.user?.tag}`)
   }
 
   @listener('commandError')

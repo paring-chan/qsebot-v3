@@ -66,7 +66,7 @@ class QuizMod extends Module {
 
     const [x, y] = b.customId.split('.').map((x) => parseInt(x))
 
-    const { answer, label } = quiz.answers.find((_, i) => i === x)!.find((_, i) => i === y)!
+    const { answer, label } = quiz.answers[x][y]
 
     await m.edit({ components: [], content: `Q: ${quiz.question}\nA: ${label}\n${blockQuote(answer)}`, embeds: [] })
   }
