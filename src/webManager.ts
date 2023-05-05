@@ -43,9 +43,9 @@ koaPassport.deserializeUser(async (id: string, done) => {
 })
 
 export function start() {
-  return new Promise<void>(async (resolve) => {
+  return new Promise<void>((resolve) => {
     console.log('Starting server..')
-    app = (await import('./web')).default
+    import('./web').then((x) => (app = x.default))
     server = app.listen(config.web.port, () => {
       console.log(`Server is listening on port ${config.web.port}`)
       resolve()
