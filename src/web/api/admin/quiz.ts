@@ -8,7 +8,7 @@ const router = new Router({ prefix: '/quiz' })
 const amount = 20
 
 router.get('/', async (ctx) => {
-  let page = Number(ctx.query.page)
+  const page = Number(ctx.query.page)
 
   const count = await Quiz.count({
     question: { $regex: escapeRegexp(ctx.query.search as string) },

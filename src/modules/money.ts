@@ -82,7 +82,7 @@ class Money extends Module {
   async getMoney(msg: Message) {
     const user = await getUser(msg.author)
 
-    let rand = _.random(1, 25)
+    const rand = _.random(1, 25)
 
     user.money += rand
 

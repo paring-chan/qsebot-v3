@@ -7,7 +7,7 @@ class Moderation extends Module {
   @command({ name: 'banwave' })
   @requireUserPermissions('ADMINISTRATOR')
   async banWave(msg: Message, from: string, to: string) {
-    let firstMsg = (
+    const firstMsg = (
       await msg.channel.messages.fetch({
         limit: 3,
         around: from,

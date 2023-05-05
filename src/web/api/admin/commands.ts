@@ -9,7 +9,7 @@ const router = new Router({ prefix: '/commands' })
 const amount = 20
 
 router.get('/', async (ctx) => {
-  let page = Number(ctx.query.page)
+  const page = Number(ctx.query.page)
 
   const count = await CustomCommand.count({ message: { $regex: escapeRegexp(ctx.query.search as string) } })
   ctx.body = {

@@ -12,7 +12,7 @@ const amount = 20
 router.use(edit.routes())
 
 router.get('/', async (ctx) => {
-  let page = Number(ctx.query.page)
+  const page = Number(ctx.query.page)
 
   const count = await YoutubeNotification.count({ message: { $regex: escapeRegexp(ctx.query.search as string) } })
   ctx.body = {

@@ -17,7 +17,7 @@ enum RCPWin {
 class Game extends Module {
   @command({ name: '가위바위보' })
   async rcp(msg: Message) {
-    let rate =
+    const rate =
       (await RCPRate.findOne({
         user: msg.author.id,
       })) ??
@@ -135,8 +135,8 @@ class Game extends Module {
   }
 
   @command({ name: '주사위' })
-  async dice(msg: Message, @optional command: string = '') {
-    let rate =
+  async dice(msg: Message, @optional command = '') {
+    const rate =
       (await DiceRate.findOne({
         user: msg.author.id,
       })) ??

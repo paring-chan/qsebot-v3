@@ -43,7 +43,7 @@ router.post('/:id/purchase', (async (ctx) => {
     return
   }
 
-  let args: any[] = []
+  const args: any[] = []
 
   if (i.questions.length) {
     if (!ctx.request.body.responses || ctx.request.body.responses.length !== i.questions.length) {

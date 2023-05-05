@@ -24,7 +24,7 @@ class General extends Module {
   }
 
   async getVariable(command: ICustomCommand, key: string) {
-    let variable: ICustomCommandVariable | null = await CustomCommandVariable.findOne({
+    const variable: ICustomCommandVariable | null = await CustomCommandVariable.findOne({
       key,
       command: command._id,
     })

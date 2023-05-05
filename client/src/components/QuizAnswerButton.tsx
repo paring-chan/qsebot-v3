@@ -12,7 +12,7 @@ enum ButtonStyle {
 }
 
 const QuizAnswerButton: React.FC<{ button: AnswerButton; update: () => void; delete: () => void; disabled: boolean }> = ({ button, update, delete: remove, disabled }) => {
-  let color: 'primary' | 'secondary' | 'success' | 'error' = ButtonStyle[button.style]
+  const color: 'primary' | 'secondary' | 'success' | 'error' = ButtonStyle[button.style]
   const [open, setOpen] = React.useState(false)
   const emojiList = useCustomEmojis()
 
