@@ -9,7 +9,7 @@ import {
     DialogTitle,
     IconButton,
     List,
-    ListItem,
+    ListItemButton,
     ListItemSecondaryAction,
     ListItemText,
     MenuItem,
@@ -34,7 +34,7 @@ import { useSnackbar } from 'notistack'
 
 const Item: React.FC<{ item: any; onClick: () => void }> = ({ item, onClick }) => {
     return (
-        <ListItem button onClick={onClick}>
+        <ListItemButton onClick={onClick}>
             <ListItemText primary={`${item.emoji} ${item.channelName}`} />
             <ListItemSecondaryAction>
                 <Box
@@ -49,7 +49,7 @@ const Item: React.FC<{ item: any; onClick: () => void }> = ({ item, onClick }) =
                     @{item.name}
                 </Box>
             </ListItemSecondaryAction>
-        </ListItem>
+        </ListItemButton>
     )
 }
 
