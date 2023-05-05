@@ -1,4 +1,3 @@
-import Koa from 'koa'
 import { Server } from 'http'
 import { config } from './config'
 import path from 'path'

@@ -1,4 +1,4 @@
-import { atom, DefaultValue, selector, useResetRecoilState, useSetRecoilState } from 'recoil'
+import { atom, DefaultValue, selector, useResetRecoilState } from 'recoil'
 import axios from 'axios'
 import type { User } from './typings'
 import type { CustomEmoji } from 'emoji-mart'
