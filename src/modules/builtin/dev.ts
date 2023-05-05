@@ -11,7 +11,7 @@ class Dev extends BuiltInModule {
   constructor(private cts: Client) {
     super()
     this.dokdo = new Dokdo(this.cts.client, {
-      noPerm() {},
+      noPerm: () => null,
       prefix: config.prefix,
       owners: this.cts.owners,
     })
