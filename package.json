@@ -44,7 +44,7 @@
     "@mui/material": "5.12.1",
     "@pikokr/command.ts": "4.0.7",
     "@uiw/react-md-editor": "3.20.8",
-    "@uiw/react-textarea-code-editor": "1.6.0",
+    "@uiw/react-textarea-code-editor": "2.1.9",
     "axios": "0.27.2",
     "axios-hooks": "2.7.0",
     "chokidar": "3.5.3",
