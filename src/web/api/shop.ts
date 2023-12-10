@@ -93,7 +93,7 @@ router.post('/:id/purchase', (async (ctx) => {
 
         await user.save()
         await qse.save()
-    }
+    } else return
 
     const vm = new VM({
         sandbox: {
