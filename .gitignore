@@ -120,3 +120,5 @@ dist
 /.idea
 /data
 /static/dist
+
+.DS_Store
