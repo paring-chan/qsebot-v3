@@ -64,7 +64,7 @@
     "koa-session": "6.2.0",
     "koa-static": "5.0.0",
     "lorem-ipsum": "2.0.8",
-    "mongo-express": "1.0.0-alpha.4",
+    "mongo-express": "1.0.2",
     "mongoose": "6.10.5",
     "notistack": "^3.0.1",
     "passport": "0.6.0",
