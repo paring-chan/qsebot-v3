@@ -33,7 +33,7 @@ router.delete('/admins/:id', async (ctx) => {
 })
 
 router.post('/admins', async (ctx) => {
-    const body = ctx.request.body
+    const body = ctx.request.body as any
     if (!body.user) {
         return (ctx.body = { error: 'ID는 필수입니다.' })
     }

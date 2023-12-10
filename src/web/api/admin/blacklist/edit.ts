@@ -2,13 +2,7 @@ import Router from 'koa-router'
 import { Blacklist, IBlackList } from '../../../../models'
 import { blacklistSchema } from './index'
 
-const router = new Router({ prefix: '/:id' })
-
-declare module 'koa' {
-    interface BaseContext {
-        blacklist: IBlackList
-    }
-}
+const router = new Router<any, {blacklist: IBlackList}>({ prefix: '/:id' })
 
 router.use(async (ctx, next) => {
     const id = ctx.params.id

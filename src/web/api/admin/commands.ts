@@ -19,7 +19,7 @@ router.get('/', async (ctx) => {
 })
 
 router.post('/', async (ctx) => {
-    const body = ctx.request.body
+    const body = ctx.request.body as any
     if (!body.message) return (ctx.body = { error: '메시지는 필수입니다.' })
     if (!body.script) return (ctx.body = { error: '스크립트는 필수입니다.' })
     if (!CommandCondition[body.condition]) return (ctx.body = { error: '알 수 없는 실행 조건입니다.' })
@@ -37,6 +37,6 @@ router.post('/', async (ctx) => {
     ctx.body = { ok: 1, id: command._id }
 })
 
-router.use(editCommand.routes())
+router.use(editCommand.routes() as any)
 
 export default router

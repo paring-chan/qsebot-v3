@@ -1,4 +1,4 @@
-import Router from 'koa-router'
+import Router, { IMiddleware } from 'koa-router'
 import { requireAuth } from '../middlewares'
 import { ShopItem } from '../../models/shopItem'
 import { ShopQuestionType } from '../../sharedTypings'
@@ -44,9 +44,10 @@ router.post('/:id/purchase', (async (ctx) => {
     }
 
     let args: any[] = []
+    const body = ctx.request.body as any
 
     if (i.questions.length) {
-        if (!ctx.request.body.responses || ctx.request.body.responses.length !== i.questions.length) {
+        if (!body.responses || body.responses.length !== i.questions.length) {
             ctx.body = {
                 error: 'Validation failed',
             }
@@ -54,7 +55,7 @@ router.post('/:id/purchase', (async (ctx) => {
             return
         }
         for (let j = 0; j < i.questions.length; j++) {
-            const res = ctx.request.body.responses[j]
+            const res = body.responses[j]
             const q = i.questions[j]
 
             if (res === null || res === undefined) {
@@ -122,6 +123,6 @@ router.post('/:id/purchase', (async (ctx) => {
     ctx.body = {
         ok: 1,
     }
-}) as Middleware)
+}) as IMiddleware)
 
 export default router

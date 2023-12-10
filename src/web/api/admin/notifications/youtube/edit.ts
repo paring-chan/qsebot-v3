@@ -2,13 +2,12 @@ import Router from 'koa-router'
 import { IYoutubeNotification, YoutubeNotification } from '../../../../../models'
 import { cts } from '../../../../../index'
 
-const router = new Router({ prefix: '/:id' })
-
-declare module 'koa' {
-    interface BaseContext {
+const router = new Router<
+    any,
+    {
         ytNotification: IYoutubeNotification
     }
-}
+>({ prefix: '/:id' })
 
 router.use(async (ctx, next) => {
     const id = ctx.params.id
@@ -23,7 +22,7 @@ router.use(async (ctx, next) => {
 })
 
 router.put('/', async (ctx) => {
-    const body = ctx.request.body
+    const body = ctx.request.body as any
     if (!body.channel) return (ctx.body = { error: '채널은 필수입니다.' })
     if (!body.script) return (ctx.body = { error: '스크립트는 필수입니다.' })
 
@@ -35,7 +34,7 @@ router.put('/', async (ctx) => {
 
     ctx.ytNotification.script = body.script
 
-    await ctx.command.save()
+    await ctx.ytNotification.save()
 
     ctx.body = { ok: 1 }
 })

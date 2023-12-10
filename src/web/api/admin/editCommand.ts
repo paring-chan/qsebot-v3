@@ -2,13 +2,8 @@ import Router from 'koa-router'
 import { CustomCommand, CustomCommandVariable, ICustomCommand } from '../../../models'
 import { CommandCondition } from '../../../sharedTypings'
 
-const router = new Router({ prefix: '/:id' })
+const router = new Router<any, {command: ICustomCommand}>({ prefix: '/:id' })
 
-declare module 'koa' {
-    interface BaseContext {
-        command: ICustomCommand
-    }
-}
 
 router.use(async (ctx, next) => {
     const id = ctx.params.id
@@ -25,7 +20,7 @@ router.use(async (ctx, next) => {
 router.get('/', (ctx) => (ctx.body = ctx.command))
 
 router.put('/', async (ctx) => {
-    const body = ctx.request.body
+    const body = ctx.request.body as any
     if (!body.message) return (ctx.body = { error: '메시지는 필수입니다.' })
     if (!body.script) return (ctx.body = { error: '스크립트는 필수입니다.' })
     if (!CommandCondition[body.condition]) return (ctx.body = { error: '알 수 없는 실행 조건입니다.' })

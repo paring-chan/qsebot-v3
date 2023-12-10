@@ -2,13 +2,7 @@ import Router from 'koa-router'
 import { AnswerButton, IQuiz, Quiz } from '../../../models'
 import * as yup from 'yup'
 
-const router = new Router({ prefix: '/:id' })
-
-declare module 'koa' {
-    interface BaseContext {
-        quiz: IQuiz
-    }
-}
+const router = new Router<any, { quiz: IQuiz }>({ prefix: '/:id' })
 
 router.use(async (ctx, next) => {
     const id = ctx.params.id

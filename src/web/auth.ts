@@ -12,10 +12,10 @@ router.get(
     })
 )
 
-router.get('/logout', ((ctx) => {
+router.get('/logout', (ctx) => {
     ctx.logout()
     ctx.redirect('/')
-}) as Middleware)
+})
 
 router.get('/current', (ctx) => {
     ctx.body = ctx.state.user || null

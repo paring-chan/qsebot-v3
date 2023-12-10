@@ -1,4 +1,4 @@
-import Router from 'koa-router'
+import Router, { IMiddleware } from 'koa-router'
 import { YoutubeNotification } from '../../../../../models'
 import { escapeRegexp } from '../../../../../utils/regexp'
 import { cts } from '../../../../../index'
@@ -9,7 +9,7 @@ const router = new Router({ prefix: '/youtube' })
 
 const amount = 20
 
-router.use(edit.routes())
+router.use(edit.routes() as IMiddleware)
 
 router.get('/', async (ctx) => {
     let page = Number(ctx.query.page)
@@ -22,7 +22,7 @@ router.get('/', async (ctx) => {
 })
 
 router.post('/', async (ctx) => {
-    const body = ctx.request.body
+    const body = ctx.request.body as any
     if (!body.ytChannel) return (ctx.body = { error: '유튜브 채널은 필수입니다.' })
     if (!body.channel) return (ctx.body = { error: '디스코드 채널은 필수입니다.' })
     if (!body.script) return (ctx.body = { error: '스크립트는 필수입니다.' })

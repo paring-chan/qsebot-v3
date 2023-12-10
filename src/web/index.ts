@@ -43,7 +43,7 @@ app.use(
             }),
             signed: false,
         },
-        app
+        app as any
     )
 )
 
@@ -93,7 +93,7 @@ const expressApp = express()
 //
 // expressApp.use(passport.session())
 
-expressApp.use(cookieParser())
+expressApp.use(cookieParser() as any)
 
 getMongoExpress().then((express: any) => {
     expressApp.use(

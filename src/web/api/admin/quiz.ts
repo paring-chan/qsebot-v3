@@ -1,4 +1,4 @@
-import Router from 'koa-router'
+import Router, { IMiddleware } from 'koa-router'
 import { Quiz } from '../../../models'
 import quizEdit from './quizEdit'
 import { escapeRegexp } from '../../../utils/regexp'
@@ -26,7 +26,7 @@ router.get('/', async (ctx) => {
 })
 
 router.post('/', async (ctx) => {
-    const question = ctx.request.body.question
+    const question = (ctx.request.body as any).question
     if (!question) return (ctx.body = { error: '질문은 필수입니다.' })
     const quiz = new Quiz()
     quiz.question = question
@@ -34,6 +34,6 @@ router.post('/', async (ctx) => {
     ctx.body = { id: quiz._id }
 })
 
-router.use(quizEdit.routes())
+router.use(quizEdit.routes() as IMiddleware)
 
 export default router

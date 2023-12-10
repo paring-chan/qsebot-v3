@@ -8,7 +8,7 @@ const router = new Router({ prefix: '/blacklist' })
 
 const amount = 20
 
-router.use(edit.routes())
+router.use(edit.routes() as any)
 
 router.get('/', async (ctx) => {
     let page = Number(ctx.query.page)
