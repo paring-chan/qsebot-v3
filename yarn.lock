@@ -1915,13 +1915,14 @@
   dependencies:
     chokidar "*"
 
-"@types/connect-redis@0.0.20":
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/@types/connect-redis/-/connect-redis-0.0.20.tgz#cb5e33ee860bf8d6ea86b807c2499af238e2cd3f"
-  integrity sha512-3VTUzlsYtgsZlIt9G7BY2EyBr96JE93V9DB7JfItNZi6NzQzqyR+S0yLK5iPHd6X31CA7drUoCNNx3LCXn4XOw==
+"@types/connect-redis@0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@types/connect-redis/-/connect-redis-0.0.23.tgz#a8a24ce2d3870860c045146c3af7ccaebfd98ae0"
+  integrity sha512-+yKa9EQJ7YZIWjTKbCdXhqYSpirGf7Cc0o5QTFrkWORneFHVu3QOopRUi6E/ye41QGMom+cj1/kvWFHamHTADA==
   dependencies:
     "@types/express" "*"
     "@types/express-session" "*"
+    "@types/node" "*"
     "@types/redis" "^2.8.0"
     ioredis "^5.3.0"
 
