@@ -38,7 +38,7 @@
     "@discordjs/rest": "0.6.0",
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
-    "@hookform/resolvers": "2.9.11",
+    "@hookform/resolvers": "3.9.0",
     "@monaco-editor/react": "4.5.0",
     "@mui/icons-material": "5.11.16",
     "@mui/lab": "5.0.0-alpha.127",
