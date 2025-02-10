@@ -1961,10 +1961,10 @@
   dependencies:
     "@types/ms" "*"
 
-"@types/emoji-mart@3.0.9":
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/@types/emoji-mart/-/emoji-mart-3.0.9.tgz#2f7ef5d9ec194f28029c46c81a5fc1e5b0efa73c"
-  integrity sha512-qdBo/2Y8MXaJ/2spKjDZocuq79GpnOhkwMHnK2GnVFa8WYFgfA+ei6sil3aeWQPCreOKIx9ogPpR5+7MaOqYAA==
+"@types/emoji-mart@3.0.14":
+  version "3.0.14"
+  resolved "https://registry.yarnpkg.com/@types/emoji-mart/-/emoji-mart-3.0.14.tgz#219b8badbf1899cdb9790b5c2fafebea899ff5b3"
+  integrity sha512-/vMkVnet466bK37ugf2jry9ldCZklFPXYMB2m+qNo3vkP2I7L0cvtNFPKAjfcHgPg9Z8pbYqVqZn7AgsC0qf+g==
   dependencies:
     "@types/react" "*"
 
